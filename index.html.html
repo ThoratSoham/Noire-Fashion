@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOIRÉ - Affordable Luxury Fashion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+            background-color: #f5f5f0; /* Warm beige */
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #000 0%, #333 100%);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        .cta-button {
+            background: #fff;
+            color: #000;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .cta-button:hover {
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }
+        .section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .collection {
+            background: #fff;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .product-card {
+            background: #fafafa;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .product-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
+        }
+        .product-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+        .product-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .product-card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .amazon-button {
+            background: #000;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 0;
+            transition: all 0.3s ease;
+        }
+        .amazon-button:hover {
+            background: #333;
+        }
+        .about {
+            background: #f5f5f0;
+            text-align: center;
+        }
+        .about h2 {
+            margin-bottom: 20px;
+        }
+        .about p {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        footer {
+            background: #000;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.8);
+            padding: 10px 20px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0 15px;
+        }
+        nav .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+        }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">NOIRÉ</div>
+        <div>
+            <a href="#home">Home</a>
+            <a href="#collection">Collection</a>
+            <a href="#about">About</a>
+        </div>
+    </nav>
+    
+    <section id="home" class="hero">
+        <h1>NOIRÉ</h1>
+        <p>Affordable luxury, crafted in minimal elegance.</p>
+        <a href="#collection" class="cta-button">Explore Collection</a>
+    </section>
+    
+    <section id="collection" class="section collection">
+        <h2>Curated Collection</h2>
+        <div class="grid">
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x300?text=Minimal+Blazer" alt="Minimal Blazer">
+                <h3>Minimal Blazer</h3>
+                <p>Elegant unisex blazer in soft wool, perfect for layering with warmth and seduction.</p>
+                <a href="https://www.amazon.com/dp/B08N5WRWNW" target="_blank" class="amazon-button">View on Amazon</a>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x300?text=Silk+Scarf" alt="Silk Scarf">
+                <h3>Silk Scarf</h3>
+                <p>Luxurious silk scarf with subtle patterns, adding a touch of high-class minimalism.</p>
+                <a href="https://www.amazon.com/dp/B07ZPKN6YR" target="_blank" class="amazon-button">View on Amazon</a>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x300?text=Leather+Boots" alt="Leather Boots">
+                <h3>Leather Boots</h3>
+                <p>Timeless leather boots, crafted for comfort and understated elegance.</p>
+                <a href="https://www.amazon.com/dp/B08L9L8Z8Z" target="_blank" class="amazon-button">View on Amazon</a>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x300?text=Cashmere+Sweater" alt="Cashmere Sweater">
+                <h3>Cashmere Sweater</h3>
+                <p>Soft cashmere sweater in neutral tones, embodying warm and seductive luxury.</p>
+                <a href="https://www.amazon.com/dp/B08N5WRWNW" target="_blank" class="amazon-button">View on Amazon</a>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x300?text=Minimal+Watch" alt="Minimal Watch">
+                <h3>Minimal Watch</h3>
+                <p>Precision watch with clean lines, a symbol of high-class minimalism.</p>
+                <a href="https://www.amazon.com/dp/B07ZPKN6YR" target="_blank" class="amazon-button">View on Amazon</a>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x300?text=Velvet+Pants" alt="Velvet Pants">
+                <h3>Velvet Pants</h3>
+                <p>Luxurious velvet pants, offering warmth and a seductive silhouette.</p>
+                <a href="https://www.amazon.com/dp/B08L9L8Z8Z" target="_blank" class="amazon-button">View on Amazon</a>
+            </div>
+        </div>
+    </section>
+    
+    <section id="about" class="section about">
+        <h2>About NOIRÉ</h2>
+        <p>NOIRÉ is a unisex brand dedicated to affordable luxury. We curate fashion and lifestyle items that embody warmth, seduction, and high-class minimalism. Each piece is selected for its timeless elegance, ensuring you feel confident and premium in every moment. Discover the art of subtle sophistication.</p>
+    </section>
+    
+    <footer>
+        <p>NOIRÉ curates products and redirects to Amazon. We may earn a commission.</p>
+    </footer>
+    
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
