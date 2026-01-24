@@ -22,16 +22,29 @@
             font-family: 'Playfair Display', serif;
         }
         .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #000 0%, #333 100%);
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-        }
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /* Translucent banner image */
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.6),
+            rgba(0, 0, 0, 0.6)
+        ),
+        url("https://i.pinimg.com/736x/ff/28/5f/ff285f52c00107485f66b9babfbf6ea4.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
         .hero h1 {
             font-size: 4rem;
             margin-bottom: 10px;
@@ -41,6 +54,7 @@
             font-size: 1.5rem;
             margin-bottom: 30px;
             font-weight: 300;
+            backdrop-filter: blur(1.5px);
         }
         .cta-button {
             background: #fff;
@@ -72,7 +86,7 @@
             align-items: center;
             justify-content: center;
         }
-        .search-filters input, .search-filters select, .search-filters button {
+        .search-filters input, .search-filters button {
             padding: 10px;
             font-family: 'Montserrat', sans-serif;
             border: 1px solid #ccc;
@@ -135,18 +149,6 @@
         .amazon-button:hover {
             background: #333;
         }
-        .about {
-            background: #f5f5f0;
-            text-align: center;
-        }
-        .about h2 {
-            margin-bottom: 20px;
-        }
-        .about p {
-            max-width: 600px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-        }
         footer {
             background: #000;
             color: #fff;
@@ -162,33 +164,13 @@
             padding: 10px 20px;
             z-index: 100;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 500;
-            margin: 0 15px;
         }
         nav .logo {
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
-        }
-        nav select {
-            background: transparent;
             color: #fff;
-            border: 1px solid #fff;
-            padding: 5px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-        }
-        nav select option {
-            background: #000;
-            color: #fff;
-        }
-        .active {
-            text-decoration: underline;
         }
         @media (max-width: 768px) {
             .hero h1 {
@@ -204,39 +186,22 @@
                 flex-direction: column;
                 align-items: stretch;
             }
-            nav {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            nav .logo {
-                margin-bottom: 10px;
-            }
         }
     </style>
 </head>
 <body>
     <nav>
         <div class="logo">NOIRÉ</div>
-        <div>
-            <a href="/" id="home-link">Home</a>
-            <select id="category-select">
-                <option value="">All Categories</option>
-                <option value="clothing">Clothing</option>
-                <option value="accessories">Accessories</option>
-                <option value="footwear">Footwear</option>
-            </select>
-            <a href="#about">About</a>
-        </div>
     </nav>
     
-    <section id="home" class="hero">
+    <section class="hero">
         <h1>NOIRÉ</h1>
         <p>Affordable luxury, crafted in minimal elegance.</p>
         <a href="#collection" class="cta-button">Explore Collection</a>
     </section>
     
     <section id="collection" class="section collection">
-        <h2 id="collection-title">Curated Collection</h2>
+        <h2>Curated Collection</h2>
         <div class="search-filters">
             <input type="text" id="search-input" placeholder="Search products...">
             <button id="search-button">Search</button>
@@ -244,11 +209,6 @@
         <div id="product-grid" class="grid">
             <!-- Products will be rendered here dynamically -->
         </div>
-    </section>
-    
-    <section id="about" class="section about">
-        <h2>About NOIRÉ</h2>
-        <p>NOIRÉ is a unisex brand dedicated to affordable luxury. We curate fashion and lifestyle items that embody warmth, seduction, and high-class minimalism. Each piece is selected for its timeless elegance, ensuring you feel confident and premium in every moment. Discover the art of subtle sophistication.</p>
     </section>
     
     <footer>
@@ -320,11 +280,64 @@
                 link: "https://amzn.to/4sXAtZT",
                 category: "clothing",
                 price: 25.99
-            }
+            },
+            {
+                id: 8,
+                title: "Women's Long Sleeve Cowl",
+                description: "PRETTYGARDEN Women's Long Sleeve Cowl Neck Ribbed Knit Spring Shirts Slim Fit Ruched Going Out Crop Tops Basic T-Shirts",
+                image: "https://m.media-amazon.com/images/I/81IK0UryU6L._AC_SY741_.jpg",
+                link: "https://amzn.to/3NvdaGS",
+                category: "clothing",
+                price: 19.99
+            },
+            {
+                id: 9,
+                title: "Wide Leg Work Pants",
+                description: "Wide Leg Work Pants for Woman Stretchy Office Slack Pants Pull On Business Trousers with Pockets",
+                image: "https://m.media-amazon.com/images/I/61QgBgJemeL._AC_SY741_.jpg",
+                link: "https://amzn.to/4adyUQg",
+                category: "clothing",
+                price: 24.99
+            },
+            {
+                id: 10,
+                title: "Women's Sweaters",
+                description: "Dokotoo Women's Sweaters 2025 Fall Winter Quarter Zip Casual Ribbed Cable Knit Pullover",
+                image: "https://m.media-amazon.com/images/I/71ltC40lKRL._AC_SY741_.jpg",
+                link: "https://amzn.to/4rbNb5x",
+                category: "clothing",
+                price: 29.99
+            },
+            {
+                id: 11,
+                title: "Turtleneck Long Sleeve Shirts",
+                description: "Trendy Queen Women's Turtleneck Long Sleeve Shirts Spring Fashion Basic Thermal Underwear Tops Winter Clothes 2026",
+                image: "https://m.media-amazon.com/images/I/71HLE7Q2k2L._AC_SY741_.jpg",
+                link: "https://amzn.to/4qyiU0Y",
+                category: "clothing",
+                price: 14.99
+            },
+            {
+                id: 12,
+                title: "Turtleneck Sweater",
+                description: "COOFANDY Mens Ribbed Slim Fit Knitted Pullover Casual Turtleneck Sweater",
+                image: "https://m.media-amazon.com/images/I/71sZsKP89HL._AC_SY741_.jpg",
+                link: "https://amzn.to/4qEzJr2",
+                category: "clothing",
+                price: 25.26
+            },
+
             // Add more products here
         ];
 
-        // Fuse.js for fuzzy search
+        // Category synonyms for mapping search terms to categories
+        const categorySynonyms = {
+            clothing: ["clothing", "clothes", "cloths", "apparel", "garments", "tops", "bottoms", "outfits"],
+            accessories: ["accessories", "acc", "jewelry", "watches", "bags", "belts"],
+            footwear: ["footwear", "shoes", "boots", "sneakers", "sandals"]
+        };
+
+        // Fuse.js for fuzzy search on products
         const fuseOptions = {
             keys: ['title', 'description'],
             threshold: 0.4,
@@ -332,7 +345,16 @@
         };
         const fuse = new Fuse(products, fuseOptions);
 
-        let currentCategory = ''; // '' for all/homepage limited
+        // Function to get category from search term
+        function getCategoryFromTerm(term) {
+            const lowerTerm = term.toLowerCase();
+            for (const [category, synonyms] of Object.entries(categorySynonyms)) {
+                if (synonyms.includes(lowerTerm)) {
+                    return category;
+                }
+            }
+            return null;
+        }
 
         // Render products
         function renderProducts(productList, isLimited = false) {
@@ -351,7 +373,7 @@
             }
             let toRender = productList;
             if (isLimited) {
-                // Show up to 6 from each category on homepage
+                // Show up to 6 from each category
                 const categories = [...new Set(products.map(p => p.category))];
                 toRender = [];
                 categories.forEach(cat => {
@@ -373,47 +395,31 @@
             });
         }
 
-        // Update view based on category
-        function updateView(category = '') {
-            currentCategory = category;
-            document.getElementById('category-select').value = category;
-            document.getElementById('collection-title').textContent = category ? `${category.charAt(0).toUpperCase() + category.slice(1)} Collection` : 'Curated Collection';
-            const isHome = window.location.pathname === '/' && !category;
-            let productList = category ? products.filter(p => p.category === category) : products;
-            renderProducts(productList, isHome);
-        }
-
-        // Handle category change
-        document.getElementById('category-select').addEventListener('change', (e) => {
-            const category = e.target.value;
-            const path = category ? `/${category}` : '/';
-            history.pushState(null, '', path);
-            updateView(category);
-        });
+        // Initial render: show 6 from each category
+        renderProducts(products, true);
 
         // Handle search
         document.getElementById('search-button').addEventListener('click', () => {
-            const searchTerm = document.getElementById('search-input').value.toLowerCase();
-            let filtered = currentCategory ? products.filter(p => p.category === currentCategory) : products;
-            if (searchTerm) {
+            const searchTerm = document.getElementById('search-input').value.trim();
+            if (!searchTerm) {
+                renderProducts(products, true); // Reset to default
+                return;
+            }
+            const category = getCategoryFromTerm(searchTerm);
+            let filtered = products;
+            if (category) {
+                // Category search: show all in category
+                filtered = products.filter(p => p.category === category);
+            } else {
+                // Product search: use fuzzy matching
                 const fuzzyResults = fuse.search(searchTerm);
                 filtered = filtered.filter(product => fuzzyResults.some(result => result.item.id === product.id));
             }
             renderProducts(filtered);
         });
 
-        // Handle URL changes (popstate)
-        window.addEventListener('popstate', () => {
-            const path = window.location.pathname.slice(1); // Remove leading /
-            updateView(path);
-        });
-
-        // Initial load
-        const initialPath = window.location.pathname.slice(1);
-        updateView(initialPath);
-
-        // Smooth scrolling for navigation
-        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+        // Smooth scrolling for CTA
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
