@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOIRÉ - Affordable Luxury Fashion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+            background-color: #f5f5f0; /* Warm beige */
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #000 0%, #333 100%);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        .cta-button {
+            background: #fff;
+            color: #000;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .cta-button:hover {
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }
+        .section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .collection {
+            background: #fff;
+        }
+        .search-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 40px;
+            align-items: center;
+            justify-content: center;
+        }
+        .search-filters input, .search-filters select, .search-filters button {
+            padding: 10px;
+            font-family: 'Montserrat', sans-serif;
+            border: 1px solid #ccc;
+            border-radius: 0;
+            font-size: 1rem;
+        }
+        .search-filters button {
+            background: #000;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .search-filters button:hover {
+            background: #333;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .product-card {
+            background: #fafafa;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .product-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
+        }
+        .product-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+        .product-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .product-card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .product-card .price {
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .amazon-button {
+            background: #000;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 0;
+            transition: all 0.3s ease;
+        }
+        .amazon-button:hover {
+            background: #333;
+        }
+        .about {
+            background: #f5f5f0;
+            text-align: center;
+        }
+        .about h2 {
+            margin-bottom: 20px;
+        }
+        .about p {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        footer {
+            background: #000;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.8);
+            padding: 10px 20px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0 15px;
+        }
+        nav .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+        }
+        nav select {
+            background: transparent;
+            color: #fff;
+            border: 1px solid #fff;
+            padding: 5px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+        }
+        nav select option {
+            background: #000;
+            color: #fff;
+        }
+        .active {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .search-filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav .logo {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">NOIRÉ</div>
+        <div>
+            <a href="/" id="home-link">Home</a>
+            <select id="category-select">
+                <option value="">All Categories</option>
+                <option value="clothing">Clothing</option>
+                <option value="accessories">Accessories</option>
+                <option value="footwear">Footwear</option>
+            </select>
+            <a href="#about">About</a>
+        </div>
+    </nav>
+    
+    <section id="home" class="hero">
+        <h1>NOIRÉ</h1>
+        <p>Affordable luxury, crafted in minimal elegance.</p>
+        <a href="#collection" class="cta-button">Explore Collection</a>
+    </section>
+    
+    <section id="collection" class="section collection">
+        <h2 id="collection-title">Curated Collection</h2>
+        <div class="search-filters">
+            <input type="text" id="search-input" placeholder="Search products...">
+            <button id="search-button">Search</button>
+        </div>
+        <div id="product-grid" class="grid">
+            <!-- Products will be rendered here dynamically -->
+        </div>
+    </section>
+    
+    <section id="about" class="section about">
+        <h2>About NOIRÉ</h2>
+        <p>NOIRÉ is a unisex brand dedicated to affordable luxury. We curate fashion and lifestyle items that embody warmth, seduction, and high-class minimalism. Each piece is selected for its timeless elegance, ensuring you feel confident and premium in every moment. Discover the art of subtle sophistication.</p>
+    </section>
+    
+    <footer>
+        <p>NOIRÉ curates products and redirects to Amazon. We may earn a commission.</p>
+    </footer>
+    
+    <script>
+        // Product data (add more as needed; categories are dynamic)
+        const products = [
+            {
+                id: 1,
+                title: "Wide Leg Pants Lounge Set",
+                description: "ANRABESS Women 2 Piece Outfits 2025 Fall Fashion",
+                image: "https://m.media-amazon.com/images/I/61mFhuYe7AL._AC_SY741_.jpg",
+                link: "https://amzn.to/3O0X5sq",
+                category: "clothing",
+                price: 45.99
+            },
+            {
+                id: 2,
+                title: "Wide Leg Sweatpants",
+                description: "AUTOMET Womens Wide Leg Sweatpants Baggy Lounge Travel Pants Fall Fashion Outfits 2025 Winter Clothes Joggers",
+                image: "https://m.media-amazon.com/images/I/71gugs4fQDL._AC_SY741_.jpg",
+                link: "https://amzn.to/4pSNKAh",
+                category: "clothing",
+                price: 29.99
+            },
+            {
+                id: 3,
+                title: "Turtleneck Tank Tops",
+                description: "Zeagoo Womens Sleeveless Mock Turtleneck Tank Tops Slim Fit Stretch Ribbed Tops Casual Basic Layering Shirts",
+                image: "https://m.media-amazon.com/images/I/71lLX48N1EL._AC_SX569_.jpg",
+                link: "https://amzn.to/45Z4zCs",
+                category: "clothing",
+                price: 19.99
+            },
+            {
+                id: 4,
+                title: "Trench Coat",
+                description: "SOMTHRON Men's Casual Trench Coat Slim Fit Notched Collar Long Jacket Overcoat Single Breasted Pea Coat wih Pockets",
+                image: "https://m.media-amazon.com/images/I/71FqcvjgkNL._AC_SX679_.jpg",
+                link: "https://amzn.to/49JT2Ic",
+                category: "clothing",
+                price: 59.99
+            },
+            {
+                id: 5,
+                title: "Men's Winter Jacket",
+                description: "TACVASEN Men's Winter Jacket Corduroy Warm Fleece Sherpa Lined Jacket Casual Lapel Work Trucker Coat with Multi Pockets",
+                image: "https://m.media-amazon.com/images/I/71ygrjVLdJL._AC_SX569_.jpg",
+                link: "https://amzn.to/3ZsHNiH",
+                category: "clothing",
+                price: 49.99
+            },
+            {
+                id: 6,
+                title: "G-Shock Casio Octagonal Watch",
+                description: "G-Shock Casio Metal Covered Octagonal Black Resin Band Watch GM2100-1A",
+                image: "https://m.media-amazon.com/images/I/812fkCn8F9L._AC_SL1500_.jpg",
+                link: "https://amzn.to/4sXZYuf",
+                category: "accessories",
+                price: 129.99
+            },
+            {
+                id: 7,
+                title: "Mens Knit Polo Shirts",
+                description: "COOFANDY Mens Knit Polo Shirts Short Sleeve Ribbed Textured Polo Shirt Lightweight Casual Golf Shirts Collared T Shirt",
+                image: "https://m.media-amazon.com/images/I/81lXGiA3PNL._AC_SX569_.jpg",
+                link: "https://amzn.to/4sXAtZT",
+                category: "clothing",
+                price: 25.99
+            }
+            // Add more products here
+        ];
+
+        // Fuse.js for fuzzy search
+        const fuseOptions = {
+            keys: ['title', 'description'],
+            threshold: 0.4,
+            includeScore: true
+        };
+        const fuse = new Fuse(products, fuseOptions);
+
+        let currentCategory = ''; // '' for all/homepage limited
+
+        // Render products
+        function renderProducts(productList, isLimited = false) {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+            if (productList.length === 0) {
+                grid.innerHTML = '<p>No products found. Showing closest match...</p>';
+                const searchTerm = document.getElementById('search-input').value;
+                if (searchTerm) {
+                    const fuzzyResults = fuse.search(searchTerm);
+                    if (fuzzyResults.length > 0) {
+                        renderProducts([fuzzyResults[0].item]);
+                    }
+                }
+                return;
+            }
+            let toRender = productList;
+            if (isLimited) {
+                // Show up to 6 from each category on homepage
+                const categories = [...new Set(products.map(p => p.category))];
+                toRender = [];
+                categories.forEach(cat => {
+                    const catProducts = productList.filter(p => p.category === cat).slice(0, 6);
+                    toRender.push(...catProducts);
+                });
+            }
+            toRender.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="${product.image}" alt="${product.title}">
+                    <h3>${product.title}</h3>
+                    <p>${product.description}</p>
+                    <p class="price">$${product.price}</p>
+                    <a href="${product.link}" target="_blank" class="amazon-button">View on Amazon</a>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Update view based on category
+        function updateView(category = '') {
+            currentCategory = category;
+            document.getElementById('category-select').value = category;
+            document.getElementById('collection-title').textContent = category ? `${category.charAt(0).toUpperCase() + category.slice(1)} Collection` : 'Curated Collection';
+            const isHome = window.location.pathname === '/' && !category;
+            let productList = category ? products.filter(p => p.category === category) : products;
+            renderProducts(productList, isHome);
+        }
+
+        // Handle category change
+        document.getElementById('category-select').addEventListener('change', (e) => {
+            const category = e.target.value;
+            const path = category ? `/${category}` : '/';
+            history.pushState(null, '', path);
+            updateView(category);
+        });
+
+        // Handle search
+        document.getElementById('search-button').addEventListener('click', () => {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            let filtered = currentCategory ? products.filter(p => p.category === currentCategory) : products;
+            if (searchTerm) {
+                const fuzzyResults = fuse.search(searchTerm);
+                filtered = filtered.filter(product => fuzzyResults.some(result => result.item.id === product.id));
+            }
+            renderProducts(filtered);
+        });
+
+        // Handle URL changes (popstate)
+        window.addEventListener('popstate', () => {
+            const path = window.location.pathname.slice(1); // Remove leading /
+            updateView(path);
+        });
+
+        // Initial load
+        const initialPath = window.location.pathname.slice(1);
+        updateView(initialPath);
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
