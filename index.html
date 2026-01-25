@@ -22,29 +22,19 @@
             font-family: 'Playfair Display', serif;
         }
         .hero {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    /* Translucent banner image */
-    background:
-        linear-gradient(
-            rgba(0, 0, 0, 0.6),
-            rgba(0, 0, 0, 0.6)
-        ),
-        url("https://i.pinimg.com/736x/ff/28/5f/ff285f52c00107485f66b9babfbf6ea4.jpg");
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    color: #fff;
-    text-align: center;
-    padding: 20px;
-}
-
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("https://i.pinimg.com/736x/ff/28/5f/ff285f52c00107485f66b9babfbf6ea4.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
         .hero h1 {
             font-size: 4rem;
             margin-bottom: 10px;
@@ -86,7 +76,7 @@
             align-items: center;
             justify-content: center;
         }
-        .search-filters input, .search-filters button {
+        .search-filters input, .search-filters select, .search-filters button {
             padding: 10px;
             font-family: 'Montserrat', sans-serif;
             border: 1px solid #ccc;
@@ -164,13 +154,33 @@
             padding: 10px 20px;
             z-index: 100;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0 15px;
         }
         nav .logo {
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
+        }
+        nav select {
+            background: transparent;
             color: #fff;
+            border: 1px solid #fff;
+            padding: 5px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+        }
+        nav select option {
+            background: #000;
+            color: #fff;
+        }
+        .active {
+            text-decoration: underline;
         }
         @media (max-width: 768px) {
             .hero h1 {
@@ -186,12 +196,27 @@
                 flex-direction: column;
                 align-items: stretch;
             }
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav .logo {
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
 <body>
     <nav>
         <div class="logo">NOIRÉ</div>
+        <div>
+            <select id="category-select">
+                <option value="">All Categories</option>
+                <option value="clothing">Clothing</option>
+                <option value="accessories">Accessories</option>
+                <option value="footwear">Footwear</option>
+            </select>
+        </div>
     </nav>
     
     <section class="hero">
@@ -201,7 +226,7 @@
     </section>
     
     <section id="collection" class="section collection">
-        <h2>Curated Collection</h2>
+        <h2 id="collection-title">Curated Collection</h2>
         <div class="search-filters">
             <input type="text" id="search-input" placeholder="Search products...">
             <button id="search-button">Search</button>
@@ -216,7 +241,7 @@
     </footer>
     
     <script>
-        // Product data (add more as needed; categories are dynamic)
+        // Expanded Product data structure (add more as needed; scalable)
         const products = [
             {
                 id: 1,
@@ -225,7 +250,13 @@
                 image: "https://m.media-amazon.com/images/I/61mFhuYe7AL._AC_SY741_.jpg",
                 link: "https://amzn.to/3O0X5sq",
                 category: "clothing",
-                price: 45.99
+                subCategory: "pants",
+                tags: ["lounge", "set", "fall", "fashion"],
+                season: "fall",
+                material: "cotton",
+                occasion: "casual",
+                price: 45.99,
+                gender: "women"
             },
             {
                 id: 2,
@@ -234,7 +265,13 @@
                 image: "https://m.media-amazon.com/images/I/71gugs4fQDL._AC_SY741_.jpg",
                 link: "https://amzn.to/4pSNKAh",
                 category: "clothing",
-                price: 29.99
+                subCategory: "pants",
+                tags: ["sweatpants", "baggy", "travel", "joggers"],
+                season: "fall",
+                material: "cotton",
+                occasion: "casual",
+                price: 29.99,
+                gender: "women"
             },
             {
                 id: 3,
@@ -243,7 +280,13 @@
                 image: "https://m.media-amazon.com/images/I/71lLX48N1EL._AC_SX569_.jpg",
                 link: "https://amzn.to/45Z4zCs",
                 category: "clothing",
-                price: 19.99
+                subCategory: "tops",
+                tags: ["turtleneck", "tank", "slim", "ribbed"],
+                season: "all",
+                material: "cotton",
+                occasion: "casual",
+                price: 19.99,
+                gender: "women"
             },
             {
                 id: 4,
@@ -252,7 +295,13 @@
                 image: "https://m.media-amazon.com/images/I/71FqcvjgkNL._AC_SX679_.jpg",
                 link: "https://amzn.to/49JT2Ic",
                 category: "clothing",
-                price: 59.99
+                subCategory: "jacket",
+                tags: ["trench", "coat", "slim", "notched"],
+                season: "all",
+                material: "cotton",
+                occasion: "casual",
+                price: 59.99,
+                gender: "men"
             },
             {
                 id: 5,
@@ -261,7 +310,13 @@
                 image: "https://m.media-amazon.com/images/I/71ygrjVLdJL._AC_SX569_.jpg",
                 link: "https://amzn.to/3ZsHNiH",
                 category: "clothing",
-                price: 49.99
+                subCategory: "jacket",
+                tags: ["winter", "corduroy", "fleece", "sherpa"],
+                season: "winter",
+                material: "corduroy",
+                occasion: "casual",
+                price: 49.99,
+                gender: "men"
             },
             {
                 id: 6,
@@ -270,7 +325,13 @@
                 image: "https://m.media-amazon.com/images/I/812fkCn8F9L._AC_SL1500_.jpg",
                 link: "https://amzn.to/4sXZYuf",
                 category: "accessories",
-                price: 129.99
+                subCategory: "watch",
+                tags: ["g-shock", "casio", "octagonal", "resin"],
+                season: "all",
+                material: "resin",
+                occasion: "casual",
+                price: 129.99,
+                gender: "men"
             },
             {
                 id: 7,
@@ -279,7 +340,13 @@
                 image: "https://m.media-amazon.com/images/I/81lXGiA3PNL._AC_SX569_.jpg",
                 link: "https://amzn.to/4sXAtZT",
                 category: "clothing",
-                price: 25.99
+                subCategory: "shirt",
+                tags: ["knit", "polo", "ribbed", "golf"],
+                season: "all",
+                material: "cotton",
+                occasion: "casual",
+                price: 25.99,
+                gender: "men"
             },
             {
                 id: 8,
@@ -288,7 +355,13 @@
                 image: "https://m.media-amazon.com/images/I/81IK0UryU6L._AC_SY741_.jpg",
                 link: "https://amzn.to/3NvdaGS",
                 category: "clothing",
-                price: 19.99
+                subCategory: "shirt",
+                tags: ["long sleeve", "cowl", "ribbed", "crop"],
+                season: "spring",
+                material: "cotton",
+                occasion: "going out",
+                price: 19.99,
+                gender: "women"
             },
             {
                 id: 9,
@@ -297,7 +370,13 @@
                 image: "https://m.media-amazon.com/images/I/61QgBgJemeL._AC_SY741_.jpg",
                 link: "https://amzn.to/4adyUQg",
                 category: "clothing",
-                price: 24.99
+                subCategory: "pants",
+                tags: ["wide leg", "work", "office", "business"],
+                season: "all",
+                material: "cotton",
+                occasion: "office",
+                price: 24.99,
+                gender: "women"
             },
             {
                 id: 10,
@@ -306,7 +385,13 @@
                 image: "https://m.media-amazon.com/images/I/71ltC40lKRL._AC_SY741_.jpg",
                 link: "https://amzn.to/4rbNb5x",
                 category: "clothing",
-                price: 29.99
+                subCategory: "sweater",
+                tags: ["sweater", "quarter zip", "ribbed", "cable"],
+                season: "fall",
+                material: "wool",
+                occasion: "casual",
+                price: 29.99,
+                gender: "women"
             },
             {
                 id: 11,
@@ -315,7 +400,13 @@
                 image: "https://m.media-amazon.com/images/I/71HLE7Q2k2L._AC_SY741_.jpg",
                 link: "https://amzn.to/4qyiU0Y",
                 category: "clothing",
-                price: 14.99
+                subCategory: "shirt",
+                tags: ["turtleneck", "long sleeve", "thermal", "basic"],
+                season: "winter",
+                material: "cotton",
+                occasion: "casual",
+                price: 14.99,
+                gender: "women"
             },
             {
                 id: 12,
@@ -324,10 +415,15 @@
                 image: "https://m.media-amazon.com/images/I/71sZsKP89HL._AC_SY741_.jpg",
                 link: "https://amzn.to/4qEzJr2",
                 category: "clothing",
-                price: 25.26
-            },
-
-            // Add more products here
+                subCategory: "sweater",
+                tags: ["turtleneck", "ribbed", "slim", "knitted"],
+                season: "all",
+                material: "wool",
+                occasion: "casual",
+                price: 25.26,
+                gender: "men"
+            }
+            // Add more products here with the same structure
         ];
 
         // Category synonyms for mapping search terms to categories
@@ -337,96 +433,109 @@
             footwear: ["footwear", "shoes", "boots", "sneakers", "sandals"]
         };
 
-        // Fuse.js for fuzzy search on products
-        const fuseOptions = {
-            keys: ['title', 'description'],
-            threshold: 0.4,
-            includeScore: true
-        };
-        const fuse = new Fuse(products, fuseOptions);
+        // Fuse.js options for fuzzy search across multiple keys
 
-        // Function to get category from search term
-        function getCategoryFromTerm(term) {
-            const lowerTerm = term.toLowerCase();
-            for (const [category, synonyms] of Object.entries(categorySynonyms)) {
-                if (synonyms.includes(lowerTerm)) {
-                    return category;
-                }
-            }
-            return null;
+    const fuseOptions = {
+        keys: [
+            { name: 'title', weight: 0.3 },
+            { name: 'description', weight: 0.2 },
+            { name: 'tags', weight: 0.2 },
+            { name: 'category', weight: 0.15 },
+            { name: 'subCategory', weight: 0.15 }
+        ],
+        threshold: 0.4,
+        includeScore: true
+    };
+
+    const fuse = new Fuse(products, fuseOptions);
+
+    const productGrid = document.getElementById("product-grid");
+    const searchInput = document.getElementById("search-input");
+    const searchButton = document.getElementById("search-button");
+    const categorySelect = document.getElementById("category-select");
+
+    // Render products
+    function renderProducts(items) {
+        productGrid.innerHTML = "";
+
+        if (!items.length) {
+            productGrid.innerHTML = `<p style="grid-column: 1/-1; text-align:center;">No products found.</p>`;
+            return;
         }
 
-        // Render products
-        function renderProducts(productList, isLimited = false) {
-            const grid = document.getElementById('product-grid');
-            grid.innerHTML = '';
-            if (productList.length === 0) {
-                grid.innerHTML = '<p>No products found. Showing closest match...</p>';
-                const searchTerm = document.getElementById('search-input').value;
-                if (searchTerm) {
-                    const fuzzyResults = fuse.search(searchTerm);
-                    if (fuzzyResults.length > 0) {
-                        renderProducts([fuzzyResults[0].item]);
-                    }
-                }
-                return;
+        items.forEach(product => {
+            const card = document.createElement("div");
+            card.className = "product-card";
+
+            card.innerHTML = `
+                <img src="${product.image}" alt="${product.title}">
+                <h3>${product.title}</h3>
+                <p>${product.description}</p>
+                <div class="price">$${product.price}</div>
+                <a href="${product.link}" target="_blank" class="amazon-button">View on Amazon</a>
+            `;
+
+            productGrid.appendChild(card);
+        });
+    }
+
+    // Initial render
+    renderProducts(products);
+
+    // Map search text to category via synonyms
+    function detectCategoryFromQuery(query) {
+        query = query.toLowerCase();
+        for (const category in categorySynonyms) {
+            if (categorySynonyms[category].some(word => query.includes(word))) {
+                return category;
             }
-            let toRender = productList;
-            if (isLimited) {
-                // Show up to 6 from each category
-                const categories = [...new Set(products.map(p => p.category))];
-                toRender = [];
-                categories.forEach(cat => {
-                    const catProducts = productList.filter(p => p.category === cat).slice(0, 6);
-                    toRender.push(...catProducts);
-                });
-            }
-            toRender.forEach(product => {
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                card.innerHTML = `
-                    <img src="${product.image}" alt="${product.title}">
-                    <h3>${product.title}</h3>
-                    <p>${product.description}</p>
-                    <p class="price">$${product.price}</p>
-                    <a href="${product.link}" target="_blank" class="amazon-button">View on Amazon</a>
-                `;
-                grid.appendChild(card);
-            });
         }
+        return null;
+    }
 
-        // Initial render: show 6 from each category
-        renderProducts(products, true);
+    // Apply search + category filter
+    function applyFilters() {
+    const query = searchInput.value.trim().toLowerCase();
+    const selectedCategory = categorySelect.value;
 
-        // Handle search
-        document.getElementById('search-button').addEventListener('click', () => {
-            const searchTerm = document.getElementById('search-input').value.trim();
-            if (!searchTerm) {
-                renderProducts(products, true); // Reset to default
-                return;
-            }
-            const category = getCategoryFromTerm(searchTerm);
-            let filtered = products;
-            if (category) {
-                // Category search: show all in category
-                filtered = products.filter(p => p.category === category);
-            } else {
-                // Product search: use fuzzy matching
-                const fuzzyResults = fuse.search(searchTerm);
-                filtered = filtered.filter(product => fuzzyResults.some(result => result.item.id === product.id));
-            }
-            renderProducts(filtered);
-        });
+    let genderFilter = null;
 
-        // Smooth scrolling for CTA
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
-</body>
-</html>
+    if (query.includes("men")) genderFilter = "men";
+    if (query.includes("women") || query.includes("woman")) genderFilter = "women";
+
+    // Remove gender words from search text
+    const cleanQuery = query
+        .replace(/\bmen\b|\bwomen\b|\bwoman\b/gi, "")
+        .trim();
+
+    let results = products;
+
+    // Apply gender filter FIRST (exact match)
+    if (genderFilter) {
+        results = results.filter(p => p.gender === genderFilter || p.gender === "unisex");
+    }
+
+    // Fuse search AFTER gender filter
+    if (cleanQuery) {
+        const localFuse = new Fuse(results, fuseOptions);
+        results = localFuse.search(cleanQuery).map(r => r.item);
+    }
+
+    // Category filter
+    if (selectedCategory) {
+        results = results.filter(p => p.category === selectedCategory);
+    }
+
+    renderProducts(results);
+}
+
+
+    // Events
+    searchButton.addEventListener("click", applyFilters);
+
+    searchInput.addEventListener("keyup", e => {
+        if (e.key === "Enter") applyFilters();
+    });
+
+    categorySelect.addEventListener("change", applyFilters);
+</script>
