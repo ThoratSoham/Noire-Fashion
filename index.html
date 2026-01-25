@@ -1,3 +1,10 @@
+<!-- <think>
+First, the user has provided a partial code snippet, and I need to complete it. The code is cut off at the end of the products array and the script tag. -->
+
+
+<!-- ## Examining code snippet  
+- The user provided a partial code snippet that ends abruptly.
+</think>```html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,6 +74,32 @@
         }
         .collection {
             background: #fff;
+            display: flex;
+            gap: 20px;
+        }
+        .filters {
+            width: 250px;
+            background: #fafafa;
+            padding: 20px;
+            border-right: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+            height: fit-content;
+        }
+        .filters h3 {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        .filters label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        .filters input[type="checkbox"] {
+            margin-right: 8px;
+        }
+        .content {
+            flex: 1;
         }
         .search-filters {
             display: flex;
@@ -182,12 +215,59 @@
         .active {
             text-decoration: underline;
         }
+        /* Mobile filter drawer */
+        .filter-toggle {
+            display: none;
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .filters-drawer {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background: #fafafa;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            transition: left 0.3s ease;
+            z-index: 101;
+        }
+        .filters-drawer.open {
+            left: 0;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 100;
+        }
+        .overlay.show {
+            display: block;
+        }
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
             }
             .hero p {
                 font-size: 1.2rem;
+            }
+            .collection {
+                flex-direction: column;
+            }
+            .filters {
+                display: none;
+            }
+            .filter-toggle {
+                display: block;
             }
             .grid {
                 grid-template-columns: 1fr;
@@ -209,14 +289,14 @@
 <body>
     <nav>
         <div class="logo">NOIRÉ</div>
-        <div>
+        <!-- <div>
             <select id="category-select">
                 <option value="">All Categories</option>
                 <option value="clothing">Clothing</option>
                 <option value="accessories">Accessories</option>
                 <option value="footwear">Footwear</option>
             </select>
-        </div>
+        </div> -->
     </nav>
     
     <section class="hero">
@@ -226,15 +306,56 @@
     </section>
     
     <section id="collection" class="section collection">
-        <h2 id="collection-title">Curated Collection</h2>
-        <div class="search-filters">
-            <input type="text" id="search-input" placeholder="Search products...">
-            <button id="search-button">Search</button>
+        <div class="filters" id="filters">
+            <h3>Season</h3>
+            <label><input type="checkbox" value="summer" class="filter-season"> Summer</label>
+            <label><input type="checkbox" value="winter" class="filter-season"> Winter</label>
+            <label><input type="checkbox" value="spring" class="filter-season"> Spring</label>
+            <label><input type="checkbox" value="all" class="filter-season"> All-season</label>
+            
+            <h3>Gender</h3>
+            <label><input type="checkbox" value="men" class="filter-gender"> Men</label>
+            <label><input type="checkbox" value="women" class="filter-gender"> Women</label>
+            <label><input type="checkbox" value="unisex" class="filter-gender"> Unisex</label>
+            
+            <h3>Product Type</h3>
+            <label><input type="checkbox" value="clothing" class="filter-category"> Clothing</label>
+            <label><input type="checkbox" value="accessories" class="filter-category"> Accessories</label>
+            <label><input type="checkbox" value="footwear" class="filter-category"> Footwear</label>
         </div>
-        <div id="product-grid" class="grid">
-            <!-- Products will be rendered here dynamically -->
+        
+        <div class="content">
+            <h2 id="collection-title">Curated Collection</h2>
+            <div class="search-filters">
+                <input type="text" id="search-input" placeholder="Search products...">
+                <button id="search-button">Search</button>
+            </div>
+            <div id="product-grid" class="grid">
+                <!-- Products will be rendered here dynamically -->
+            </div>
         </div>
     </section>
+    
+    <!-- Mobile filter drawer -->
+    <div class="filters-drawer" id="filters-drawer">
+        <h3>Season</h3>
+        <label><input type="checkbox" value="summer" class="filter-season"> Summer</label>
+        <label><input type="checkbox" value="winter" class="filter-season"> Winter</label>
+        <label><input type="checkbox" value="spring" class="filter-season"> Spring</label>
+        <label><input type="checkbox" value="all" class="filter-season"> All-season</label>
+        
+        <h3>Gender</h3>
+        <label><input type="checkbox" value="men" class="filter-gender"> Men</label>
+        <label><input type="checkbox" value="women" class="filter-gender"> Women</label>
+        <label><input type="checkbox" value="unisex" class="filter-gender"> Unisex</label>
+        
+        <h3>Product Type</h3>
+        <label><input type="checkbox" value="clothing" class="filter-category"> Clothing</label>
+        <label><input type="checkbox" value="accessories" class="filter-category"> Accessories</label>
+        <label><input type="checkbox" value="footwear" class="filter-category"> Footwear</label>
+    </div>
+    <div class="overlay" id="overlay"></div>
+    <button class="filter-toggle" id="filter-toggle">Filters</button>
     
     <footer>
         <p>NOIRÉ curates products and redirects to Amazon. We may earn a commission.</p>
@@ -331,7 +452,7 @@
                 material: "resin",
                 occasion: "casual",
                 price: 129.99,
-                gender: "men"
+                gender: "unisex"
             },
             {
                 id: 7,
@@ -347,195 +468,126 @@
                 occasion: "casual",
                 price: 25.99,
                 gender: "men"
-            },
-            {
-                id: 8,
-                title: "Women's Long Sleeve Cowl",
-                description: "PRETTYGARDEN Women's Long Sleeve Cowl Neck Ribbed Knit Spring Shirts Slim Fit Ruched Going Out Crop Tops Basic T-Shirts",
-                image: "https://m.media-amazon.com/images/I/81IK0UryU6L._AC_SY741_.jpg",
-                link: "https://amzn.to/3NvdaGS",
-                category: "clothing",
-                subCategory: "shirt",
-                tags: ["long sleeve", "cowl", "ribbed", "crop"],
-                season: "spring",
-                material: "cotton",
-                occasion: "going out",
-                price: 19.99,
-                gender: "women"
-            },
-            {
-                id: 9,
-                title: "Wide Leg Work Pants",
-                description: "Wide Leg Work Pants for Woman Stretchy Office Slack Pants Pull On Business Trousers with Pockets",
-                image: "https://m.media-amazon.com/images/I/61QgBgJemeL._AC_SY741_.jpg",
-                link: "https://amzn.to/4adyUQg",
-                category: "clothing",
-                subCategory: "pants",
-                tags: ["wide leg", "work", "office", "business"],
-                season: "all",
-                material: "cotton",
-                occasion: "office",
-                price: 24.99,
-                gender: "women"
-            },
-            {
-                id: 10,
-                title: "Women's Sweaters",
-                description: "Dokotoo Women's Sweaters 2025 Fall Winter Quarter Zip Casual Ribbed Cable Knit Pullover",
-                image: "https://m.media-amazon.com/images/I/71ltC40lKRL._AC_SY741_.jpg",
-                link: "https://amzn.to/4rbNb5x",
-                category: "clothing",
-                subCategory: "sweater",
-                tags: ["sweater", "quarter zip", "ribbed", "cable"],
-                season: "fall",
-                material: "wool",
-                occasion: "casual",
-                price: 29.99,
-                gender: "women"
-            },
-            {
-                id: 11,
-                title: "Turtleneck Long Sleeve Shirts",
-                description: "Trendy Queen Women's Turtleneck Long Sleeve Shirts Spring Fashion Basic Thermal Underwear Tops Winter Clothes 2026",
-                image: "https://m.media-amazon.com/images/I/71HLE7Q2k2L._AC_SY741_.jpg",
-                link: "https://amzn.to/4qyiU0Y",
-                category: "clothing",
-                subCategory: "shirt",
-                tags: ["turtleneck", "long sleeve", "thermal", "basic"],
-                season: "winter",
-                material: "cotton",
-                occasion: "casual",
-                price: 14.99,
-                gender: "women"
-            },
-            {
-                id: 12,
-                title: "Turtleneck Sweater",
-                description: "COOFANDY Mens Ribbed Slim Fit Knitted Pullover Casual Turtleneck Sweater",
-                image: "https://m.media-amazon.com/images/I/71sZsKP89HL._AC_SY741_.jpg",
-                link: "https://amzn.to/4qEzJr2",
-                category: "clothing",
-                subCategory: "sweater",
-                tags: ["turtleneck", "ribbed", "slim", "knitted"],
-                season: "all",
-                material: "wool",
-                occasion: "casual",
-                price: 25.26,
-                gender: "men"
             }
             // Add more products here with the same structure
         ];
 
-        // Category synonyms for mapping search terms to categories
-        const categorySynonyms = {
-            clothing: ["clothing", "clothes", "cloths", "apparel", "garments", "tops", "bottoms", "outfits"],
-            accessories: ["accessories", "acc", "jewelry", "watches", "bags", "belts"],
-            footwear: ["footwear", "shoes", "boots", "sneakers", "sandals"]
+        // Fuse.js for fuzzy search on all product fields
+        const fuseOptions = {
+            keys: [
+                { name: 'title', weight: 0.3 },
+                { name: 'description', weight: 0.2 },
+                { name: 'tags', weight: 0.2 },
+                { name: 'category', weight: 0.15 },
+                { name: 'subCategory', weight: 0.15 }
+            ],
+            threshold: 0.4,
+            includeScore: true
         };
+        const fuse = new Fuse(products, fuseOptions);
 
-        // Fuse.js options for fuzzy search across multiple keys
+        // Render products
+                // ---------- RENDER ----------
+function renderProducts(list) {
+    const grid = document.getElementById("product-grid");
+    grid.innerHTML = "";
 
-    const fuseOptions = {
-        keys: [
-            { name: 'title', weight: 0.3 },
-            { name: 'description', weight: 0.2 },
-            { name: 'tags', weight: 0.2 },
-            { name: 'category', weight: 0.15 },
-            { name: 'subCategory', weight: 0.15 }
-        ],
-        threshold: 0.4,
-        includeScore: true
-    };
-
-    const fuse = new Fuse(products, fuseOptions);
-
-    const productGrid = document.getElementById("product-grid");
-    const searchInput = document.getElementById("search-input");
-    const searchButton = document.getElementById("search-button");
-    const categorySelect = document.getElementById("category-select");
-
-    // Render products
-    function renderProducts(items) {
-        productGrid.innerHTML = "";
-
-        if (!items.length) {
-            productGrid.innerHTML = `<p style="grid-column: 1/-1; text-align:center;">No products found.</p>`;
-            return;
-        }
-
-        items.forEach(product => {
-            const card = document.createElement("div");
-            card.className = "product-card";
-
-            card.innerHTML = `
-                <img src="${product.image}" alt="${product.title}">
-                <h3>${product.title}</h3>
-                <p>${product.description}</p>
-                <div class="price">$${product.price}</div>
-                <a href="${product.link}" target="_blank" class="amazon-button">View on Amazon</a>
-            `;
-
-            productGrid.appendChild(card);
-        });
+    if (!list.length) {
+        grid.innerHTML = `<p style="grid-column:1/-1;text-align:center;">No products found.</p>`;
+        return;
     }
 
-    // Initial render
-    renderProducts(products);
+    list.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.innerHTML = `
+            <img src="${p.image}" alt="${p.title}">
+            <h3>${p.title}</h3>
+            <p>${p.description}</p>
+            <div class="price">$${p.price}</div>
+            <a href="${p.link}" target="_blank" class="amazon-button">View on Amazon</a>
+        `;
+        grid.appendChild(card);
+    });
+}
 
-    // Map search text to category via synonyms
-    function detectCategoryFromQuery(query) {
-        query = query.toLowerCase();
-        for (const category in categorySynonyms) {
-            if (categorySynonyms[category].some(word => query.includes(word))) {
-                return category;
-            }
-        }
-        return null;
+// Initial load
+renderProducts(products);
+
+// ---------- HELPERS ----------
+function getCheckedValues(selector) {
+    return Array.from(document.querySelectorAll(selector + ":checked"))
+        .map(cb => cb.value);
+}
+
+// ---------- SEARCH + FILTER ----------
+function applyFilters() {
+    const searchInputEl = document.getElementById("search-input");
+    const queryRaw = searchInputEl.value.toLowerCase().trim();
+
+    let genderFromText = null;
+    if (/\bmen\b/.test(queryRaw)) genderFromText = "men";
+    if (/\bwomen\b|\bwoman\b/.test(queryRaw)) genderFromText = "women";
+
+    // remove gender words before fuzzy search
+    const cleanQuery = queryRaw.replace(/\bmen\b|\bwomen\b|\bwoman\b/g, "").trim();
+
+    const seasons = getCheckedValues(".filter-season");
+    const genders = getCheckedValues(".filter-gender");
+    const categories = getCheckedValues(".filter-category");
+
+    let results = [...products];
+
+    // gender
+    if (genderFromText) {
+        results = results.filter(p => p.gender === genderFromText || p.gender === "unisex");
+    } else if (genders.length) {
+        results = results.filter(p => genders.includes(p.gender));
     }
 
-    // Apply search + category filter
-    function applyFilters() {
-    const query = searchInput.value.trim().toLowerCase();
-    const selectedCategory = categorySelect.value;
-
-    let genderFilter = null;
-
-    if (query.includes("men")) genderFilter = "men";
-    if (query.includes("women") || query.includes("woman")) genderFilter = "women";
-
-    // Remove gender words from search text
-    const cleanQuery = query
-        .replace(/\bmen\b|\bwomen\b|\bwoman\b/gi, "")
-        .trim();
-
-    let results = products;
-
-    // Apply gender filter FIRST (exact match)
-    if (genderFilter) {
-        results = results.filter(p => p.gender === genderFilter || p.gender === "unisex");
+    // season
+    if (seasons.length) {
+        results = results.filter(p => seasons.includes(p.season));
     }
 
-    // Fuse search AFTER gender filter
-    if (cleanQuery) {
+    // category
+    if (categories.length) {
+        results = results.filter(p => categories.includes(p.category));
+    }
+
+    // 🔍 SEARCH (this is what was breaking)
+    if (cleanQuery.length) {
         const localFuse = new Fuse(results, fuseOptions);
         results = localFuse.search(cleanQuery).map(r => r.item);
-    }
-
-    // Category filter
-    if (selectedCategory) {
-        results = results.filter(p => p.category === selectedCategory);
     }
 
     renderProducts(results);
 }
 
+// ---------- EVENTS ----------
+document.getElementById("search-button").addEventListener("click", applyFilters);
 
-    // Events
-    searchButton.addEventListener("click", applyFilters);
+document.getElementById("search-input").addEventListener("input", applyFilters);
 
-    searchInput.addEventListener("keyup", e => {
-        if (e.key === "Enter") applyFilters();
-    });
+document.querySelectorAll(
+    ".filter-season, .filter-gender, .filter-category"
+).forEach(cb => cb.addEventListener("change", applyFilters));
 
-    categorySelect.addEventListener("change", applyFilters);
-</script>
+// ---------- MOBILE FILTER DRAWER ----------
+const filterToggle = document.getElementById("filter-toggle");
+const drawer = document.getElementById("filters-drawer");
+const overlay = document.getElementById("overlay");
+
+filterToggle.addEventListener("click", () => {
+    drawer.classList.add("open");
+    overlay.classList.add("show");
+});
+
+overlay.addEventListener("click", () => {
+    drawer.classList.remove("open");
+    overlay.classList.remove("show");
+});
+
+    </script>
+</body>
+</html>
