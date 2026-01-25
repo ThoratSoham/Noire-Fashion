@@ -568,17 +568,29 @@ function renderProducts(list) {
     const grid = document.getElementById("product-grid");
     grid.innerHTML = "";
 
-    if (!list.length) {
+    // Check if URL has ?product=ID
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('product');
+    let productsToShow = list;
+
+    if (productId) {
+        const singleProduct = list.find(p => p.id == productId);
+        if (singleProduct) {
+            productsToShow = [singleProduct]; // show only this product
+        }
+    }
+
+    if (!productsToShow.length) {
         grid.innerHTML = `<p style="grid-column:1/-1;text-align:center;">No products found.</p>`;
         return;
     }
 
-    list.forEach(p => {
+    productsToShow.forEach(p => {
         const card = document.createElement("div");
         card.className = "product-card";
 
         // URL to your website product page
-        const siteLink = `${window.location.origin}/?product=${p.id}`;
+        const siteLink = `${window.location.origin}${window.location.pathname}?product=${p.id}`;
 
         card.innerHTML = `
             <img src="${p.image}" alt="${p.title}">
@@ -597,11 +609,12 @@ function renderProducts(list) {
             const link = e.target.getAttribute("data-link");
             navigator.clipboard.writeText(link).then(() => {
                 e.target.textContent = "✅ Copied!";
-                setTimeout(() => { e.target.textContent = "🔗 Share"; }, 1500);
+                setTimeout(() => { e.target.textContent = "Share"; }, 1500);
             });
         });
     });
 }
+
 
 
 
