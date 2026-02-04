@@ -6,7 +6,13 @@
     <title>NOIRÉ - Affordable Luxury Fashion</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/js/supabaseClient.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/cart.js"></script>
+    <script src="/js/profile.js"></script>
     <style>
+        /* Same CSS as before, truncated for brevity */
         * {
             margin: 0;
             padding: 0;
@@ -166,7 +172,7 @@
         .amazon-button:hover {
             background: #333;
         }
-        .share-button, .save-button {
+        .add-to-cart-button {
             background: #eee;
             color: #333;
             padding: 8px 15px;
@@ -177,12 +183,26 @@
             margin-right: 5px;
             transition: all 0.2s ease;
         }
-        .share-button:hover, .save-button:hover {
+        .add-to-cart-button:hover {
             background: #ddd;
         }
-        .save-button.saved {
+        .add-to-cart-button.added {
             background: #4CAF50;
             color: white;
+            cursor: default;
+        }
+        .share-button {
+            background: #eee;
+            color: #333;
+            padding: 8px 15px;
+            border: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.2s ease;
+        }
+        .share-button:hover {
+            background: #ddd;
         }
         footer {
             background: #000;
@@ -286,6 +306,7 @@
 <body>
     <nav>
         <div class="logo">NOIRÉ</div>
+        <div id="auth-links"></div>  <!-- Dynamic auth links added by auth.js -->
     </nav>
     
     <section class="hero">
@@ -351,9 +372,10 @@
     </footer>
     
     <script>
-        // Product data
+        // Product data (source of truth)
         const products = [
-            {
+            // Full products array as before
+             {
                 id: 1,
                 title: "Wide Leg Pants Lounge Set",
                 description: "ANRABESS Women 2 Piece Outfits 2025 Fall Fashion",
@@ -745,29 +767,6 @@
             }
         ];
 
-        // Simple auth/cart/profile stubs (replace with actual implementation)
-        const auth = {
-            isLoggedIn: false
-        };
-        
-        const cart = {
-            savedItems: new Set(),
-            isSaved: function(id) {
-                return this.savedItems.has(id);
-            },
-            add: function(id) {
-                this.savedItems.add(id);
-                return Promise.resolve();
-            },
-            fetch: function() {
-                return Promise.resolve();
-            }
-        };
-        
-        const profile = {
-            load: function() {}
-        };
-
         // Fuse.js for fuzzy search
         const fuseOptions = {
             keys: [
@@ -782,7 +781,7 @@
         };
         const fuse = new Fuse(products, fuseOptions);
 
-        // Render products
+        // Render products with Add to Cart button
         function renderProducts(list) {
             const grid = document.getElementById("product-grid");
             grid.innerHTML = "";
@@ -808,6 +807,7 @@
                 card.className = "product-card";
 
                 const siteLink = `${window.location.origin}${window.location.pathname}?product=${p.id}`;
+                const isInCart = cart.isSaved(p.id);
 
                 card.innerHTML = `
                     <img src="${p.image}" alt="${p.title}">
@@ -816,7 +816,7 @@
                     <div class="price">$${p.price}</div>
                     <a href="${p.link}" target="_blank" class="amazon-button">View on Amazon</a>
                     <button class="share-button" data-link="${siteLink}">Share</button>
-                    ${auth.isLoggedIn ? `<button class="save-button ${cart.isSaved(p.id) ? 'saved' : ''}" data-id="${p.id}">${cart.isSaved(p.id) ? 'Saved' : 'Save to Collection'}</button>` : ''}
+                    <button class="add-to-cart-button ${isInCart ? 'added' : ''}" data-id="${p.id}" ${isInCart ? 'disabled' : ''}>${isInCart ? 'Added to Cart' : 'Add to Cart'}</button>
                 `;
 
                 grid.appendChild(card);
@@ -833,17 +833,33 @@
                 });
             });
 
-            // Save button functionality
-            document.querySelectorAll(".save-button").forEach(btn => {
-                btn.addEventListener("click", (e) => {
+            // Add to Cart button functionality
+            document.querySelectorAll(".add-to-cart-button").forEach(btn => {
+                btn.addEventListener("click", async (e) => {
                     const id = parseInt(e.target.dataset.id);
-                    cart.add(id).then(() => renderProducts(products));
+                    if (auth.isLoggedIn) {
+                        try {
+                            await cart.add(id);
+                            renderProducts(products);  // Re-render to update button state
+                        } catch (err) {
+                            alert('Something didn’t work. Please try again.');
+                        }
+                    } else {
+                        auth.showModal(() => cart.add(id).then(() => renderProducts(products)));  // Show login, then add on success
+                    }
                 });
             });
         }
 
-        // Initial load
+        // Initial render (products show immediately, auth initializes separately)
         renderProducts(products);
+        
+        // Initialize auth after rendering
+        document.addEventListener('DOMContentLoaded', () => {
+            auth.init();
+            cart.fetch().then(() => renderProducts(products)).catch(() => {});
+            profile.load();
+        });
 
         // Helper function
         function getCheckedValues(selector) {
