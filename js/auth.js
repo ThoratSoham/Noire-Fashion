@@ -16,10 +16,18 @@ const auth = {
             <div id="login-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
                 <div style="background:#fff; padding:30px; border:1px solid #ddd; max-width:400px; width:90%; text-align:center; font-family:'Montserrat', sans-serif;">
                     <h3 style="font-family:'Playfair Display', serif; margin-bottom:15px;">Save Your Collection</h3>
-                    <p style="font-size:0.9rem; color:#666; margin-bottom:20px;">Enter your email for a secure link to access your saved pieces anytime.</p>
-                    <input id="email-input" type="email" placeholder="your@email.com" style="width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:0;">
-                    <button id="send-link-btn" style="background:#000; color:#fff; padding:10px 20px; border:none; cursor:pointer;">Send Magic Link</button>
-                    <p id="auth-message" style="font-size:0.8rem; color:#666; margin-top:10px;"></p>
+                    <p style="font-size:0.9rem; color:#666; margin-bottom:20px;">Choose how to sign in and access your saved pieces anytime.</p>
+                    
+                    <button id="google-signin-btn" style="background:#4285F4; color:#fff; padding:12px 20px; border:none; cursor:pointer; width:100%; margin-bottom:10px; font-weight:500; border-radius:4px;">Sign in with Google</button>
+                    
+                    <div style="position:relative; margin:15px 0;">
+                        <div style="position:absolute; top:50%; width:100%; height:1px; background:#ddd;"></div>
+                        <span style="position:relative; background:#fff; padding:0 10px; color:#999; font-size:0.8rem;">OR</span>
+                    </div>
+                    
+                    <input id="email-input" type="email" placeholder="your@email.com" style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:0;">
+                    <button id="send-link-btn" style="background:#000; color:#fff; padding:10px 20px; border:none; cursor:pointer; width:100%;">Send Magic Link</button>
+                    <p id="auth-message" style="font-size:0.8rem; color:#d00; margin-top:10px;"></p>
                     <button id="close-modal" style="background:none; border:none; color:#666; cursor:pointer; margin-top:10px;">Close</button>
                 </div>
             </div>
@@ -29,6 +37,7 @@ const auth = {
 
         // Event listeners
         document.getElementById('send-link-btn').addEventListener('click', () => this.sendMagicLink());
+        document.getElementById('google-signin-btn').addEventListener('click', () => this.signInWithGoogle());
         document.getElementById('close-modal').addEventListener('click', () => this.hideModal());
         document.getElementById('email-input').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') this.sendMagicLink();
@@ -38,13 +47,39 @@ const auth = {
     async sendMagicLink() {
         const email = document.getElementById('email-input').value.trim();
         if (!email) return this.showMessage('Please enter a valid email.');
+        
+        if (!window.supabaseClient) {
+            this.showMessage('System is loading... please try again in a moment.');
+            return;
+        }
 
         try {
             const { error } = await window.supabaseClient.auth.signInWithOtp({ email });
             if (error) throw error;
-            this.showMessage('Check your email for a secure link.');
+            this.showMessage('Check your email for a secure link. It may take a minute to arrive.');
         } catch (err) {
-            this.showMessage('Something didn’t work. Please try again.');
+            console.error('Magic link error:', err);
+            this.showMessage('Email error: ' + (err.message || 'Something went wrong. Try again.'));
+        }
+    },
+
+    async signInWithGoogle() {
+        if (!window.supabaseClient) {
+            this.showMessage('System is loading... please try again in a moment.');
+            return;
+        }
+        
+        try {
+            const { error } = await window.supabaseClient.auth.signInWithOAuth({
+                provider: 'google',
+                options: {
+                    redirectTo: window.location.origin + window.location.pathname
+                }
+            });
+            if (error) throw error;
+        } catch (err) {
+            console.error('Google signin error:', err);
+            this.showMessage('Google signin failed: ' + (err.message || 'Please try again.'));
         }
     },
 
