@@ -18,7 +18,7 @@
 <body>
     <nav>
         <div class="logo">NOIRÉ</div>
-        <!-- Auth links added by auth.js -->
+        <div id="auth-links"></div>
     </nav>
 
     <section class="section">
@@ -30,4 +30,64 @@
     </section>
 
     <footer>
-        <p>NOIRÉ
+        <p>NOIRÉ curates products and redirects to Amazon. We may earn a commission.</p>
+    </footer>
+
+    <script>
+        // Render cart items
+        function renderCart() {
+            const grid = document.getElementById("cart-grid");
+            const emptyState = document.getElementById("empty-state");
+            grid.innerHTML = "";
+
+            if (!auth.isLoggedIn) {
+                emptyState.textContent = "Please log in to view your collection.";
+                emptyState.style.display = "block";
+                return;
+            }
+
+            const cartItems = cart.items.map(id => products.find(p => p.id === id)).filter(Boolean);
+
+            if (!cartItems.length) {
+                emptyState.style.display = "block";
+                return;
+            }
+
+            emptyState.style.display = "none";
+
+            cartItems.forEach(p => {
+                const card = document.createElement("div");
+                card.className = "product-card";
+
+                card.innerHTML = `
+                    <img src="${p.image}" alt="${p.title}">
+                    <h3>${p.title}</h3>
+                    <p>${p.description}</p>
+                    <div class="price">$${p.price}</div>
+                    <a href="${p.link}" target="_blank" class="amazon-button">View on Amazon</a>
+                    <button class="remove-button" data-id="${p.id}">Remove</button>
+                `;
+
+                grid.appendChild(card);
+            });
+
+            // Remove button functionality
+            document.querySelectorAll(".remove-button").forEach(btn => {
+                btn.addEventListener("click", async (e) => {
+                    const id = parseInt(e.target.dataset.id);
+                    try {
+                        await cart.remove(id);
+                        renderCart();
+                    } catch (err) {
+                        alert('Something didn’t work. Please try again.');
+                    }
+                });
+            });
+        }
+
+        // Initial load
+        cart.fetch().then(() => renderCart());
+        profile.load();
+    </script>
+</body>
+</html>
