@@ -1,55 +1,66 @@
-// Handles cart operations (add, remove, fetch)
+// js/cart.js
 const cart = {
-    items: [],  // Local cache for quick UI
+    items: [],  // Array of product IDs saved by the user
 
-    async add(productId) {
-        if (!auth.isLoggedIn) {
-            auth.showModal(() => this.add(productId));  // Trigger login, then retry
+    isSaved: function(id) {
+        return this.items.includes(id);
+    },
+
+    fetch: async function() {
+        if (!auth.isLoggedIn || !auth.user) {
+            this.items = [];
             return;
         }
-
-        try {
-            const { error } = await window.supabaseClient
-                .from('carts')
-                .insert({ user_id: auth.user.id, product_id: productId });
-            if (error && error.code !== '23505') throw error;  // Ignore unique constraint errors
-            this.items.push(productId);  // Update local cache
-            alert('Added to your collection.');  // Subtle feedback
-        } catch (err) {
-            alert('Something didn’t work. Please try again.');
-        }
-    },
-
-    async remove(productId) {
-        try {
-            await window.supabaseClient
-                .from('carts')
-                .delete()
-                .eq('user_id', auth.user.id)
-                .eq('product_id', productId);
-            this.items = this.items.filter(id => id !== productId);
-        } catch (err) {
-            alert('Something didn’t work. Please try again.');
-        }
-    },
-
-    async fetch() {
-        if (!auth.isLoggedIn) return [];
         try {
             const { data, error } = await window.supabaseClient
                 .from('carts')
                 .select('product_id')
                 .eq('user_id', auth.user.id);
+
             if (error) throw error;
-            this.items = data.map(item => item.product_id);
-            return this.items;
+            this.items = data.map(row => row.product_id);
         } catch (err) {
-            console.error('Fetch cart failed:', err);
-            return [];
+            console.error('Cart fetch error:', err);
+            throw err;
         }
     },
 
-    isSaved(productId) {
-        return this.items.includes(productId);
+    add: async function(id) {
+        if (!auth.isLoggedIn || !auth.user) {
+            throw new Error('You must be logged in to add items to your cart.');
+        }
+        if (this.isSaved(id)) {
+            throw new Error('Item already in cart.');
+        }
+        try {
+            const { error } = await window.supabaseClient
+                .from('carts')
+                .insert({ user_id: auth.user.id, product_id: id });
+
+            if (error) throw error;
+            this.items.push(id);
+        } catch (err) {
+            console.error('Cart add error:', err);
+            throw err;
+        }
+    },
+
+    remove: async function(id) {
+        if (!auth.isLoggedIn || !auth.user) {
+            throw new Error('You must be logged in to remove items from your cart.');
+        }
+        try {
+            const { error } = await window.supabaseClient
+                .from('carts')
+                .delete()
+                .eq('user_id', auth.user.id)
+                .eq('product_id', id);
+
+            if (error) throw error;
+            this.items = this.items.filter(itemId => itemId !== id);
+        } catch (err) {
+            console.error('Cart remove error:', err);
+            throw err;
+        }
     }
 };
