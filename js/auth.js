@@ -1,42 +1,50 @@
-// auth.js
+// js/auth.js
 
-import { supabase } from "./supabaseClient.js"
+window.auth = {
+  isLoggedIn: false,
 
-document.addEventListener("DOMContentLoaded", () => {
-  const loginBtn = document.getElementById("google-login")
-  const logoutBtn = document.getElementById("logout-btn")
+  async init() {
+    const { data: { session } } = await window.supabaseClient.auth.getSession()
 
-  // LOGIN
-  if (loginBtn) {
-    loginBtn.addEventListener("click", async () => {
-      await supabase.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-          redirectTo: "https://noire-fashion.github.io/Noire-Website/"
-        }
+    this.isLoggedIn = !!session
+    this.render()
+  },
+
+  render() {
+    const container = document.getElementById("auth-links")
+    if (!container) return
+
+    if (this.isLoggedIn) {
+      container.innerHTML = `
+        <a href="#" id="logout-link">Logout</a>
+      `
+
+      document.getElementById("logout-link").addEventListener("click", async (e) => {
+        e.preventDefault()
+        await window.supabaseClient.auth.signOut()
+        location.reload()
       })
-    })
-  }
 
-  // LOGOUT
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", async () => {
-      await supabase.auth.signOut()
-      window.location.reload()
-    })
-  }
+    } else {
+      container.innerHTML = `
+        <a href="#" id="login-link">Login</a>
+      `
 
-  // CHECK SESSION
-  checkUser()
-})
+      document.getElementById("login-link").addEventListener("click", async (e) => {
+        e.preventDefault()
 
-async function checkUser() {
-  const { data: { session } } = await supabase.auth.getSession()
+        await window.supabaseClient.auth.signInWithOAuth({
+          provider: "google",
+          options: {
+            redirectTo: "https://noire-fashion.github.io/Noire-Website/"
+          }
+        })
+      })
+    }
+  },
 
-  if (session) {
-    console.log("User logged in:", session.user)
-
-    const loginBtn = document.getElementById("google-login")
-    if (loginBtn) loginBtn.style.display = "none"
+  showModal(callback) {
+    alert("Please login first.")
+    // You can improve this later
   }
 }
