@@ -1,21 +1,24 @@
 // js/supabaseClient.js
 
-const SUPABASE_URL = "https://xpfydaohsihasabnalyw.supabase.co"
-const SUPABASE_ANON_KEY = "sb_publishable_y9IGmcNotMSeJhbE7gqXig_tgAPScy3"
+const SUPABASE_URL = "https://xpfydaohsihasabnalyw.supabase.co";
+const SUPABASE_ANON_KEY = "YOUR_REAL_ANON_KEY_HERE";
 
-function initSupabase() {
-  if (!window.supabase) {
-    console.warn("Supabase not loaded yet, retrying...");
-    setTimeout(initSupabase, 50);
-    return;
-  }
-
-  window.supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY
-  );
-
-  console.log("Supabase initialized");
+// Make sure Supabase library exists
+if (!window.supabase) {
+  throw new Error("Supabase CDN not loaded. Check script order in index.html");
 }
 
-initSupabase();
+// Create client ONLY ONCE
+window.supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY,
+  {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: true
+    }
+  }
+);
+
+console.log("Supabase client initialized");
