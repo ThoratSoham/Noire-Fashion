@@ -139,26 +139,27 @@ const auth = {
 
         // Google login button
         document.getElementById('google-login-btn').addEventListener('click', async () => {
-            const messageEl = document.getElementById('auth-message');
-            try {
-                const { error } = await window.supabaseClient.auth.signInWithOAuth({
-                    provider: 'google',
-                    options: {
-                        redirectTo: window.location.origin  // Redirect back to your site after login
-                    }
-                });
-                if (error) {
-                    messageEl.textContent = 'Google login failed. Try again.';
-                    console.error(error);
-                } else {
-                    // OAuth will handle the popup and redirect
-                    this.pendingCallback = callback;
-                }
-            } catch (err) {
-                messageEl.textContent = 'Something went wrong. Try again.';
-                console.error(err);
+    const messageEl = document.getElementById('auth-message');
+    console.log('Google login clicked');  // Add this
+    try {
+        const { data, error } = await window.supabaseClient.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+                redirectTo: window.location.origin
             }
         });
+        console.log('OAuth response:', data, error);  // Add this
+        if (error) {
+            messageEl.textContent = 'Google login failed: ' + error.message;
+            console.error('OAuth error:', error);
+        } else {
+            this.pendingCallback = callback;
+        }
+    } catch (err) {
+        messageEl.textContent = 'Something went wrong: ' + err.message;
+        console.error('Catch error:', err);
+    }
+});
 
         // Send link button (unchanged)
         document.getElementById('send-link-btn').addEventListener('click', async () => {
