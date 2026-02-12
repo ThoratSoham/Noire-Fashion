@@ -1,38 +1,43 @@
-// Handles optional user profile (name, gender preference)
+// js/profile.js
 const profile = {
-    isComplete: false,
+    data: {},
 
-    async load() {
-        if (!auth.isLoggedIn) return;
+    load: async function() {
+        if (!auth.isLoggedIn || !auth.user) {
+            throw new Error('You must be logged in to load your profile.');
+        }
         try {
             const { data, error } = await window.supabaseClient
-                .from('users')
+                .from('profiles')
                 .select('*')
-                .eq('id', auth.user.id)
+                .eq('user_id', auth.user.id)
                 .single();
-            if (error) throw error;
-            this.isComplete = !!(data.name && data.gender_preference);
-            // Update nav with red dot if incomplete
-            const profileLink = document.querySelector('#profile-link');
-            if (profileLink && !this.isComplete) {
-                profileLink.style.textDecoration = 'underline';
-                profileLink.style.color = '#d00';  // Subtle red
-                profileLink.title = 'Complete your profile to improve recommendations';
+
+            if (error && error.code !== 'PGRST116') { // PGRST116 is "not found", which is ok for new users
+                throw error;
             }
+            this.data = data || {};
+            return this.data;
         } catch (err) {
-            console.error('Load profile failed:', err);
+            console.error('Profile load error:', err);
+            throw err;
         }
     },
 
-    async update(updates) {
+    save: async function(profileData) {
+        if (!auth.isLoggedIn || !auth.user) {
+            throw new Error('You must be logged in to save your profile.');
+        }
         try {
-            await window.supabaseClient
-                .from('users')
-                .update(updates)
-                .eq('id', auth.user.id);
-            this.isComplete = !!(updates.name && updates.gender_preference);
+            const { error } = await window.supabaseClient
+                .from('profiles')
+                .upsert({ user_id: auth.user.id, ...profileData });
+
+            if (error) throw error;
+            this.data = { ...this.data, ...profileData };
         } catch (err) {
-            alert('Something didn’t work. Please try again.');
+            console.error('Profile save error:', err);
+            throw err;
         }
     }
 };
