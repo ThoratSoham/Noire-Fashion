@@ -403,7 +403,8 @@
     <script>
         // Product data (source of truth) - Full array
         const products = [
-            {
+            // Full products array as before
+             {
                 id: 1,
                 title: "Wide Leg Pants Lounge Set",
                 description: "ANRABESS Women 2 Piece Outfits 2025 Fall Fashion",
@@ -795,7 +796,7 @@
             }
         ];
 
-                // Fuse.js for fuzzy search
+        // Fuse.js for fuzzy search
         const fuseOptions = {
             keys: [
                 { name: 'title', weight: 0.3 },
@@ -847,7 +848,7 @@
                     <button class="add-to-cart-button ${isInCart ? 'added' : ''}" data-id="${p.id}" ${isInCart ? 'disabled' : ''}>${isInCart ? 'Added to Cart' : 'Add to Cart'}</button>
                 `;
 
-                grid.appendChild(card);
+                                grid.appendChild(card);
             });
 
             // Share button functionality
@@ -884,21 +885,32 @@
         // Initial render - wait for DOM to be ready
         function startApp() {
             console.log('Starting app...');
+            console.log('window.supabaseClient:', window.supabaseClient);
+            console.log('auth:', typeof auth);
+            console.log('cart:', typeof cart);
+            console.log('profile:', typeof profile);
+            
             renderProducts(products);
             
             if (typeof auth !== 'undefined') {
+                console.log('Initializing auth...');
                 auth.init();
             } else {
                 console.warn('auth not loaded yet');
             }
             
             if (typeof cart !== 'undefined') {
-                cart.fetch().then(() => renderProducts(products)).catch(err => {
+                console.log('Fetching cart...');
+                cart.fetch().then(() => {
+                    console.log('Cart fetched successfully');
+                    renderProducts(products);
+                }).catch(err => {
                     console.warn('Cart fetch failed:', err);
                 });
             }
             
             if (typeof profile !== 'undefined') {
+                console.log('Loading profile...');
                 profile.load();
             }
         }
