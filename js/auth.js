@@ -149,7 +149,7 @@ const auth = {
                 const { data, error } = await window.supabaseClient.auth.signInWithOAuth({
                     provider: 'google',
                     options: {
-                        redirectTo: window.location.origin
+                       redirectTo: window.location.origin + "/Noire-Website/"
                     }
                 });
                 console.log('OAuth response:', data, error);
