@@ -6,13 +6,39 @@
     <title>Your Collection - NOIRÉ</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="/js/supabaseClient.js"></script>
-    <script src="/js/auth.js"></script>
-    <script src="/js/cart.js"></script>
-    <script src="/js/profile.js"></script>
-    <!-- Include the same CSS from index.html -->
+    <script src="js/supabaseClient.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/profile.js"></script>
     <style>
-        /* Paste the entire <style> block from index.html here */
+        /* Same CSS as index.html */
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #000;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Times New Roman', serif;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 15px;
+            border: 2px solid #fff;
+        }
+        .cart-link {
+            display: flex;
+            align-items: center;
+            margin-left: 15px;
+        }
+        .cart-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            fill: #fff;
+        }
     </style>
 </head>
 <body>
@@ -34,6 +60,11 @@
     </footer>
 
     <script>
+        // Full products array (same as index.html)
+        const products = [
+            // Paste the full products array here
+        ];
+
         // Render cart items
         function renderCart() {
             const grid = document.getElementById("cart-grid");
@@ -86,8 +117,25 @@
         }
 
         // Initial load
-        cart.fetch().then(() => renderCart());
-        profile.load();
+        function startCartApp() {
+            if (typeof auth !== 'undefined') {
+                auth.init();
+            }
+            if (typeof cart !== 'undefined') {
+                cart.fetch().then(() => renderCart()).catch(err => {
+                    console.warn('Cart fetch failed:', err);
+                });
+            }
+            if (typeof profile !== 'undefined') {
+                profile.load();
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', startCartApp);
+        } else {
+            startCartApp();
+        }
     </script>
 </body>
 </html>
