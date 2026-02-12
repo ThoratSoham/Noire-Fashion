@@ -5,55 +5,6 @@ const auth = {
     modal: null,
     overlay: null,
 
-    updateNav: function() {
-        const authLinks = document.getElementById('auth-links');
-        authLinks.innerHTML = '';
-
-        if (this.isLoggedIn) {
-            // Profile avatar
-            const avatar = document.createElement('div');
-            avatar.className = 'avatar';
-            const initial = this.user.email.charAt(0).toUpperCase();
-            avatar.textContent = initial;
-            avatar.addEventListener('click', () => {
-                window.location.href = 'profile.html';
-            });
-            authLinks.appendChild(avatar);
-
-            // Cart link
-            const cartLink = document.createElement('a');
-            cartLink.href = 'cart.html';
-            cartLink.className = 'cart-link';
-            cartLink.innerHTML = `
-                <svg class="cart-icon" viewBox="0 0 24 24">
-                    <path d="M7 4V2C7 1.45 7.45 1 8 1H16C16.55 1 17 1.45 17 2V4H20C20.55 4 21 4.45 21 5S20.55 6 20 6H19V19C19 20.1 18.1 21 17 21H7C5.9 21 5 20.1 5 19V6H4C3.45 6 3 5.55 3 5S3.45 4 4 4H7ZM9 3V4H15V3H9ZM7 6V19H17V6H7Z"/>
-                </svg>
-                Collection
-            `;
-            authLinks.appendChild(cartLink);
-
-            // Logout button
-            const logoutBtn = document.createElement('a');
-            logoutBtn.href = '#';
-            logoutBtn.textContent = 'Logout';
-            logoutBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.logout();
-            });
-            authLinks.appendChild(logoutBtn);
-        } else {
-            // Save Collection link
-            const saveLink = document.createElement('a');
-            saveLink.href = '#';
-            saveLink.textContent = 'Save Collection';
-            saveLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.showModal();
-            });
-            authLinks.appendChild(saveLink);
-        }
-    },
-
     init: function() {
         // Check for existing session
         const session = window.supabaseClient.auth.getSession();
@@ -93,9 +44,20 @@ const auth = {
         authLinks.innerHTML = '';
 
         if (this.isLoggedIn) {
-            // Cart icon + Collection link
+            // Profile avatar (only visible after login)
+            const avatar = document.createElement('div');
+            avatar.className = 'avatar';
+            const initial = this.user.email.charAt(0).toUpperCase();
+            avatar.textContent = initial;
+            avatar.addEventListener('click', () => {
+                window.location.href = 'profile.html';
+            });
+            authLinks.appendChild(avatar);
+
+            // Cart link
             const cartLink = document.createElement('a');
             cartLink.href = 'cart.html';
+            cartLink.className = 'cart-link';
             cartLink.innerHTML = `
                 <svg class="cart-icon" viewBox="0 0 24 24">
                     <path d="M7 4V2C7 1.45 7.45 1 8 1H16C16.55 1 17 1.45 17 2V4H20C20.55 4 21 4.45 21 5S20.55 6 20 6H19V19C19 20.1 18.1 21 17 21H7C5.9 21 5 20.1 5 19V6H4C3.45 6 3 5.55 3 5S3.45 4 4 4H7ZM9 3V4H15V3H9ZM7 6V19H17V6H7Z"/>
@@ -103,13 +65,6 @@ const auth = {
                 Collection
             `;
             authLinks.appendChild(cartLink);
-
-            // User email
-            const emailSpan = document.createElement('span');
-            emailSpan.textContent = this.user.email;
-            emailSpan.style.margin = '0 15px';
-            emailSpan.style.color = '#fff';
-            authLinks.appendChild(emailSpan);
 
             // Logout button
             const logoutBtn = document.createElement('a');
@@ -188,29 +143,29 @@ const auth = {
 
         // Google login button
         document.getElementById('google-login-btn').addEventListener('click', async () => {
-    const messageEl = document.getElementById('auth-message');
-    console.log('Google login clicked');  // Add this
-    try {
-        const { data, error } = await window.supabaseClient.auth.signInWithOAuth({
-            provider: 'google',
-            options: {
-                redirectTo: "https://noire-fashion.github.io/Noire-Website/"
+            const messageEl = document.getElementById('auth-message');
+            console.log('Google login clicked');
+            try {
+                const { data, error } = await window.supabaseClient.auth.signInWithOAuth({
+                    provider: 'google',
+                    options: {
+                        redirectTo: window.location.origin
+                    }
+                });
+                console.log('OAuth response:', data, error);
+                if (error) {
+                    messageEl.textContent = 'Google login failed: ' + error.message;
+                    console.error('OAuth error:', error);
+                } else {
+                    this.pendingCallback = callback;
+                }
+            } catch (err) {
+                messageEl.textContent = 'Something went wrong: ' + err.message;
+                console.error('Catch error:', err);
             }
         });
-        console.log('OAuth response:', data, error);  // Add this
-        if (error) {
-            messageEl.textContent = 'Google login failed: ' + error.message;
-            console.error('OAuth error:', error);
-        } else {
-            this.pendingCallback = callback;
-        }
-    } catch (err) {
-        messageEl.textContent = 'Something went wrong: ' + err.message;
-        console.error('Catch error:', err);
-    }
-});
 
-        // Send link button (unchanged)
+        // Send link button
         document.getElementById('send-link-btn').addEventListener('click', async () => {
             const email = document.getElementById('auth-email').value.trim();
             const messageEl = document.getElementById('auth-message');
@@ -233,7 +188,6 @@ const auth = {
                     console.error(error);
                 } else {
                     messageEl.textContent = 'Magic link sent! Check your email.';
-                    // Store callback for after login
                     this.pendingCallback = callback;
                 }
             } catch (err) {
