@@ -5,18 +5,35 @@ const auth = {
     modal: null,
     overlay: null,
 
-    init: function() {
-        // Check for existing session
-        const session = window.supabaseClient.auth.getSession();
-        session.then(({ data: { session } }) => {
-            if (session) {
-                this.isLoggedIn = true;
-                this.user = session.user;
-                this.updateNav();
-            } else {
-                this.updateNav();
-            }
-        });
+    init: async function() {
+
+    const { data: { session } } = await window.supabaseClient.auth.getSession();
+
+    if (session) {
+        this.isLoggedIn = true;
+        this.user = session.user;
+    } else {
+        this.isLoggedIn = false;
+        this.user = null;
+    }
+
+    this.updateNav();
+
+    window.supabaseClient.auth.onAuthStateChange((event, session) => {
+        if (event === 'SIGNED_IN' && session) {
+            this.isLoggedIn = true;
+            this.user = session.user;
+            this.updateNav();
+        }
+
+        if (event === 'SIGNED_OUT') {
+            this.isLoggedIn = false;
+            this.user = null;
+            this.updateNav();
+        }
+    });
+}
+
 
         // Listen for auth state changes
         window.supabaseClient.auth.onAuthStateChange((event, session) => {
