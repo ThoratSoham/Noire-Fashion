@@ -5,6 +5,55 @@ const auth = {
     modal: null,
     overlay: null,
 
+    updateNav: function() {
+        const authLinks = document.getElementById('auth-links');
+        authLinks.innerHTML = '';
+
+        if (this.isLoggedIn) {
+            // Profile avatar
+            const avatar = document.createElement('div');
+            avatar.className = 'avatar';
+            const initial = this.user.email.charAt(0).toUpperCase();
+            avatar.textContent = initial;
+            avatar.addEventListener('click', () => {
+                window.location.href = 'profile.html';
+            });
+            authLinks.appendChild(avatar);
+
+            // Cart link
+            const cartLink = document.createElement('a');
+            cartLink.href = 'cart.html';
+            cartLink.className = 'cart-link';
+            cartLink.innerHTML = `
+                <svg class="cart-icon" viewBox="0 0 24 24">
+                    <path d="M7 4V2C7 1.45 7.45 1 8 1H16C16.55 1 17 1.45 17 2V4H20C20.55 4 21 4.45 21 5S20.55 6 20 6H19V19C19 20.1 18.1 21 17 21H7C5.9 21 5 20.1 5 19V6H4C3.45 6 3 5.55 3 5S3.45 4 4 4H7ZM9 3V4H15V3H9ZM7 6V19H17V6H7Z"/>
+                </svg>
+                Collection
+            `;
+            authLinks.appendChild(cartLink);
+
+            // Logout button
+            const logoutBtn = document.createElement('a');
+            logoutBtn.href = '#';
+            logoutBtn.textContent = 'Logout';
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.logout();
+            });
+            authLinks.appendChild(logoutBtn);
+        } else {
+            // Save Collection link
+            const saveLink = document.createElement('a');
+            saveLink.href = '#';
+            saveLink.textContent = 'Save Collection';
+            saveLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.showModal();
+            });
+            authLinks.appendChild(saveLink);
+        }
+    },
+
     init: function() {
         // Check for existing session
         const session = window.supabaseClient.auth.getSession();
