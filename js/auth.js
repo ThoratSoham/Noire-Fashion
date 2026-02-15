@@ -204,7 +204,6 @@ const auth = {
         });
 
         // Handle post-login callback
-   // Handle post-login callback
 window.supabaseClient.auth.onAuthStateChange((event, session) => {
     if (event === 'SIGNED_IN' && session && this.pendingCallback) {
         this.pendingCallback();
