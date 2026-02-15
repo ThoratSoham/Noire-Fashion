@@ -5,38 +5,24 @@ const auth = {
     modal: null,
     overlay: null,
 
-    init: async function() {
-
-    const { data: { session } } = await window.supabaseClient.auth.getSession();
-
-    if (session) {
-        this.isLoggedIn = true;
-        this.user = session.user;
-    } else {
-        this.isLoggedIn = false;
-        this.user = null;
-    }
-
-    this.updateNav();
-
-    window.supabaseClient.auth.onAuthStateChange((event, session) => {
-        if (event === 'SIGNED_IN' && session) {
-            this.isLoggedIn = true;
-            this.user = session.user;
-            this.updateNav();
-        }
-
-        if (event === 'SIGNED_OUT') {
-            this.isLoggedIn = false;
-            this.user = null;
-            this.updateNav();
-        }
-    });
-}
-
+    init: function() {
+        console.log('auth.init() called');
+        // Check for existing session
+        const session = window.supabaseClient.auth.getSession();
+        session.then(({ data: { session } }) => {
+            console.log('Session check result:', session ? 'Logged in' : 'Not logged in');
+            if (session) {
+                this.isLoggedIn = true;
+                this.user = session.user;
+                this.updateNav();
+            } else {
+                this.updateNav();
+            }
+        }).catch(err => console.error('Session check error:', err));
 
         // Listen for auth state changes
         window.supabaseClient.auth.onAuthStateChange((event, session) => {
+            console.log('Auth state change:', event, session ? 'Session exists' : 'No session');
             if (event === 'SIGNED_IN' && session) {
                 this.isLoggedIn = true;
                 this.user = session.user;
@@ -57,11 +43,12 @@ const auth = {
     },
 
     updateNav: function() {
+        console.log('updateNav called, isLoggedIn:', this.isLoggedIn);
         const authLinks = document.getElementById('auth-links');
         authLinks.innerHTML = '';
 
         if (this.isLoggedIn) {
-            // Profile avatar (only visible after login)
+            // Profile avatar
             const avatar = document.createElement('div');
             avatar.className = 'avatar';
             const initial = this.user.email.charAt(0).toUpperCase();
@@ -93,12 +80,13 @@ const auth = {
             });
             authLinks.appendChild(logoutBtn);
         } else {
-            // Save Collection link (prompts login)
+            // Save Collection link
             const saveLink = document.createElement('a');
             saveLink.href = '#';
             saveLink.textContent = 'Save Collection';
             saveLink.addEventListener('click', (e) => {
                 e.preventDefault();
+                console.log('Save Collection clicked, showing modal');
                 this.showModal();
             });
             authLinks.appendChild(saveLink);
@@ -106,6 +94,7 @@ const auth = {
     },
 
     showModal: function(callback) {
+        console.log('showModal called');
         // Create overlay
         this.overlay = document.createElement('div');
         this.overlay.style.position = 'fixed';
@@ -160,13 +149,13 @@ const auth = {
 
         // Google login button
         document.getElementById('google-login-btn').addEventListener('click', async () => {
+            console.log('Google login button clicked');
             const messageEl = document.getElementById('auth-message');
-            console.log('Google login clicked');
             try {
                 const { data, error } = await window.supabaseClient.auth.signInWithOAuth({
                     provider: 'google',
                     options: {
-                       redirectTo: window.location.origin + "/Noire-Website/"
+                        redirectTo: window.location.origin
                     }
                 });
                 console.log('OAuth response:', data, error);
@@ -184,6 +173,7 @@ const auth = {
 
         // Send link button
         document.getElementById('send-link-btn').addEventListener('click', async () => {
+            console.log('Send link button clicked');
             const email = document.getElementById('auth-email').value.trim();
             const messageEl = document.getElementById('auth-message');
 
@@ -232,6 +222,7 @@ const auth = {
     },
 
     logout: function() {
+        console.log('Logout called');
         window.supabaseClient.auth.signOut();
     }
 };
