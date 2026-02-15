@@ -864,6 +864,7 @@
             });
 
             // Add to Cart button functionality
+// Add to Cart button functionality
 document.querySelectorAll(".add-to-cart-button").forEach(btn => {
     btn.addEventListener("click", async (e) => {
         const id = parseInt(e.target.dataset.id);
@@ -881,6 +882,7 @@ document.querySelectorAll(".add-to-cart-button").forEach(btn => {
             auth.showModal(async () => {
                 await cart.add(id);
                 renderProducts(products);
+                alert('Product added to your cart!');  // Add success message here
             });
         }
     });
@@ -999,5 +1001,6 @@ document.querySelectorAll(".add-to-cart-button").forEach(btn => {
     </script>
 </body>
 </html>
+
 
 
