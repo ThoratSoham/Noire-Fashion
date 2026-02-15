@@ -204,12 +204,18 @@ const auth = {
         });
 
         // Handle post-login callback
-        window.supabaseClient.auth.onAuthStateChange((event, session) => {
-            if (event === 'SIGNED_IN' && session && this.pendingCallback) {
-                this.pendingCallback();
-                this.pendingCallback = null;
-            }
+    window.supabaseClient.auth.onAuthStateChange((event, session) => {
+    if (event === 'SIGNED_IN' && session && this.pendingCallback) {
+        console.log('Post-login callback executing...');
+        this.pendingCallback().then(() => {
+            alert('Product added to your cart!');  // Add success message
+        }).catch(err => {
+            console.error('Error adding product post-login:', err);
+            alert('Login successful, but failed to add product. Try again.');
         });
+        this.pendingCallback = null;
+    }
+});
     },
 
     closeModal: function() {
