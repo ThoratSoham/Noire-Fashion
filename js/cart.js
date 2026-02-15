@@ -26,23 +26,24 @@ const cart = {
     },
 
     add: async function(id) {
-        if (!auth.isLoggedIn || !auth.user) {
-            throw new Error('You must be logged in to add items to your cart.');
-        }
-        if (this.isSaved(id)) {
-            throw new Error('Item already in cart.');
-        }
-        try {
-            const { error } = await window.supabaseClient
-                .from('carts')
-                .insert({ user_id: auth.user.id, product_id: id });
+    if (!auth.isLoggedIn || !auth.user) {
+        throw new Error('You must be logged in to add items to your cart.');
+    }
+    if (this.isSaved(id)) {
+        throw new Error('Item already in cart.');
+    }
+    try {
+        const { error } = await window.supabaseClient
+            .from('carts')
+            .insert({ user_id: auth.user.id, product_id: id });
 
-            if (error) throw error;
-            this.items.push(id);
-        } catch (err) {
-            console.error('Cart add error:', err);
-            throw err;
-        }
+        if (error) throw error;
+        this.items.push(id);
+        console.log(`Product ${id} added to cart for user ${auth.user.email}`);  // Add logging
+    } catch (err) {
+        console.error('Cart add error:', err);
+        throw err;
+    }
     },
 
     remove: async function(id) {
