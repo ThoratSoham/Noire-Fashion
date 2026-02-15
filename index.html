@@ -864,24 +864,28 @@
             });
 
             // Add to Cart button functionality
-            document.querySelectorAll(".add-to-cart-button").forEach(btn => {
-                btn.addEventListener("click", async (e) => {
-                    const id = parseInt(e.target.dataset.id);
-                    if (auth.isLoggedIn) {
-                        // Direct add for logged-in users
-                        try {
-                            await cart.add(id);
-                            renderProducts(products);  // Re-render to update button state
-                        } catch (err) {
-                            alert('Something didn’t work. Please try again.');
-                        }
-                    } else {
-                        // Show login modal for non-logged-in users
-                        auth.showModal(() => cart.add(id).then(() => renderProducts(products)));
-                    }
-                });
+document.querySelectorAll(".add-to-cart-button").forEach(btn => {
+    btn.addEventListener("click", async (e) => {
+        const id = parseInt(e.target.dataset.id);
+        if (auth.isLoggedIn) {
+            // Direct add for logged-in users
+            try {
+                await cart.add(id);
+                renderProducts(products);  // Re-render to update button state
+                alert('Product added to your cart!');  // Add success message
+            } catch (err) {
+                alert('Something didn’t work. Please try again.');
+            }
+        } else {
+            // Show login modal for non-logged-in users, then add product
+            auth.showModal(async () => {
+                await cart.add(id);
+                renderProducts(products);
             });
         }
+    });
+});
+        
 
         // Initial render - wait for DOM to be ready
         function startApp() {
@@ -995,4 +999,5 @@
     </script>
 </body>
 </html>
+
 
