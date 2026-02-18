@@ -1,7 +1,7 @@
 // js/supabaseClient.js
 
 const SUPABASE_URL = "https://xpfydaohsihasabnalyw.supabase.co";
-const SUPABASE_ANON_KEY = "YOUR_REAL_ANON_KEY_HERE";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhwZnlkYW9oc2loYXNhYm5hbHl3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAxNzAwNzcsImV4cCI6MjA4NTc0NjA3N30.2E53HfEOdW48WP_jZUXOgZOmPyqAOaFs1cAc8LspUqM";
 
 // Make sure Supabase library exists
 if (!window.supabase) {

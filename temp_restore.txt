@@ -1,0 +1,27 @@
+            // Fuse.js for fuzzy search
+            const fuseOptions = {
+                keys: [
+                    { name: 'title', weight: 0.3 },
+                    { name: 'description', weight: 0.2 },
+                    { name: 'tags', weight: 0.2 },
+                    { name: 'category', weight: 0.15 },
+                    { name: 'subCategory', weight: 0.15 }
+                ],
+                threshold: 0.4,
+                includeScore: true
+            };
+            const fuse = new Fuse(products, fuseOptions);
+
+            // Render products with Add to Cart button
+            function renderProducts(list) {
+                const grid = document.getElementById("product-grid");
+                grid.innerHTML = "";
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const productId = urlParams.get('product');
+                let productsToShow = list;
+
+                if (productId) {
+                    const singleProduct = list.find(p => p.id == productId);
+                    if (singleProduct) {
+                        productsToShow = [singleProduct];

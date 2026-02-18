@@ -4,47 +4,139 @@ const auth = {
     user: null,
     modal: null,
     overlay: null,
+    pendingCallback: null,
+    _initPromise: null,
+    _listenerRegistered: false,
+    _onSignIn: [],  // callbacks to run once on next sign-in
 
-    init: function () {
-        console.log('auth.init() called');
-        // Check for existing session
-        const session = window.supabaseClient.auth.getSession();
-        session.then(({ data: { session } }) => {
-            console.log('Session check result:', session ? 'Logged in' : 'Not logged in');
-            if (session) {
-                this.isLoggedIn = true;
-                this.user = session.user;
-                this.updateNav();
+    // Ensure user exists in the 'profiles' table
+    ensureUserProfile: async function (user) {
+        try {
+            const { error } = await window.supabaseClient
+                .from('profiles')
+                .upsert({
+                    id: user.id,
+                    email: user.email,
+                    name: user.user_metadata?.full_name || user.email.split('@')[0]
+                }, { onConflict: 'id' });
+            if (error) {
+                console.error('Error ensuring user profile:', error);
             } else {
-                this.updateNav();
+                console.log('User profile ensured in profiles table');
             }
-        }).catch(err => console.error('Session check error:', err));
+        } catch (err) {
+            console.error('ensureUserProfile failed:', err);
+        }
+    },
 
-        // Listen for auth state changes
-        window.supabaseClient.auth.onAuthStateChange((event, session) => {
-            console.log('Auth state change:', event, session ? 'Session exists' : 'No session');
-            if (event === 'SIGNED_IN' && session) {
-                this.isLoggedIn = true;
-                this.user = session.user;
-                this.updateNav();
-                // Close modal if open
-                if (this.modal) {
-                    this.modal.remove();
-                    this.overlay.remove();
-                    this.modal = null;
-                    this.overlay = null;
-                }
-            } else if (event === 'SIGNED_OUT') {
-                this.isLoggedIn = false;
-                this.user = null;
-                this.updateNav();
+    // Central init — call this ONCE per page via `await auth.init()`
+    init: function () {
+        if (this._initPromise) return this._initPromise;
+
+        this._initPromise = (async () => {
+            console.log('[Auth Debug] init() starting...');
+
+            // Check protocol
+            if (window.location.protocol === 'file:') {
+                console.error('[Auth Debug] CRITICAL: You are running the site via file://. Google Auth WILL NOT work. You must use a local server (e.g., Live Server in VS Code).');
+                alert('Warning: Supabase Auth will not work when opening HTML files directly. Please use a local server.');
             }
-        });
+
+            // 1. Restore existing session
+            try {
+                console.log('[Auth Debug] Checking current session...');
+                const { data: { session }, error } = await window.supabaseClient.auth.getSession();
+                if (error) {
+                    console.error('[Auth Debug] getSession error:', error);
+                } else {
+                    console.log('[Auth Debug] Session check result:', session ? 'Logged in as ' + session.user.email : 'No active session');
+                }
+
+                if (session) {
+                    this.isLoggedIn = true;
+                    this.user = session.user;
+                    await this.ensureUserProfile(session.user);
+                }
+            } catch (err) {
+                console.error('[Auth Debug] getSession catch error:', err);
+            }
+
+            this.updateNav();
+
+            // 2. Register onAuthStateChange EXACTLY ONCE
+            if (!this._listenerRegistered) {
+                console.log('[Auth Debug] Registering state change listener...');
+                this._listenerRegistered = true;
+                window.supabaseClient.auth.onAuthStateChange(async (event, session) => {
+                    console.log('[Auth Debug] State change event:', event, session ? 'User: ' + session.user.email : 'No session');
+
+                    if (session) {
+                        this.isLoggedIn = true;
+                        this.user = session.user;
+
+                        if (event === 'SIGNED_IN') {
+                            console.log('[Auth Debug] SIGNED_IN event detected, ensuring profile...');
+                            await this.ensureUserProfile(session.user);
+                            this.updateNav();
+
+                            if (this.modal) this.closeModal();
+
+                            if (this.pendingCallback) {
+                                console.log('[Auth Debug] Executing pending callback');
+                                this.pendingCallback();
+                                this.pendingCallback = null;
+                            }
+
+                            const callbacks = [...this._onSignIn];
+                            this._onSignIn = [];
+                            for (const cb of callbacks) {
+                                try { await cb(); } catch (e) { console.error('onSignIn callback error:', e); }
+                            }
+                        }
+                    } else if (event === 'SIGNED_OUT') {
+                        console.log('[Auth Debug] SIGNED_OUT event detected');
+                        this.isLoggedIn = false;
+                        this.user = null;
+                        this.updateNav();
+
+                        const callbacks = [...this._onSignOut || []];
+                        this._onSignOut = [];
+                        for (const cb of callbacks) {
+                            try { await cb(); } catch (e) { console.error('onSignOut callback error:', e); }
+                        }
+                    }
+                });
+            }
+            console.log('[Auth Debug] init() complete');
+        })();
+
+        return this._initPromise;
+    },
+
+    // ... rest of code (updateNav, showModal, etc.)
+    // Note: I will keep the showModal Google login part with logs too.
+
+
+    // Register a one-time callback for the next SIGNED_IN event
+    onNextSignIn: function (cb) { this._onSignIn.push(cb); },
+
+    // Register a one-time callback for the next SIGNED_OUT event
+    onNextSignOut: function (cb) {
+        if (!this._onSignOut) this._onSignOut = [];
+        this._onSignOut.push(cb);
+    },
+
+    // Subscribe to auth changes (returns unsubscribe function)
+    onAuthChange: function (callback) {
+        // Wrapper that delegates to the supabase listener
+        const { data: { subscription } } = window.supabaseClient.auth.onAuthStateChange(callback);
+        return () => subscription.unsubscribe();
     },
 
     updateNav: function () {
         console.log('updateNav called, isLoggedIn:', this.isLoggedIn);
         const authLinks = document.getElementById('auth-links');
+        if (!authLinks) return;
         authLinks.innerHTML = '';
 
         if (this.isLoggedIn) {
@@ -95,6 +187,10 @@ const auth = {
 
     showModal: function (callback) {
         console.log('showModal called');
+
+        // Store callback for after sign-in
+        this.pendingCallback = callback || null;
+
         // Create overlay
         this.overlay = document.createElement('div');
         this.overlay.style.position = 'fixed';
@@ -118,7 +214,7 @@ const auth = {
         this.modal.style.maxWidth = '400px';
         this.modal.style.width = '90%';
         this.modal.style.textAlign = 'center';
-        this.modal.addEventListener('click', (e) => e.stopPropagation()); // Prevent overlay click
+        this.modal.addEventListener('click', (e) => e.stopPropagation());
 
         this.modal.innerHTML = `
             <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 20px;">Sign In to Save Your Collection</h3>
@@ -149,25 +245,28 @@ const auth = {
 
         // Google login button
         document.getElementById('google-login-btn').addEventListener('click', async () => {
-            console.log('Google login button clicked');
+            const redirectTo = window.location.href.split('?')[0];
+            console.log('[Auth Debug] Google login clicked. Redirecting to:', redirectTo);
+
             const messageEl = document.getElementById('auth-message');
             try {
                 const { data, error } = await window.supabaseClient.auth.signInWithOAuth({
                     provider: 'google',
                     options: {
-                        redirectTo: window.location.origin
+                        redirectTo: redirectTo
                     }
                 });
-                console.log('OAuth response:', data, error);
+
+                console.log('[Auth Debug] OAuth call response data:', data);
                 if (error) {
+                    console.error('[Auth Debug] OAuth error:', error);
                     messageEl.textContent = 'Google login failed: ' + error.message;
-                    console.error('OAuth error:', error);
                 } else {
-                    this.pendingCallback = callback;
+                    console.log('[Auth Debug] OAuth redirect initiated successfully');
                 }
             } catch (err) {
+                console.error('[Auth Debug] Catch error in OAuth click:', err);
                 messageEl.textContent = 'Something went wrong: ' + err.message;
-                console.error('Catch error:', err);
             }
         });
 
@@ -195,7 +294,6 @@ const auth = {
                     console.error(error);
                 } else {
                     messageEl.textContent = 'Magic link sent! Check your email.';
-                    this.pendingCallback = callback;
                 }
             } catch (err) {
                 messageEl.textContent = 'Something went wrong. Try again.';
@@ -203,13 +301,7 @@ const auth = {
             }
         });
 
-        // Handle post-login callback
-        window.supabaseClient.auth.onAuthStateChange((event, session) => {
-            if (event === 'SIGNED_IN' && session && this.pendingCallback) {
-                this.pendingCallback();
-                this.pendingCallback = null;
-            }
-        });
+        // NOTE: No onAuthStateChange here — the centralized listener in init() handles it
     },
 
     closeModal: function () {
@@ -221,8 +313,8 @@ const auth = {
         }
     },
 
-    logout: function () {
+    logout: async function () {
         console.log('Logout called');
-        window.supabaseClient.auth.signOut();
+        await window.supabaseClient.auth.signOut();
     }
 };

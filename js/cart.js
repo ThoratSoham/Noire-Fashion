@@ -6,6 +6,10 @@ const cart = {
         return this.items.includes(id);
     },
 
+    getSavedItems: function () {
+        return this.items;
+    },
+
     fetch: async function () {
         if (!auth.isLoggedIn || !auth.user) {
             this.items = [];
@@ -39,6 +43,7 @@ const cart = {
 
             if (error) throw error;
             this.items.push(id);
+            console.log(`Product ${id} added to cart for user ${auth.user.email}`);  // Add logging
         } catch (err) {
             console.error('Cart add error:', err);
             throw err;

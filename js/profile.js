@@ -10,10 +10,10 @@ const profile = {
             const { data, error } = await window.supabaseClient
                 .from('profiles')
                 .select('*')
-                .eq('user_id', auth.user.id)
+                .eq('id', auth.user.id)
                 .single();
 
-            if (error && error.code !== 'PGRST116') { // PGRST116 is "not found", which is ok for new users
+            if (error && error.code !== 'PGRST116') { // PGRST116 = "not found" (ok for new users)
                 throw error;
             }
             this.data = data || {};
@@ -31,7 +31,10 @@ const profile = {
         try {
             const { error } = await window.supabaseClient
                 .from('profiles')
-                .upsert({ user_id: auth.user.id, ...profileData });
+                .upsert(
+                    { id: auth.user.id, ...profileData },
+                    { onConflict: 'id' }
+                );
 
             if (error) throw error;
             this.data = { ...this.data, ...profileData };

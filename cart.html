@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Collection - NOIRÉ</title>
+    <title>Your Cart - NOIRÉ</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap"
         rel="stylesheet">
@@ -13,8 +13,55 @@
     <script src="js/auth.js"></script>
     <script src="js/cart.js"></script>
     <script src="js/profile.js"></script>
+    <script src="js/products.js"></script>
+
     <style>
-        /* Same CSS as index.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+            background-color: #f5f5f0;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 20px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
         .avatar {
             width: 40px;
             height: 40px;
@@ -44,6 +91,174 @@
             margin-right: 5px;
             fill: #fff;
         }
+
+        .section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+
+        .cart-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .cart-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #000;
+        }
+
+        .cart-header p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .product-card {
+            background: #fafafa;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .product-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .product-card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .product-card .price {
+            font-weight: 500;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .remove-button {
+            background: #ff6b6b;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .remove-button:hover {
+            background: #ff5252;
+        }
+
+        .empty-cart-card {
+            background: #fafafa;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 350px;
+            text-decoration: none;
+        }
+
+        .empty-cart-card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .plus-icon {
+            font-size: 5rem;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1;
+            font-weight: 300;
+            display: block;
+        }
+
+        .empty-cart-text {
+            font-size: 1.2rem;
+            color: #666;
+            font-weight: 500;
+            display: block;
+        }
+
+        footer {
+            background: #000;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            margin-top: 40px;
+        }
+
+        .cart-content {
+            min-height: 400px;
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 40px 15px;
+                margin-top: 60px;
+            }
+
+            .cart-header h1 {
+                font-size: 2rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav .logo {
+                margin-bottom: 10px;
+            }
+
+            .plus-icon {
+                font-size: 4rem;
+                margin-bottom: 15px;
+            }
+
+            .empty-cart-text {
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 
@@ -54,12 +269,16 @@
     </nav>
 
     <section class="section">
-        <h2>Your Saved Collection</h2>
-        <div id="cart-grid" class="grid">
-            <!-- Cart items rendered here -->
+        <div class="cart-header">
+            <h1>Your Cart</h1>
+            <p id="cart-count"></p>
         </div>
-        <p id="empty-state" style="display:none; text-align:center; color:#666;">Your saved collection is empty. Curate
-            pieces you love and come back anytime.</p>
+
+        <div class="cart-content">
+            <div id="cart-grid" class="grid">
+                <!-- Cart items or empty state will be rendered here -->
+            </div>
+        </div>
     </section>
 
     <footer>
@@ -67,81 +286,105 @@
     </footer>
 
     <script>
-        // Full products array (same as index.html)
-        const products = [
-            // Paste the full products array here
-        ];
-
-        // Render cart items
-        function renderCart() {
+        // Render cart items or empty state
+        async function renderCart() {
             const grid = document.getElementById("cart-grid");
-            const emptyState = document.getElementById("empty-state");
+            const cartCountEl = document.getElementById("cart-count");
+
             grid.innerHTML = "";
 
-            if (!auth.isLoggedIn) {
-                emptyState.textContent = "Please log in to view your collection.";
-                emptyState.style.display = "block";
+            // Get saved items from cart
+            const cartItems = cart.getSavedItems ? cart.getSavedItems() : [];
+
+            if (!cartItems || cartItems.length === 0) {
+                // Empty cart state
+                cartCountEl.textContent = "Your cart is empty";
+
+                const emptyCard = document.createElement("a");
+                emptyCard.href = "index.html";
+                emptyCard.className = "empty-cart-card";
+                emptyCard.innerHTML = `
+                    <span class="plus-icon">+</span>
+                    <span class="empty-cart-text">Add Products</span>
+                `;
+                grid.appendChild(emptyCard);
                 return;
             }
 
-            const cartItems = cart.items.map(id => products.find(p => p.id === id)).filter(Boolean);
+            // Display cart count
+            cartCountEl.textContent = `${cartItems.length} item${cartItems.length !== 1 ? 's' : ''} in your cart`;
 
-            if (!cartItems.length) {
-                emptyState.style.display = "block";
-                return;
-            }
+            // Render each cart item
+            cartItems.forEach(productId => {
+                const product = products.find(p => p.id === productId);
 
-            emptyState.style.display = "none";
+                if (!product) return;
 
-            cartItems.forEach(p => {
                 const card = document.createElement("div");
                 card.className = "product-card";
 
                 card.innerHTML = `
-                    <img src="${p.image}" alt="${p.title}">
-                    <h3>${p.title}</h3>
-                    <p>${p.description}</p>
-                    <div class="price">$${p.price}</div>
-                    <a href="${p.link}" target="_blank" class="amazon-button">View on Amazon</a>
-                    <button class="remove-button" data-id="${p.id}">Remove</button>
+                    <img src="${product.image}" alt="${product.title}">
+                    <h3>${product.title}</h3>
+                    <p>${product.description}</p>
+                    <div class="price">$${product.price}</div>
+                    <a href="${product.link}" target="_blank" class="remove-button" style="background: #000; margin-right: 5px;">View on Amazon</a>
+                    <button class="remove-button" data-id="${product.id}">Remove from Cart</button>
                 `;
 
                 grid.appendChild(card);
             });
 
-            // Remove button functionality
-            document.querySelectorAll(".remove-button").forEach(btn => {
+            // Add event listeners for remove buttons
+            document.querySelectorAll(".remove-button[data-id]").forEach(btn => {
                 btn.addEventListener("click", async (e) => {
                     const id = parseInt(e.target.dataset.id);
                     try {
                         await cart.remove(id);
                         renderCart();
                     } catch (err) {
-                        alert('Something didn’t work. Please try again.');
+                        alert('Error removing item. Please try again.');
                     }
                 });
             });
         }
 
-        // Initial load
-        function startCartApp() {
-            if (typeof auth !== 'undefined') {
-                auth.init();
-            }
-            if (typeof cart !== 'undefined') {
-                cart.fetch().then(() => renderCart()).catch(err => {
+        // Initialize the page
+        async function initCart() {
+            console.log('Initializing cart page...');
+
+            // Initialize auth (centralized — handles session + listener)
+            await auth.init();
+
+            // Subscribe to future auth changes for cart UI updates
+            auth.onAuthChange(async (event, session) => {
+                if (event === 'SIGNED_IN' && session) {
+                    await cart.fetch();
+                    renderCart();
+                } else if (event === 'SIGNED_OUT') {
+                    cart.items = [];
+                    renderCart();
+                }
+            });
+
+            // Fetch and render cart
+            if (auth.isLoggedIn) {
+                console.log('Fetching cart...');
+                try {
+                    await cart.fetch();
+                    console.log('Cart fetched, items:', cart.items);
+                } catch (err) {
                     console.warn('Cart fetch failed:', err);
-                });
+                }
             }
-            if (typeof profile !== 'undefined') {
-                profile.load();
-            }
+            renderCart();
         }
 
+        // Wait for DOM to be ready
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', startCartApp);
+            document.addEventListener('DOMContentLoaded', initCart);
         } else {
-            startCartApp();
+            initCart();
         }
     </script>
 </body>
