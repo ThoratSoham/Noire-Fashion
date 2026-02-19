@@ -388,5 +388,50 @@ const products = [
         occasion: "casual / daily wear",
         price: 1.99,
         gender: "women"
-    }
+    },
+    {
+        id: 27,
+        title: "Sugathari Women's Elegant High Neck Bow Detail Tank Top",
+        description: "Chic sleeveless ribbed tank top featuring a high neckline and elegant bow detail. Designed in a soft beige shade, this stylish blouse offers a flattering fit, making it perfect for summer casual outings, daily wear, or pairing with jeans and skirts for a trendy look.",
+        image: "https://m.media-amazon.com/images/I/81htP4KDPjL._SY879_.jpg",
+        link: "https://amzn.to/4kLf3M6",
+        category: "clothing",
+        subCategory: "tops",
+        tags: ["women tank top", "high neck top", "bow detail blouse", "ribbed sleeveless top", "summer fashion top", "beige stylish top"],
+        season: "summer",
+        material: "ribbed fabric",
+        occasion: "casual / daily wear",
+        price: 3.99,
+        gender: "women"
+    },
+    {
+        id: 28,
+        title: "GRECIILOOKS Women High Rise High Waist Flared Korean Style Trousers",
+        description: "Elegant high-rise, high-waist flared trousers inspired by Korean fashion. Designed for a flattering silhouette with a structured fit, these formal pants are perfect for office wear, college, business meetings, and special events. Stylish yet comfortable, they pair effortlessly with tops, blouses, and blazers for a polished look.",
+        image: "https://m.media-amazon.com/images/I/71u+frPwGpL._SY879_.jpg",
+        link: "https://amzn.to/46gPCMj",
+        category: "clothing",
+        subCategory: "trousers",
+        tags: ["women formal trousers", "high waist pants", "flared trousers women", "korean style pants", "office wear women", "elegant workwear pants"],
+        season: "all",
+        material: "polyester blend",
+        occasion: "formal / office / events",
+        price: 5.99,
+        gender: "women"
+    },
+    {
+        id: 29,
+        title: "Shoetopia Women Pump Heels",
+        description: "Elegant women’s pump heels designed for a sleek and sophisticated look. Featuring a comfortable fit and stylish silhouette, these heels are perfect for office wear, parties, formal events, and special occasions. Pairs beautifully with dresses, skirts, and formal outfits.",
+        image: "https://m.media-amazon.com/images/I/51nlyKThF2L._SY695_.jpg",
+        link: "https://amzn.to/4s2HtUk",
+        category: "footwear",
+        subCategory: "heels",
+        tags: ["women pump heels", "formal heels", "party heels", "office wear heels", "stylish high heels"],
+        season: "all",
+        material: "synthetic",
+        occasion: "formal / party / office",
+        price: 6.99,
+        gender: "women"
+    },
 ];
