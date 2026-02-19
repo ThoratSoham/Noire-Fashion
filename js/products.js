@@ -478,6 +478,102 @@ const products = [
         occasion: "casual / outdoor / party",
         price: 4.99,
         gender: "women"
+    },
+    {
+        id: 33,
+        title: "Winter Fuzzy Knit Leg Warmers for Women (42CM, White)",
+        description: "Soft fuzzy knit leg warmers designed for skirts and Korean-style outfits. Warm, cozy, and perfect for winter layering.",
+        image: "https://m.media-amazon.com/images/I/61Vcuor703L._SX679_.jpg",
+        link: "https://amzn.to/3MIRhDE",
+        category: "accessories",
+        subCategory: "leg warmers",
+        tags: ["winter leg warmers", "fuzzy knit socks", "korean outfit stockings", "skirt leg warmers", "white leg warmers women"],
+        season: "winter",
+        material: "knit fabric",
+        occasion: "casual / winter wear",
+        price: 2.99,
+        gender: "women"
+    },
+    {
+        id: 34,
+        title: "Shoetopia Women’s Chunky Combat Boots",
+        description: "Lace-up ankle boots with a thick lug sole and durable faux leather finish. Perfect for casual, street-style, and outdoor wear.",
+        image: "https://m.media-amazon.com/images/I/51RgMAv1M7L._SY625_.jpg",
+        link: "https://amzn.to/4rZakbY",
+        category: "footwear",
+        subCategory: "boots",
+        tags: ["chunky combat boots", "lace up ankle boots", "lug sole boots women", "faux leather boots", "casual fashion boots"],
+        season: "all",
+        material: "faux leather",
+        occasion: "casual / outdoor",
+        price: 7.99,
+        gender: "women"
+    },
+    {
+        id: 35,
+        title: "Theater Sheer Stockings for Women",
+        description: "Comfortable, breathable sheer stockings made from nylon-spandex blend. Free size and perfect for formal or everyday wear.",
+        image: "https://m.media-amazon.com/images/I/618wZeGfqpL._SX679_.jpg",
+        link: "https://amzn.to/4tRjKrV",
+        category: "accessories",
+        subCategory: "stockings",
+        tags: ["sheer stockings", "nylon spandex stockings", "women hosiery", "formal stockings", "free size stockings"],
+        season: "all",
+        material: "nylon spandex",
+        occasion: "formal / daily wear",
+        price: 3.99,
+        gender: "women"
+    },
+    {
+        id: 36,
+        title: "DIMPY GARMENTS Elasticated Side Slit Mini Skirt",
+        description: "Trendy elasticated mini skirt with a stylish side slit. Comfortable fit, perfect for casual and college wear.",
+        image: "https://m.media-amazon.com/images/I/61dOhyUJjLL._SY879_.jpg",
+        link: "https://amzn.to/3OoPTH1",
+        category: "clothing",
+        subCategory: "skirts",
+        tags: ["mini skirt", "side slit skirt", "short skirt women", "elastic waist skirt", "casual skirt"],
+        season: "all",
+        material: "fabric blend",
+        occasion: "casual / college wear",
+        price: 2.99,
+        gender: "women"
+    },
+    {
+        id: 37,
+        title: "Women’s Winter High Neck Slim Fit Thermal Top",
+        description: "Soft, stretchable full-sleeve high neck top designed for winter layering. Slim fit, warm, and comfortable without fleece bulk.",
+        image: "https://m.media-amazon.com/images/I/5179XrMULmL._SY879_.jpg",
+        link: "https://amzn.to/4aNWrqi",
+        category: "clothing",
+        subCategory: "tops",
+        tags: ["winter thermal top", "high neck inner top", "slim fit winter top", "full sleeve base layer", "women winter layering"],
+        season: "winter",
+        material: "stretchable fabric blend",
+        occasion: "winter / daily wear",
+        price: 4.99,
+        gender: "women"
+    },
+    {
+        id: 38,
+        title: "GRECIILOOKS Women’s Oversized Zipper Hoodie",
+        description: "Stylish cotton oversized hoodie with zipper closure. Comfortable, trendy, and perfect for summer or winter layering.",
+        image: "https://m.media-amazon.com/images/I/71w7KslnTqL._SY879_.jpg",
+        link: "https://amzn.to/4rrod2U",
+        category: "clothing",
+        subCategory: "hoodies",
+        tags: ["oversized hoodie women", "zipper hoodie", "cotton hoodie", "casual hoodie", "women streetwear hoodie"],
+        season: "all",
+        material: "cotton",
+        occasion: "casual / daily wear",
+        price: 5.99,
+        gender: "women"
     }
+
+
+
+
+
+
 
 ];
