@@ -204,63 +204,78 @@
     </footer>
 
     <script>
-        // Load profile data on page load
+        // Load profile data
         async function loadProfile() {
+            const messageEl = document.getElementById('profile-message');
+
             if (!auth.isLoggedIn) {
-                document.getElementById('profile-message').textContent = 'Please log in to view your profile.';
+                messageEl.textContent = 'Please sign in to manage your profile.';
                 return;
             }
+
             try {
+                messageEl.textContent = 'Loading profile...';
                 const data = await profile.load();
                 if (data) {
                     document.getElementById('birth-date').value = data.birth_date || '';
                     document.getElementById('gender').value = data.gender || '';
                     document.getElementById('country').value = data.country || '';
+                    messageEl.textContent = '';
+                } else {
+                    messageEl.textContent = 'Ready to complete your profile.';
                 }
             } catch (err) {
-                console.error('Profile load error:', err);
+                console.error('[Profile Page] Load error:', err);
+                messageEl.textContent = 'Could not load profile details.';
             }
         }
 
-        // Save profile on form submit
-        document.getElementById('profile-form').addEventListener('submit', async (e) => {
+        // Save profile
+        document.getElementById('profile-form').onsubmit = async (e) => {
             e.preventDefault();
             const messageEl = document.getElementById('profile-message');
+            const btn = e.target.querySelector('button');
+
             const data = {
                 birth_date: document.getElementById('birth-date').value,
                 gender: document.getElementById('gender').value,
                 country: document.getElementById('country').value
             };
+
+            btn.disabled = true;
+            btn.textContent = 'Saving...';
+
             try {
                 await profile.save(data);
-                messageEl.textContent = 'Profile saved successfully!';
-                messageEl.style.color = 'green';
+                messageEl.textContent = 'Profile updated successfully.';
+                messageEl.style.color = '#1e8e3e';
             } catch (err) {
-                messageEl.textContent = 'Failed to save profile. Try again.';
-                messageEl.style.color = 'red';
-                console.error(err);
+                messageEl.textContent = 'Error saving profile.';
+                messageEl.style.color = '#d93025';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Save Profile';
             }
-        });
+        };
 
         // Initialize
         async function startProfileApp() {
-            // Centralized auth init
+            console.log('[Profile Page] Initializing...');
+
+            // 1. Initialize Auth
             await auth.init();
 
-            // Subscribe to future auth changes
-            auth.onAuthChange(async (event, session) => {
-                if (event === 'SIGNED_IN' && session) {
+            // 2. Initial load
+            loadProfile();
+
+            // 3. Listen for auth changes
+            auth.onAuthChange((event, session) => {
+                if (event === 'SIGNED_OUT') {
+                    window.location.href = 'index.html'; // Redirect to home on logout
+                } else if (event === 'SIGNED_IN') {
                     loadProfile();
-                } else if (event === 'SIGNED_OUT') {
-                    document.getElementById('profile-message').textContent = 'Please log in to view your profile.';
-                    document.getElementById('birth-date').value = '';
-                    document.getElementById('gender').value = '';
-                    document.getElementById('country').value = '';
                 }
             });
-
-            // Load profile (auth is now initialized)
-            loadProfile();
         }
 
         if (document.readyState === 'loading') {

@@ -287,97 +287,75 @@
 
     <script>
         // Render cart items or empty state
-        async function renderCart() {
+        function renderCart() {
             const grid = document.getElementById("cart-grid");
             const cartCountEl = document.getElementById("cart-count");
 
             grid.innerHTML = "";
+            const cartItems = cart.items || [];
 
-            // Get saved items from cart
-            const cartItems = cart.getSavedItems ? cart.getSavedItems() : [];
-
-            if (!cartItems || cartItems.length === 0) {
-                // Empty cart state
-                cartCountEl.textContent = "Your cart is empty";
-
+            if (cartItems.length === 0) {
+                cartCountEl.textContent = "Your collection is currently empty";
                 const emptyCard = document.createElement("a");
                 emptyCard.href = "index.html";
                 emptyCard.className = "empty-cart-card";
                 emptyCard.innerHTML = `
                     <span class="plus-icon">+</span>
-                    <span class="empty-cart-text">Add Products</span>
+                    <span class="empty-cart-text">Explore Products</span>
                 `;
                 grid.appendChild(emptyCard);
                 return;
             }
 
-            // Display cart count
-            cartCountEl.textContent = `${cartItems.length} item${cartItems.length !== 1 ? 's' : ''} in your cart`;
+            cartCountEl.textContent = `${cartItems.length} item${cartItems.length !== 1 ? 's' : ''} saved`;
 
-            // Render each cart item
             cartItems.forEach(productId => {
                 const product = products.find(p => p.id === productId);
-
                 if (!product) return;
 
                 const card = document.createElement("div");
                 card.className = "product-card";
-
                 card.innerHTML = `
                     <img src="${product.image}" alt="${product.title}">
                     <h3>${product.title}</h3>
                     <p>${product.description}</p>
                     <div class="price">$${product.price}</div>
-                    <a href="${product.link}" target="_blank" class="remove-button" style="background: #000; margin-right: 5px;">View on Amazon</a>
-                    <button class="remove-button" data-id="${product.id}">Remove from Cart</button>
+                    <a href="${product.link}" target="_blank" class="remove-button" style="background: #000; margin-right: 5px; display: inline-block;">View on Amazon</a>
+                    <button class="remove-button" data-id="${product.id}">Remove</button>
                 `;
-
                 grid.appendChild(card);
             });
 
-            // Add event listeners for remove buttons
+            // Remove logic
             document.querySelectorAll(".remove-button[data-id]").forEach(btn => {
-                btn.addEventListener("click", async (e) => {
+                btn.onclick = async (e) => {
                     const id = parseInt(e.target.dataset.id);
-                    try {
-                        await cart.remove(id);
-                        renderCart();
-                    } catch (err) {
-                        alert('Error removing item. Please try again.');
-                    }
-                });
+                    await cart.remove(id);
+                    // renderCart will be called automatically by the 'cartUpdated' event
+                };
             });
         }
 
         // Initialize the page
         async function initCart() {
-            console.log('Initializing cart page...');
+            console.log('[Cart Page] Initializing...');
 
-            // Initialize auth (centralized — handles session + listener)
+            // 1. Initialize Auth
             await auth.init();
 
-            // Subscribe to future auth changes for cart UI updates
-            auth.onAuthChange(async (event, session) => {
-                if (event === 'SIGNED_IN' && session) {
-                    await cart.fetch();
-                    renderCart();
-                } else if (event === 'SIGNED_OUT') {
-                    cart.items = [];
-                    renderCart();
-                }
+            // 2. Initial render
+            renderCart();
+
+            // 3. Listen for cart updates (including those triggered by auth changes)
+            document.addEventListener('cartUpdated', () => {
+                console.log('[Cart Page] Global cart updated, re-rendering...');
+                renderCart();
             });
 
-            // Fetch and render cart
+            // 4. Initial fetch if logged in
             if (auth.isLoggedIn) {
-                console.log('Fetching cart...');
-                try {
-                    await cart.fetch();
-                    console.log('Cart fetched, items:', cart.items);
-                } catch (err) {
-                    console.warn('Cart fetch failed:', err);
-                }
+                cart.fetch();
             }
-            renderCart();
         }
 
         // Wait for DOM to be ready

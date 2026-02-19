@@ -556,34 +556,25 @@
 
         // Initial render - wait for DOM to be ready
         async function startApp() {
-            console.log('Starting app...');
+            console.log('[App] Starting...');
 
-            // Render products immediately (without cart state)
+            // 1. Initial product render
             renderProducts(products);
 
-            // Initialize auth (centralized — handles session + listener)
+            // 2. Initialize Auth
+            // This waits for the initial session check to complete
             await auth.init();
 
-            // Subscribe to future auth changes for cart/UI updates
-            auth.onAuthChange(async (event, session) => {
-                if (event === 'SIGNED_IN' && session) {
-                    await cart.fetch();
-                    renderProducts(products);
-                } else if (event === 'SIGNED_OUT') {
-                    cart.items = [];
-                    renderProducts(products);
-                }
+            // 3. Sync UI with cart updates
+            // cart.js triggers 'cartUpdated' whenever its items change (on fetch, add, remove, or auth change)
+            document.addEventListener('cartUpdated', () => {
+                console.log('[App] Cart updated, re-rendering products...');
+                renderProducts(products);
             });
 
-            // Fetch cart now that auth is initialized
+            // Initial cart sync (if already logged in)
             if (auth.isLoggedIn) {
-                try {
-                    await cart.fetch();
-                    console.log('Cart fetched, items:', cart.items);
-                    renderProducts(products);
-                } catch (err) {
-                    console.warn('Cart fetch failed:', err);
-                }
+                cart.fetch();
             }
         }
 

@@ -2,15 +2,16 @@
 const auth = {
     isLoggedIn: false,
     user: null,
-    modal: null,
-    overlay: null,
-    pendingCallback: null,
+    isInitialized: false,
     _initPromise: null,
     _listenerRegistered: false,
-    _onSignIn: [],  // callbacks to run once on next sign-in
+    _onSignIn: [],  // Callbacks for next sign-in
+    _onSignOut: [], // Callbacks for next sign-out
+    _statusCallbacks: [], // Callbacks for ANY auth change
 
     // Ensure user exists in the 'profiles' table
     ensureUserProfile: async function (user) {
+        if (!user) return;
         try {
             const { error } = await window.supabaseClient
                 .from('profiles')
@@ -19,302 +20,262 @@ const auth = {
                     email: user.email,
                     name: user.user_metadata?.full_name || user.email.split('@')[0]
                 }, { onConflict: 'id' });
+
             if (error) {
                 console.error('Error ensuring user profile:', error);
             } else {
-                console.log('User profile ensured in profiles table');
+                console.log('User profile synchronized.');
             }
         } catch (err) {
             console.error('ensureUserProfile failed:', err);
         }
     },
 
-    // Central init — call this ONCE per page via `await auth.init()`
-    init: function () {
+    // Central init — call this at the start of every page
+    init: async function () {
         if (this._initPromise) return this._initPromise;
 
-        this._initPromise = (async () => {
-            console.log('[Auth Debug] init() starting...');
+        this._initPromise = new Promise(async (resolve) => {
+            console.log('[Auth] Initializing...');
 
-            // Check protocol
-            if (window.location.protocol === 'file:') {
-                console.error('[Auth Debug] CRITICAL: You are running the site via file://. Google Auth WILL NOT work. You must use a local server (e.g., Live Server in VS Code).');
-                alert('Warning: Supabase Auth will not work when opening HTML files directly. Please use a local server.');
-            }
-
-            // 1. Restore existing session
-            try {
-                console.log('[Auth Debug] Checking current session...');
-                const { data: { session }, error } = await window.supabaseClient.auth.getSession();
-                if (error) {
-                    console.error('[Auth Debug] getSession error:', error);
-                } else {
-                    console.log('[Auth Debug] Session check result:', session ? 'Logged in as ' + session.user.email : 'No active session');
-                }
-
-                if (session) {
-                    this.isLoggedIn = true;
-                    this.user = session.user;
-                    await this.ensureUserProfile(session.user);
-                }
-            } catch (err) {
-                console.error('[Auth Debug] getSession catch error:', err);
-            }
-
-            this.updateNav();
-
-            // 2. Register onAuthStateChange EXACTLY ONCE
+            // 1. Set up the PERMANENT listener first
             if (!this._listenerRegistered) {
-                console.log('[Auth Debug] Registering state change listener...');
                 this._listenerRegistered = true;
                 window.supabaseClient.auth.onAuthStateChange(async (event, session) => {
-                    console.log('[Auth Debug] State change event:', event, session ? 'User: ' + session.user.email : 'No session');
+                    console.log(`[Auth] Event: ${event}`, session ? `User: ${session.user.email}` : 'No session');
 
-                    if (session) {
-                        this.isLoggedIn = true;
-                        this.user = session.user;
+                    const wasLoggedIn = this.isLoggedIn;
+                    this.user = session?.user || null;
+                    this.isLoggedIn = !!session;
 
-                        if (event === 'SIGNED_IN') {
-                            console.log('[Auth Debug] SIGNED_IN event detected, ensuring profile...');
-                            await this.ensureUserProfile(session.user);
-                            this.updateNav();
+                    if (this.isLoggedIn) {
+                        await this.ensureUserProfile(this.user);
+                    }
 
-                            if (this.modal) this.closeModal();
+                    // Global UI update
+                    this.updateNav();
 
-                            if (this.pendingCallback) {
-                                console.log('[Auth Debug] Executing pending callback');
-                                this.pendingCallback();
-                                this.pendingCallback = null;
-                            }
-
-                            const callbacks = [...this._onSignIn];
-                            this._onSignIn = [];
-                            for (const cb of callbacks) {
-                                try { await cb(); } catch (e) { console.error('onSignIn callback error:', e); }
-                            }
-                        }
+                    // Execute specific event callbacks
+                    if (event === 'SIGNED_IN' || (event === 'INITIAL_SESSION' && this.isLoggedIn)) {
+                        const callbacks = [...this._onSignIn];
+                        this._onSignIn = [];
+                        callbacks.forEach(cb => cb(session));
                     } else if (event === 'SIGNED_OUT') {
-                        console.log('[Auth Debug] SIGNED_OUT event detected');
-                        this.isLoggedIn = false;
-                        this.user = null;
-                        this.updateNav();
-
-                        const callbacks = [...this._onSignOut || []];
+                        const callbacks = [...this._onSignOut];
                         this._onSignOut = [];
-                        for (const cb of callbacks) {
-                            try { await cb(); } catch (e) { console.error('onSignOut callback error:', e); }
-                        }
+                        callbacks.forEach(cb => cb());
+                    }
+
+                    // Broad status change listeners
+                    this._statusCallbacks.forEach(cb => cb(event, session));
+
+                    // First time initialization resolve
+                    if (!this.isInitialized) {
+                        this.isInitialized = true;
+                        resolve(session);
                     }
                 });
             }
-            console.log('[Auth Debug] init() complete');
-        })();
+
+            // 2. Immediate session check to speed up initial load
+            try {
+                const { data: { session } } = await window.supabaseClient.auth.getSession();
+                if (session && !this.isInitialized) {
+                    // onAuthStateChange might not have fired yet for INITIAL_SESSION
+                    this.user = session.user;
+                    this.isLoggedIn = true;
+                    this.isInitialized = true;
+                    this.updateNav();
+                    resolve(session);
+                } else if (!session && !this.isInitialized) {
+                    // Wait a moment for onAuthStateChange to possibly catch a redirect session
+                    // Supabase detectSessionInUrl: true usually triggers quickly
+                    setTimeout(() => {
+                        if (!this.isInitialized) {
+                            this.isInitialized = true;
+                            this.updateNav();
+                            resolve(null);
+                        }
+                    }, 500);
+                }
+            } catch (err) {
+                console.warn('[Auth] getSession error:', err);
+                if (!this.isInitialized) {
+                    this.isInitialized = true;
+                    resolve(null);
+                }
+            }
+        });
 
         return this._initPromise;
     },
 
-    // ... rest of code (updateNav, showModal, etc.)
-    // Note: I will keep the showModal Google login part with logs too.
-
-
-    // Register a one-time callback for the next SIGNED_IN event
-    onNextSignIn: function (cb) { this._onSignIn.push(cb); },
-
-    // Register a one-time callback for the next SIGNED_OUT event
-    onNextSignOut: function (cb) {
-        if (!this._onSignOut) this._onSignOut = [];
-        this._onSignOut.push(cb);
-    },
-
-    // Subscribe to auth changes (returns unsubscribe function)
+    // Subscribe to auth changes
     onAuthChange: function (callback) {
-        // Wrapper that delegates to the supabase listener
-        const { data: { subscription } } = window.supabaseClient.auth.onAuthStateChange(callback);
-        return () => subscription.unsubscribe();
+        this._statusCallbacks.push(callback);
+        // If already initialized, trigger callback once immediately
+        if (this.isInitialized) {
+            callback(this.isLoggedIn ? 'SIGNED_IN' : 'SIGNED_OUT', this.user ? { user: this.user } : null);
+        }
+        return () => {
+            this._statusCallbacks = this._statusCallbacks.filter(c => c !== callback);
+        };
     },
 
     updateNav: function () {
-        console.log('updateNav called, isLoggedIn:', this.isLoggedIn);
         const authLinks = document.getElementById('auth-links');
         if (!authLinks) return;
-        authLinks.innerHTML = '';
 
-        if (this.isLoggedIn) {
-            // Profile avatar
+        authLinks.innerHTML = '';
+        if (this.isLoggedIn && this.user) {
+            // Profile link / Avatar
             const avatar = document.createElement('div');
             avatar.className = 'avatar';
-            const initial = this.user.email.charAt(0).toUpperCase();
-            avatar.textContent = initial;
-            avatar.addEventListener('click', () => {
-                window.location.href = 'profile.html';
-            });
+            avatar.textContent = (this.user.email || 'U').charAt(0).toUpperCase();
+            avatar.title = this.user.email;
+            avatar.onclick = () => window.location.href = 'profile.html';
             authLinks.appendChild(avatar);
 
-            // Cart link
+            // Collection / Cart
             const cartLink = document.createElement('a');
             cartLink.href = 'cart.html';
             cartLink.className = 'cart-link';
             cartLink.innerHTML = `
                 <svg class="cart-icon" viewBox="0 0 24 24">
-                    <path d="M7 4V2C7 1.45 7.45 1 8 1H16C16.55 1 17 1.45 17 2V4H20C20.55 4 21 4.45 21 5S20.55 6 20 6H19V19C19 20.1 18.1 21 17 21H7C5.9 21 5 20.1 5 19V6H4C3.45 6 3 5.55 3 5S3.45 4 4 4H7ZM9 3V4H15V3H9ZM7 6V19H17V6H7Z"/>
+                    <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
                 </svg>
                 Collection
             `;
             authLinks.appendChild(cartLink);
 
-            // Logout button
+            // Logout
             const logoutBtn = document.createElement('a');
             logoutBtn.href = '#';
             logoutBtn.textContent = 'Logout';
-            logoutBtn.addEventListener('click', (e) => {
+            logoutBtn.onclick = (e) => {
                 e.preventDefault();
                 this.logout();
-            });
+            };
             authLinks.appendChild(logoutBtn);
         } else {
-            // Save Collection link
-            const saveLink = document.createElement('a');
-            saveLink.href = '#';
-            saveLink.textContent = 'Save Collection';
-            saveLink.addEventListener('click', (e) => {
+            const loginLink = document.createElement('a');
+            loginLink.href = '#';
+            loginLink.textContent = 'Save Collection';
+            loginLink.onclick = (e) => {
                 e.preventDefault();
-                console.log('Save Collection clicked, showing modal');
                 this.showModal();
-            });
-            authLinks.appendChild(saveLink);
+            };
+            authLinks.appendChild(loginLink);
         }
     },
 
     showModal: function (callback) {
-        console.log('showModal called');
+        if (this.modal) return; // Already showing
 
-        // Store callback for after sign-in
         this.pendingCallback = callback || null;
 
-        // Create overlay
+        // Overlay
         this.overlay = document.createElement('div');
-        this.overlay.style.position = 'fixed';
-        this.overlay.style.top = '0';
-        this.overlay.style.left = '0';
-        this.overlay.style.width = '100%';
-        this.overlay.style.height = '100%';
-        this.overlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
-        this.overlay.style.zIndex = '1000';
-        this.overlay.style.display = 'flex';
-        this.overlay.style.alignItems = 'center';
-        this.overlay.style.justifyContent = 'center';
-        this.overlay.addEventListener('click', () => this.closeModal());
+        Object.assign(this.overlay.style, {
+            position: 'fixed', top: '0', left: '0', width: '100%', height: '100%',
+            backgroundColor: 'rgba(0,0,0,0.7)', zIndex: '1000', display: 'flex',
+            alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(4px)'
+        });
+        this.overlay.onclick = () => this.closeModal();
 
-        // Create modal
+        // Modal
         this.modal = document.createElement('div');
-        this.modal.style.backgroundColor = '#fff';
-        this.modal.style.padding = '20px';
-        this.modal.style.borderRadius = '0';
-        this.modal.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-        this.modal.style.maxWidth = '400px';
-        this.modal.style.width = '90%';
-        this.modal.style.textAlign = 'center';
-        this.modal.addEventListener('click', (e) => e.stopPropagation());
+        Object.assign(this.modal.style, {
+            backgroundColor: '#fff', padding: '40px', maxWidth: '400px', width: '90%',
+            textAlign: 'center', boxShadow: '0 20px 40px rgba(0,0,0,0.2)'
+        });
+        this.modal.onclick = (e) => e.stopPropagation();
 
         this.modal.innerHTML = `
-            <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 20px;">Sign In to Save Your Collection</h3>
-            <p style="margin-bottom: 20px; color: #666;">Choose your sign-in method.</p>
+            <h2 style="margin-bottom: 10px;">Membership</h2>
+            <p style="margin-bottom: 30px; color: #666;">Sign in to save your personal collection.</p>
             
-            <!-- Google Login Button -->
-            <button id="google-login-btn" style="background: #4285F4; color: #fff; padding: 10px 20px; border: none; cursor: pointer; font-size: 1rem; margin-bottom: 20px; width: 100%; display: flex; align-items: center; justify-content: center;">
-                <svg style="width: 20px; height: 20px; margin-right: 10px;" viewBox="0 0 24 24">
-                    <path fill="#fff" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                    <path fill="#fff" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                    <path fill="#fff" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                    <path fill="#fff" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                </svg>
-                Login with Google
+            <button id="google-login-btn" style="background: #fff; color: #000; padding: 12px; border: 1px solid #000; cursor: pointer; width: 100%; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; font-weight: 500;">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" style="width: 18px; margin-right: 10px;">
+                Continue with Google
             </button>
             
-            <p style="margin: 20px 0; color: #666;">Or</p>
+            <div style="margin: 20px 0; color: #ccc;">or</div>
             
-            <!-- Email Login -->
-            <p style="margin-bottom: 20px; color: #666;">Enter your email for a magic link (no password needed).</p>
-            <input type="email" id="auth-email" placeholder="your@email.com" style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 0; font-size: 1rem;">
-            <button id="send-link-btn" style="background: #000; color: #fff; padding: 10px 20px; border: none; cursor: pointer; font-size: 1rem;">Send Magic Link</button>
-            <p id="auth-message" style="margin-top: 20px; color: #666;"></p>
+            <input type="email" id="auth-email" placeholder="Email Address" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; outline: none;">
+            <button id="send-link-btn" style="background: #000; color: #fff; padding: 12px; border: none; cursor: pointer; width: 100%; font-weight: 500;">Send Magic Link</button>
+            
+            <p id="auth-message" style="margin-top: 20px; font-size: 0.9rem; color: #d93025;"></p>
         `;
 
         document.body.appendChild(this.overlay);
         this.overlay.appendChild(this.modal);
 
-        // Google login button
-        document.getElementById('google-login-btn').addEventListener('click', async () => {
-            const redirectTo = window.location.href.split('?')[0];
-            console.log('[Auth Debug] Google login clicked. Redirecting to:', redirectTo);
+        // Google
+        document.getElementById('google-login-btn').onclick = async () => {
+            const btn = document.getElementById('google-login-btn');
+            btn.disabled = true;
+            btn.textContent = 'Redirecting...';
 
-            const messageEl = document.getElementById('auth-message');
-            try {
-                const { data, error } = await window.supabaseClient.auth.signInWithOAuth({
-                    provider: 'google',
-                    options: {
-                        redirectTo: redirectTo
-                    }
-                });
+            // Handle GitHub Pages Subdirectory
+            const siteUrl = window.location.origin + window.location.pathname;
+            console.log('[Auth] OAuth Redirect URL:', siteUrl);
 
-                console.log('[Auth Debug] OAuth call response data:', data);
-                if (error) {
-                    console.error('[Auth Debug] OAuth error:', error);
-                    messageEl.textContent = 'Google login failed: ' + error.message;
-                } else {
-                    console.log('[Auth Debug] OAuth redirect initiated successfully');
-                }
-            } catch (err) {
-                console.error('[Auth Debug] Catch error in OAuth click:', err);
-                messageEl.textContent = 'Something went wrong: ' + err.message;
+            const { error } = await window.supabaseClient.auth.signInWithOAuth({
+                provider: 'google',
+                options: { redirectTo: siteUrl }
+            });
+
+            if (error) {
+                document.getElementById('auth-message').textContent = error.message;
+                btn.disabled = false;
+                btn.textContent = 'Continue with Google';
             }
-        });
+        };
 
-        // Send link button
-        document.getElementById('send-link-btn').addEventListener('click', async () => {
-            console.log('Send link button clicked');
+        // Magic Link
+        document.getElementById('send-link-btn').onclick = async () => {
             const email = document.getElementById('auth-email').value.trim();
-            const messageEl = document.getElementById('auth-message');
+            const btn = document.getElementById('send-link-btn');
+            const message = document.getElementById('auth-message');
 
             if (!email) {
-                messageEl.textContent = 'Please enter a valid email.';
+                message.textContent = 'Please enter your email.';
                 return;
             }
 
-            try {
-                const { error } = await window.supabaseClient.auth.signInWithOtp({
-                    email: email,
-                    options: {
-                        shouldCreateUser: true,
-                    }
-                });
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
 
-                if (error) {
-                    messageEl.textContent = 'Error sending link. Try again.';
-                    console.error(error);
-                } else {
-                    messageEl.textContent = 'Magic link sent! Check your email.';
-                }
-            } catch (err) {
-                messageEl.textContent = 'Something went wrong. Try again.';
-                console.error(err);
+            const siteUrl = window.location.origin + window.location.pathname;
+
+            const { error } = await window.supabaseClient.auth.signInWithOtp({
+                email,
+                options: { emailRedirectTo: siteUrl }
+            });
+
+            if (error) {
+                message.textContent = error.message;
+                btn.disabled = false;
+                btn.textContent = 'Send Magic Link';
+            } else {
+                message.style.color = '#1e8e3e';
+                message.textContent = 'Check your email for the magic link!';
             }
-        });
-
-        // NOTE: No onAuthStateChange here — the centralized listener in init() handles it
+        };
     },
 
     closeModal: function () {
-        if (this.modal) {
-            this.modal.remove();
+        if (this.overlay) {
             this.overlay.remove();
-            this.modal = null;
             this.overlay = null;
+            this.modal = null;
         }
     },
 
     logout: async function () {
-        console.log('Logout called');
-        await window.supabaseClient.auth.signOut();
+        const { error } = await window.supabaseClient.auth.signOut();
+        if (error) console.error('Logout error:', error);
+        window.location.href = 'index.html'; // Direct refresh to clear state
     }
 };

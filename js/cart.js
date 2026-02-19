@@ -1,21 +1,30 @@
 // js/cart.js
 const cart = {
-    items: [],  // Array of product IDs saved by the user
+    items: [], // Array of product IDs
+
+    // Initialize cart state listeners
+    init: function () {
+        auth.onAuthChange((event, session) => {
+            if (session) {
+                this.fetch();
+            } else {
+                this.items = [];
+            }
+        });
+    },
 
     isSaved: function (id) {
         return this.items.includes(id);
     },
 
-    getSavedItems: function () {
-        return this.items;
-    },
-
     fetch: async function () {
         if (!auth.isLoggedIn || !auth.user) {
             this.items = [];
+            document.dispatchEvent(new CustomEvent('cartUpdated'));
             return;
         }
         try {
+            console.log(`[Cart] Fetching bits for user: ${auth.user.id}`);
             const { data, error } = await window.supabaseClient
                 .from('carts')
                 .select('product_id')
@@ -23,19 +32,20 @@ const cart = {
 
             if (error) throw error;
             this.items = data.map(row => row.product_id);
+            console.log('[Cart] Items loaded:', this.items.length);
+            document.dispatchEvent(new CustomEvent('cartUpdated'));
         } catch (err) {
-            console.error('Cart fetch error:', err);
-            throw err;
+            console.error('[Cart] Fetch error:', err);
         }
     },
 
     add: async function (id) {
         if (!auth.isLoggedIn || !auth.user) {
-            throw new Error('You must be logged in to add items to your cart.');
+            auth.showModal(); // Prompt login
+            return;
         }
-        if (this.isSaved(id)) {
-            throw new Error('Item already in cart.');
-        }
+        if (this.isSaved(id)) return;
+
         try {
             const { error } = await window.supabaseClient
                 .from('carts')
@@ -43,17 +53,17 @@ const cart = {
 
             if (error) throw error;
             this.items.push(id);
-            console.log(`Product ${id} added to cart for user ${auth.user.email}`);  // Add logging
+            console.log(`[Cart] Added product ${id}`);
+            document.dispatchEvent(new CustomEvent('cartUpdated'));
         } catch (err) {
-            console.error('Cart add error:', err);
-            throw err;
+            console.error('[Cart] Add error:', err);
+            alert('Could not add to cart. Please try again.');
         }
     },
 
     remove: async function (id) {
-        if (!auth.isLoggedIn || !auth.user) {
-            throw new Error('You must be logged in to remove items from your cart.');
-        }
+        if (!auth.isLoggedIn || !auth.user) return;
+
         try {
             const { error } = await window.supabaseClient
                 .from('carts')
@@ -63,9 +73,13 @@ const cart = {
 
             if (error) throw error;
             this.items = this.items.filter(itemId => itemId !== id);
+            console.log(`[Cart] Removed product ${id}`);
+            document.dispatchEvent(new CustomEvent('cartUpdated'));
         } catch (err) {
-            console.error('Cart remove error:', err);
-            throw err;
+            console.error('[Cart] Remove error:', err);
         }
     }
 };
+
+// Auto-init cart listeners
+cart.init();
