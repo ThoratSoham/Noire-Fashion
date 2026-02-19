@@ -1,0 +1,248 @@
+:root {
+    --primary-bg: #f5f5f0;
+    /* Original Noire background */
+    --secondary-bg: #ffffff;
+    --accent: #000000;
+    --accent-blue: #555555;
+    --text-main: #333333;
+    --text-muted: #666666;
+    --glass: rgba(0, 0, 0, 0.05);
+    --glass-border: rgba(0, 0, 0, 0.1);
+}
+
+/* WearLoop Branding */
+.wearloop-logo {
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+    color: var(--text-main);
+    letter-spacing: 2px;
+}
+
+/* Hero Section Adjustment */
+.wearloop-hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--primary-bg);
+    color: var(--text-main);
+    text-align: center;
+    padding: 20px;
+}
+
+.wearloop-hero h1 {
+    font-size: 5rem;
+    margin-bottom: 15px;
+    color: var(--text-main);
+    animation: fadeInDown 0.8s ease-out;
+}
+
+.tagline-carousel {
+    font-size: 2rem;
+    font-weight: 300;
+    height: 2.5rem;
+    overflow: hidden;
+    margin-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.tagline-track {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.tagline-option {
+    height: 2.5rem;
+    color: var(--accent);
+}
+
+.wearloop-hero p.subtext {
+    max-width: 600px;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.hero-ctas {
+    display: flex;
+    gap: 20px;
+}
+
+.btn-premium {
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 0;
+    transition: all 0.3s ease;
+    border: 1px solid #000;
+}
+
+.btn-start {
+    background: #000;
+    color: #fff;
+}
+
+.btn-creator {
+    background: #fff;
+    color: #000;
+}
+
+.btn-premium:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+/* How It Works Section */
+.how-it-works {
+    background: #fff;
+    color: var(--text-main);
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    max-width: 1100px;
+    margin: 60px auto 0;
+}
+
+.step-card {
+    padding: 40px;
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    transition: all 0.2s ease;
+}
+
+.step-card:hover {
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.step-icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+/* Feed Section */
+.feed-container {
+    background: var(--primary-bg);
+    min-height: 100vh;
+    padding: 40px 0;
+}
+
+.feed-grid {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.post-card {
+    background: #fff;
+    border-radius: 0;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+.post-header {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.creator-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #eee;
+}
+
+.creator-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.post-media {
+    width: 100%;
+    aspect-ratio: 1/1;
+    background: #f9f9f9;
+}
+
+.post-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post-actions {
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-actions {
+    display: flex;
+    gap: 15px;
+    font-size: 1.2rem;
+}
+
+.action-btn {
+    cursor: pointer;
+    filter: grayscale(1);
+    transition: filter 0.2s ease;
+}
+
+.action-btn:hover {
+    filter: grayscale(0);
+}
+
+.action-btn.liked {
+    filter: grayscale(0);
+}
+
+.shop-btn-pill {
+    background: #000;
+    color: #fff;
+    padding: 8px 16px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+.post-info {
+    padding: 0 16px 16px;
+}
+
+.tag {
+    color: #888;
+    font-size: 0.8rem;
+    margin-right: 5px;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .wearloop-hero h1 {
+        font-size: 3rem;
+    }
+
+    .tagline-carousel {
+        font-size: 1.4rem;
+    }
+
+    .hero-ctas {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+    }
+}

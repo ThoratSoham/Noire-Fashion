@@ -15,6 +15,7 @@
     <script src="js/cart.js"></script>
     <script src="js/profile.js"></script>
     <script src="js/products.js"></script>
+    <link rel="stylesheet" href="css/wearloop.css">
 
     <style>
         /* Same CSS as before */
@@ -404,8 +405,33 @@
     <section class="hero">
         <h1>NOIRÉ</h1>
         <p>Affordable luxury, crafted in minimal elegance.</p>
-        <a href="#collection" class="cta-button">Explore Collection</a>
+        <div class="hero-btns">
+            <a href="#collection" class="cta-button">Explore Collection</a>
+            <a href="wearloop.html" class="cta-button secondary"
+                style="background:#fff; color:#000; border:1px solid #000; margin-left:10px;">Try WearLoop</a>
+        </div>
     </section>
+
+    <!-- WearLoop Teaser Section -->
+    <section class="wearloop-teaser"
+        style="background: #fff; padding: 60px 20px; text-align: center; border-bottom: 1px solid #eee;">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <span style="letter-spacing: 2px; color: #888; font-size: 0.8rem; font-weight: 700;">INTRODUCING</span>
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin: 10px 0 20px;">The WearLoop
+                Experience</h2>
+            <p style="color: #666; line-height: 1.6; margin-bottom: 30px; font-family: 'Montserrat', sans-serif;">
+                Discover fashion through an infinite community feed. Shop viral looks, follow top creators, and find
+                your next vibe in a whole new way.
+            </p>
+            <a href="wearloop.html"
+                style="display: inline-block; padding: 15px 40px; background: #000; color: #fff; text-decoration: none; font-weight: 600; font-size: 0.9rem;">Start
+                Scrolling</a>
+        </div>
+    </section>
+
+
+
+
 
     <section id="collection" class="section collection">
         <div class="filters" id="filters">
@@ -508,15 +534,21 @@
 
                 const siteLink = `${window.location.origin}${window.location.pathname}?product=${p.id}`;
                 const isInCart = cart.isSaved(p.id);
+                const wearloopLink = p.creatorId ? `<a href="wearloop.html" style="display:block; margin-top:10px; font-size:0.75rem; color:#888; text-decoration:none;">🎥 Seen on WearLoop</a>` : '';
 
                 card.innerHTML = `
                     <img src="${p.image}" alt="${p.title}">
-                    <h3>${p.title}</h3>
-                    <p>${p.description}</p>
-                    <div class="price">$${p.price}</div>
-                    <a href="${p.link}" target="_blank" class="amazon-button">View on Amazon</a>
-                    <button class="share-button" data-link="${siteLink}">Share</button>
-                    <button class="add-to-cart-button ${isInCart ? 'added' : ''}" data-id="${p.id}" ${isInCart ? 'disabled' : ''}>${isInCart ? 'Added to Cart' : 'Add to Cart'}</button>
+                    <div style="padding:15px;">
+                        <h3>${p.title}</h3>
+                        <p>${p.description}</p>
+                        <div class="price">$${p.price}</div>
+                        ${wearloopLink}
+                        <a href="${p.link}" target="_blank" class="amazon-button" style="margin-top:15px;">View on Amazon</a>
+                        <div style="display:flex; gap:10px; margin-top:10px;">
+                            <button class="share-button" data-link="${siteLink}" style="flex:1;">Share</button>
+                            <button class="add-to-cart-button ${isInCart ? 'added' : ''}" data-id="${p.id}" ${isInCart ? 'disabled' : ''} style="flex:2;">${isInCart ? 'Added' : 'Add to Collection'}</button>
+                        </div>
+                    </div>
                 `;
 
                 grid.appendChild(card);

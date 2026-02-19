@@ -569,11 +569,34 @@ const products = [
         price: 5.99,
         gender: "women"
     }
-
-
-
-
-
-
-
 ];
+
+const creators = [
+    { id: 1, name: "Noire", handle: "@noirecore", avatar: "Noire.jpg", verified: true }
+];
+
+const outfitSets = [
+    {
+        id: "set-1",
+        title: "Minimal Street Vibes",
+        creatorId: 1,
+        image: "https://i.pinimg.com/736x/8e/3c/6e/8e3c6e4e1a6a6a6a6a6a6a6a6a6a6a6a.jpg",
+        products: [17, 2, 21], // T-shirt, Sweatpants, Sunglasses
+        tags: ["#minimal", "#streetwear", "#essentials"]
+    },
+    {
+        id: "set-2",
+        title: "Clean Office Look",
+        creatorId: 1,
+        image: "https://i.pinimg.com/736x/f5/0a/7b/f50a7b1a6a6a6a6a6a6a6a6a6a6a6a6a.jpg",
+        products: [13, 28, 29, 6], // Shirt, Trousers, Heels, Watch
+        tags: ["#korean", "#minimal", "#workwear"]
+    }
+];
+
+// Assign Noire to all products for the feed
+products.forEach((p) => {
+    p.creatorId = 1;
+    p.tags = p.tags || [];
+    if (p.category === 'clothing') p.tags.push('#fitcheck');
+});
