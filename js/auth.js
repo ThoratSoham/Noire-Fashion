@@ -79,25 +79,30 @@ const auth = {
 
             // 2. Immediate session check to speed up initial load
             try {
-                const { data: { session } } = await window.supabaseClient.auth.getSession();
-                if (session && !this.isInitialized) {
-                    // onAuthStateChange might not have fired yet for INITIAL_SESSION
-                    this.user = session.user;
-                    this.isLoggedIn = true;
-                    this.isInitialized = true;
+                async function init() {
+                    console.log('[Auth] Initializing...');
+
+                    // 1. Get current session
+                    const { data: { session } } =
+                        await window.supabaseClient.auth.getSession();
+
+                    this.user = session?.user || null;
+                    this.isLoggedIn = !!session;
+
                     this.updateNav();
-                    resolve(session);
-                } else if (!session && !this.isInitialized) {
-                    // Wait a moment for onAuthStateChange to possibly catch a redirect session
-                    // Supabase detectSessionInUrl: true usually triggers quickly
-                    setTimeout(() => {
-                        if (!this.isInitialized) {
-                            this.isInitialized = true;
-                            this.updateNav();
-                            resolve(null);
-                        }
-                    }, 500);
+
+                    // 2. Listen for changes
+                    window.supabaseClient.auth.onAuthStateChange((event, session) => {
+                        console.log('[Auth] Event:', event);
+
+                        this.user = session?.user || null;
+                        this.isLoggedIn = !!session;
+
+                        this.updateNav();
+                    });
                 }
+
+
             } catch (err) {
                 console.warn('[Auth] getSession error:', err);
                 if (!this.isInitialized) {
