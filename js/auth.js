@@ -247,7 +247,7 @@ const auth = {
             btn.disabled = true;
             btn.textContent = 'Sending...';
 
-            const siteUrl = https://thoratsoham.github.io/Noire-Fashion/;
+            const siteUrl = window.location.origin + window.location.pathname;
 
             const { error } = await window.supabaseClient.auth.signInWithOtp({
                 email,
