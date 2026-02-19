@@ -434,4 +434,50 @@ const products = [
         price: 6.99,
         gender: "women"
     },
+    {
+        id: 30,
+        title: "Women’s Solid Asymmetric Hem Stretchable Draped Crop Top",
+        description: "Trendy solid crop top featuring an asymmetric hem and stretchable draped fabric for a flattering fit. Designed with a stylish single-shoulder/off-shoulder silhouette and elegant cowl neckline, this sleeveless top adds a bold and modern touch to party, casual, and evening outfits.",
+        image: "https://m.media-amazon.com/images/I/61DUsfRzYDL._SY879_.jpg",
+        link: "https://amzn.to/4rpzfWa",
+        category: "clothing",
+        subCategory: "tops",
+        tags: ["asymmetric crop top", "one shoulder top women", "off shoulder crop top", "cowl neck top", "party wear crop top", "stretchable women top"],
+        season: "summer",
+        material: "stretchable fabric blend",
+        occasion: "party / casual / evening wear",
+        price: 1.99,
+        gender: "women"
+    },
+    {
+        id: 31,
+        title: "ALYNE Women’s Classic Stretchy Flared Skater Skirt",
+        description: "Classic stretchy flared skater skirt with a flattering fit. Perfect for casual, college, and everyday stylish looks.",
+        image: "https://m.media-amazon.com/images/I/51ZhbqJinoL.jpg",
+        link: "https://amzn.to/4kIp5NT",
+        category: "clothing",
+        subCategory: "skirts",
+        tags: ["skater skirt", "flared skirt women", "stretchy skirt", "casual skirt", "college wear skirt"],
+        season: "all",
+        material: "stretchable fabric blend",
+        occasion: "casual / daily wear",
+        price: 2.99,
+        gender: "women"
+    },
+    {
+        id: 32,
+        title: "SilverArrow Women’s Twilight Drift Block Heel Sandals",
+        description: "Stylish block heel sandals with a chic toe-strap design. Perfect for casual outings, outdoor wear, and party looks.",
+        image: "https://m.media-amazon.com/images/I/51FjsLeIjsL._SY695_.jpg",
+        link: "https://amzn.to/46ckFZQ",
+        category: "footwear",
+        subCategory: "sandals",
+        tags: ["block heel sandals", "women fashion sandals", "toe strap heels", "party sandals", "casual heel sandals"],
+        season: "all",
+        material: "synthetic",
+        occasion: "casual / outdoor / party",
+        price: 4.99,
+        gender: "women"
+    }
+
 ];
