@@ -79,30 +79,21 @@ const auth = {
 
             // 2. Immediate session check to speed up initial load
             try {
-                async function init() {
-                    console.log('[Auth] Initializing...');
+                const { data: { session } } = await window.supabaseClient.auth.getSession();
 
-                    // 1. Get current session
-                    const { data: { session } } =
-                        await window.supabaseClient.auth.getSession();
+                this.user = session?.user || null;
+                this.isLoggedIn = !!session;
 
-                    this.user = session?.user || null;
-                    this.isLoggedIn = !!session;
-
-                    this.updateNav();
-
-                    // 2. Listen for changes
-                    window.supabaseClient.auth.onAuthStateChange((event, session) => {
-                        console.log('[Auth] Event:', event);
-
-                        this.user = session?.user || null;
-                        this.isLoggedIn = !!session;
-
-                        this.updateNav();
-                    });
+                if (this.isLoggedIn) {
+                    await this.ensureUserProfile(this.user);
                 }
 
+                this.updateNav();
 
+                if (!this.isInitialized) {
+                    this.isInitialized = true;
+                    resolve(session);
+                }
             } catch (err) {
                 console.warn('[Auth] getSession error:', err);
                 if (!this.isInitialized) {
