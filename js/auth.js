@@ -167,7 +167,7 @@ const auth = {
         // Persistent WearLoop Link
         const wearLoopLink = document.createElement('a');
         wearLoopLink.href = 'wearloop.html';
-        wearLoopLink.innerHTML = '🔥 <span style="font-weight:700;">WearLoop</span>';
+        wearLoopLink.innerHTML = '<span style="font-weight:700;">WearLoop</span>';
         wearLoopLink.style.marginRight = '20px';
         authLinks.insertBefore(wearLoopLink, authLinks.firstChild);
     },
