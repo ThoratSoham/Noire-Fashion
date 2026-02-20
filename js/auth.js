@@ -320,15 +320,7 @@ const auth = {
         document.body.appendChild(this.overlay);
         this.overlay.appendChild(this.modal);
 
-        // Dynamic Site URL helper
-        const getSiteUrl = () => {
-            // Check if we are on GitHub Pages or Localhost
-            if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-                return window.location.origin + window.location.pathname.replace(/\/[^/]*$/, '/');
-            }
-            // For GitHub Pages (keeping the hardcoded one as fallback for reliability with Supabase redirect config)
-            return "https://noire-fashion.github.io/Noire-Website/";
-        };
+        const getSiteUrl = () => window.location.origin + window.location.pathname;
 
         // Google
         document.getElementById('google-login-btn').onclick = async () => {
