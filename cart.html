@@ -47,6 +47,12 @@
             align-items: center;
         }
 
+        #auth-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
         nav a {
             color: #fff;
             text-decoration: none;
@@ -336,12 +342,18 @@
             });
         }
 
-        // Initialize the page
         async function initCart() {
             console.log('[Cart Page] Initializing...');
 
             // 1. Initialize Auth
-            await auth.init();
+            try {
+                await Promise.race([
+                    auth.init(),
+                    new Promise(resolve => setTimeout(resolve, 2000))
+                ]);
+            } catch (err) {
+                console.error('[Cart Page] Auth init error:', err);
+            }
 
             // 2. Initial render
             renderCart();
@@ -351,14 +363,8 @@
                 console.log('[Cart Page] Global cart updated, re-rendering...');
                 renderCart();
             });
-
-            // 4. Initial fetch if logged in
-            if (auth.isLoggedIn) {
-                cart.fetch();
-            }
         }
 
-        // Wait for DOM to be ready
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initCart);
         } else {

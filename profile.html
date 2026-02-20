@@ -45,6 +45,12 @@
             align-items: center;
         }
 
+        #auth-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
         nav a {
             color: #fff;
             text-decoration: none;
@@ -258,12 +264,18 @@
             }
         };
 
-        // Initialize
         async function startProfileApp() {
             console.log('[Profile Page] Initializing...');
 
             // 1. Initialize Auth
-            await auth.init();
+            try {
+                await Promise.race([
+                    auth.init(),
+                    new Promise(resolve => setTimeout(resolve, 2000))
+                ]);
+            } catch (err) {
+                console.error('[Profile Page] Auth init error:', err);
+            }
 
             // 2. Initial load
             loadProfile();

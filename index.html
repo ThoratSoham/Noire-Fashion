@@ -267,6 +267,12 @@
             align-items: center;
         }
 
+        #auth-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
         nav a {
             color: #fff;
             text-decoration: none;
@@ -586,28 +592,28 @@
             });
         }
 
-        // Initial render - wait for DOM to be ready
         async function startApp() {
             console.log('[App] Starting...');
 
-            // 1. Initial product render
+            // 1. Initialize Auth — Delay UI until session is resolved
+            try {
+                // Timeout auth init if it takes > 2 seconds to ensure products eventually render
+                await Promise.race([
+                    auth.init(),
+                    new Promise(resolve => setTimeout(resolve, 2000))
+                ]);
+            } catch (err) {
+                console.error('[App] Auth init failed or timed out:', err);
+            }
+
+            // 2. Initial product render
             renderProducts(products);
 
-            // 2. Initialize Auth
-            // This waits for the initial session check to complete
-            await auth.init();
-
             // 3. Sync UI with cart updates
-            // cart.js triggers 'cartUpdated' whenever its items change (on fetch, add, remove, or auth change)
             document.addEventListener('cartUpdated', () => {
                 console.log('[App] Cart updated, re-rendering products...');
                 renderProducts(products);
             });
-
-            // Initial cart sync (if already logged in)
-            if (auth.isLoggedIn) {
-                cart.fetch();
-            }
         }
 
         if (document.readyState === 'loading') {

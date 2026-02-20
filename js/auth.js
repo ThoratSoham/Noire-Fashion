@@ -37,11 +37,12 @@ const auth = {
 
         this._initPromise = new Promise(async (resolve) => {
             console.log('[Auth] Initializing...');
-
             // 1. Set up the PERMANENT listener first
             if (!this._listenerRegistered) {
                 this._listenerRegistered = true;
                 window.supabaseClient.auth.onAuthStateChange(async (event, session) => {
+                    console.log("Auth state changed:", event);
+                    console.log("Current isLoggedIn:", this.isLoggedIn);
                     console.log(`[Auth] Event: ${event}`, session ? `User: ${session.user.email}` : 'No session');
 
                     const wasLoggedIn = this.isLoggedIn;
@@ -49,17 +50,27 @@ const auth = {
                     this.isLoggedIn = !!session;
 
                     if (this.isLoggedIn) {
-                        await this.ensureUserProfile(this.user);
+                        this.ensureUserProfile(this.user); // Background sync
                     }
 
                     // Global UI update
                     this.updateNav();
+
+                    // Clean URL hash after successful login
+                    if (this.isLoggedIn && window.location.hash.includes("access_token")) {
+                        window.history.replaceState({}, document.title, window.location.pathname);
+                    }
 
                     // Execute specific event callbacks
                     if (event === 'SIGNED_IN' || (event === 'INITIAL_SESSION' && this.isLoggedIn)) {
                         const callbacks = [...this._onSignIn];
                         this._onSignIn = [];
                         callbacks.forEach(cb => cb(session));
+
+                        // NEW: Redirect guest to index after login if not already there
+                        if (event === 'SIGNED_IN' && !window.location.pathname.includes('index.html') && window.location.pathname !== '/') {
+                            window.location.href = 'index.html';
+                        }
                     } else if (event === 'SIGNED_OUT') {
                         const callbacks = [...this._onSignOut];
                         this._onSignOut = [];
@@ -77,18 +88,45 @@ const auth = {
                 });
             }
 
-            // 2. Immediate session check to speed up initial load
+            // 2. Extra Robustness: Manual Hash Recovery
+            const hash = window.location.hash;
+            if (hash.includes("access_token")) {
+                console.log("[Auth] Detected OAuth hash. Attempting manual session recovery...");
+                try {
+                    const params = new URLSearchParams(hash.substring(1));
+                    const accessToken = params.get('access_token');
+                    const refreshToken = params.get('refresh_token');
+                    if (accessToken) {
+                        const { data, error } = await window.supabaseClient.auth.setSession({
+                            access_token: accessToken,
+                            refresh_token: refreshToken
+                        });
+                        if (error) throw error;
+                        console.log("[Auth] Manual setSession successful.");
+                    }
+                } catch (e) {
+                    console.warn("[Auth] Manual hash recovery failed:", e);
+                }
+            }
+
             try {
+                console.log('[Auth] Checking current session...');
                 const { data: { session } } = await window.supabaseClient.auth.getSession();
 
-                this.user = session?.user || null;
-                this.isLoggedIn = !!session;
-
-                if (this.isLoggedIn) {
-                    await this.ensureUserProfile(this.user);
+                if (session) {
+                    console.log('[Auth] Session found:', session.user.email);
+                    this.user = session.user;
+                    this.isLoggedIn = true;
+                    this.ensureUserProfile(this.user);
+                    this.updateNav();
+                } else if (hash.includes("access_token")) {
+                    console.log('[Auth] Hash present but session not resolved. Waiting for listener...');
+                    // Return early and let onAuthStateChange resolve the initPromise
+                    return;
+                } else {
+                    console.log('[Auth] No session found (guest).');
+                    this.updateNav();
                 }
-
-                this.updateNav();
 
                 if (!this.isInitialized) {
                     this.isInitialized = true;
@@ -96,6 +134,7 @@ const auth = {
                 }
             } catch (err) {
                 console.warn('[Auth] getSession error:', err);
+                this.updateNav();
                 if (!this.isInitialized) {
                     this.isInitialized = true;
                     resolve(null);
@@ -120,16 +159,42 @@ const auth = {
 
     updateNav: function () {
         const authLinks = document.getElementById('auth-links');
-        if (!authLinks) return;
+        if (!authLinks) {
+            // If DOM not ready, try again when it is
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => this.updateNav(), { once: true });
+            }
+            return;
+        }
 
+        // Force flex layout to prevent features from disappearing/stacking
+        authLinks.style.display = 'flex';
+        authLinks.style.alignItems = 'center';
+        authLinks.style.justifyContent = 'flex-end';
+        authLinks.style.gap = '20px';
         authLinks.innerHTML = '';
+
+        // 1. WearLoop Link
+        const wearLoopLink = document.createElement('a');
+        wearLoopLink.href = 'wearloop.html';
+        wearLoopLink.innerHTML = '<span style="font-weight:700; color: inherit;">WearLoop</span>';
+        authLinks.appendChild(wearLoopLink);
+
         if (this.isLoggedIn && this.user) {
-            // Profile link / Avatar
-            const avatar = document.createElement('div');
+            // Profile link / Avatar (Now an anchor to avoid line breaks)
+            const avatar = document.createElement('a');
+            avatar.href = 'profile.html';
             avatar.className = 'avatar';
-            avatar.textContent = (this.user.email || 'U').charAt(0).toUpperCase();
-            avatar.title = this.user.email;
-            avatar.onclick = () => window.location.href = 'profile.html';
+            const name = this.user.user_metadata?.full_name || this.user.email || 'U';
+            avatar.textContent = name.charAt(0).toUpperCase();
+            avatar.title = name;
+            avatar.style.display = 'flex';
+            avatar.style.alignItems = 'center';
+            avatar.style.justifyContent = 'center';
+            avatar.style.textDecoration = 'none';
+            avatar.style.background = '#333';
+            avatar.style.color = '#fff';
+            avatar.style.border = '1px solid #fff';
             authLinks.appendChild(avatar);
 
             // Collection / Cart
@@ -137,10 +202,10 @@ const auth = {
             cartLink.href = 'cart.html';
             cartLink.className = 'cart-link';
             cartLink.innerHTML = `
-                <svg class="cart-icon" viewBox="0 0 24 24">
+                <svg class="cart-icon" viewBox="0 0 24 24" style="width:18px; height:18px; fill:currentColor; margin-right:5px; vertical-align:middle;">
                     <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
                 </svg>
-                Collection
+                My Collection
             `;
             authLinks.appendChild(cartLink);
 
@@ -163,13 +228,54 @@ const auth = {
             };
             authLinks.appendChild(loginLink);
         }
+    },
 
-        // Persistent WearLoop Link
-        const wearLoopLink = document.createElement('a');
-        wearLoopLink.href = 'wearloop.html';
-        wearLoopLink.innerHTML = '<span style="font-weight:700;">WearLoop</span>';
-        wearLoopLink.style.marginRight = '20px';
-        authLinks.insertBefore(wearLoopLink, authLinks.firstChild);
+    // WearLoop Activity Tracking
+    trackActivity: async function (postId, type, content = null) {
+        if (!this.isLoggedIn) return;
+        try {
+            const { error } = await window.supabaseClient
+                .from('wearloop_activities')
+                .upsert({
+                    user_id: this.user.id,
+                    post_id: postId,
+                    type: type,
+                    content: content
+                }, { onConflict: 'user_id,post_id,type' });
+            if (error) console.error('[Auth] Activity tracking error:', error);
+        } catch (err) {
+            console.error('[Auth] trackActivity failed:', err);
+        }
+    },
+
+    removeActivity: async function (postId, type) {
+        if (!this.isLoggedIn) return;
+        try {
+            const { error } = await window.supabaseClient
+                .from('wearloop_activities')
+                .delete()
+                .eq('user_id', this.user.id)
+                .eq('post_id', postId)
+                .eq('type', type);
+            if (error) console.error('[Auth] Activity removal error:', error);
+        } catch (err) {
+            console.error('[Auth] removeActivity failed:', err);
+        }
+    },
+
+    getUserActivities: async function () {
+        if (!this.isLoggedIn) return [];
+        try {
+            const { data, error } = await window.supabaseClient
+                .from('wearloop_activities')
+                .select('*')
+                .eq('user_id', this.user.id);
+            if (error) throw error;
+            return data;
+        } catch (err) {
+            console.error('[Auth] Failed to fetch user activities:', err);
+            return [];
+        }
     },
 
     showModal: function (callback) {
@@ -214,14 +320,23 @@ const auth = {
         document.body.appendChild(this.overlay);
         this.overlay.appendChild(this.modal);
 
+        // Dynamic Site URL helper
+        const getSiteUrl = () => {
+            // Check if we are on GitHub Pages or Localhost
+            if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+                return window.location.origin + window.location.pathname.replace(/\/[^/]*$/, '/');
+            }
+            // For GitHub Pages (keeping the hardcoded one as fallback for reliability with Supabase redirect config)
+            return "https://noire-fashion.github.io/Noire-Website/";
+        };
+
         // Google
         document.getElementById('google-login-btn').onclick = async () => {
             const btn = document.getElementById('google-login-btn');
             btn.disabled = true;
             btn.textContent = 'Redirecting...';
 
-            // Handle GitHub Pages Subdirectory
-            const siteUrl = window.location.origin + window.location.pathname;
+            const siteUrl = getSiteUrl();
             console.log('[Auth] OAuth Redirect URL:', siteUrl);
 
             const { error } = await window.supabaseClient.auth.signInWithOAuth({
@@ -250,7 +365,7 @@ const auth = {
             btn.disabled = true;
             btn.textContent = 'Sending...';
 
-            const siteUrl = "https://thoratsoham.github.io/Noire-Fashion/";
+            const siteUrl = getSiteUrl();
 
             const { error } = await window.supabaseClient.auth.signInWithOtp({
                 email,
@@ -266,6 +381,7 @@ const auth = {
                 message.textContent = 'Check your email for the magic link!';
             }
         };
+
     },
 
     closeModal: function () {
