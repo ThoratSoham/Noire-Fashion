@@ -140,9 +140,14 @@ const wearloop = {
         });
 
         // Infinity Scroll Observer
-        const sentinel = document.createElement('div');
-        sentinel.style.height = '40px';
-        document.body.appendChild(sentinel);
+        let sentinel = document.getElementById('wearloop-sentinel');
+        if (!sentinel) {
+            sentinel = document.createElement('div');
+            sentinel.id = 'wearloop-sentinel';
+            sentinel.style.height = '40px';
+            feedGrid.after(sentinel);
+        }
+
         const observer = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting && !isLoading) loadMore();
         }, { threshold: 0.1 });

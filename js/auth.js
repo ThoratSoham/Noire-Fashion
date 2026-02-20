@@ -85,14 +85,14 @@ const auth = {
 
         // WearLoop Link (Always visible)
         const wearLoopLink = document.createElement('a');
-        wearLoopLink.href = 'wearloop.html';
+        wearLoopLink.href = '#wearloop';
         wearLoopLink.innerHTML = '<span style="font-weight:700;">WearLoop</span>';
         authLinks.appendChild(wearLoopLink);
 
         if (this.isLoggedIn && this.user) {
             // Profile / Avatar
             const avatar = document.createElement('a');
-            avatar.href = 'profile.html';
+            avatar.href = '#profile';
             avatar.className = 'avatar';
             const name = this.user.user_metadata?.full_name || this.user.email || 'U';
             avatar.textContent = name.charAt(0).toUpperCase();
@@ -106,7 +106,7 @@ const auth = {
 
             // Collection / Cart
             const cartLink = document.createElement('a');
-            cartLink.href = 'cart.html';
+            cartLink.href = '#cart';
             cartLink.className = 'cart-link';
             cartLink.style.display = 'flex';
             cartLink.style.alignItems = 'center';
@@ -125,6 +125,7 @@ const auth = {
             logoutBtn.onclick = async (e) => {
                 e.preventDefault();
                 await window.supabaseClient.auth.signOut();
+                window.location.hash = '#home';
             };
             authLinks.appendChild(logoutBtn);
         } else {
