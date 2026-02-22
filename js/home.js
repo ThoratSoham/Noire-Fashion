@@ -30,6 +30,9 @@ function renderHome() {
             </div>
             <div id="product-grid" class="grid"></div>
         </section>
+
+            <div id="product-grid" class="grid"></div>
+        </section>
     `;
 
     // Initialize products display
@@ -76,34 +79,43 @@ function renderProducts(list) {
     }
 
     list.forEach(p => {
-        const card = document.createElement("div");
-        card.className = "product-card";
-        const isInCart = cart.isSaved(p.id);
-
-        const siteLink = `${window.location.origin}${window.location.pathname}#home?product=${p.id}`;
-
-        card.innerHTML = `
-            <img src="${p.image}" alt="${p.title}">
-            <div style="padding:15px;">
-                <h3>${p.title}</h3>
-                <p style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">${p.description}</p>
-                <div class="price" style="font-weight: 700; margin-bottom: 15px;">$${p.price}</div>
-                <div style="display:flex; flex-direction: column; gap:10px;">
-                    <a href="${p.link}" target="_blank" class="cta-button" style="background:#000; color:#fff; font-size: 0.8rem; padding: 10px;">Buy on Amazon</a>
-                    <div style="display:flex; gap:10px;">
-                        <button class="share-btn" data-link="${siteLink}" style="flex:1; padding: 10px; border: 1px solid #ddd; background: #eee; cursor: pointer;">Share</button>
-                        <button class="add-to-cart-btn ${isInCart ? 'added' : ''}" data-id="${p.id}" style="flex:2; padding: 10px; border: 1px solid #000; background: ${isInCart ? '#4CAF50' : '#fff'}; color: ${isInCart ? '#fff' : '#000'}; cursor: pointer;">
-                            ${isInCart ? 'Added' : 'Add to Collection'}
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `;
+        const card = createProductCard(p);
         grid.appendChild(card);
     });
 
+    // Share button logic (delegated or re-attached)
+    attachProductListeners(grid);
+}
+
+function createProductCard(p) {
+    const card = document.createElement("div");
+    card.className = "product-card";
+    const isInCart = cart.isSaved(p.id);
+    const siteLink = `${window.location.origin}${window.location.pathname}#home?product=${p.id}`;
+
+    card.innerHTML = `
+        <img src="${p.image}" alt="${p.title}">
+        <div style="padding:15px;">
+            <h3>${p.title}</h3>
+            <p style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">${p.description}</p>
+            <div class="price" style="font-weight: 700; margin-bottom: 15px;">$${p.price}</div>
+            <div style="display:flex; flex-direction: column; gap:10px;">
+                <a href="${p.link}" target="_blank" class="cta-button" style="background:#000; color:#fff; font-size: 0.8rem; padding: 10px;">Buy on Amazon</a>
+                <div style="display:flex; gap:10px;">
+                    <button class="share-btn" data-link="${siteLink}" style="flex:1; padding: 10px; border: 1px solid #ddd; background: #eee; cursor: pointer;">Share</button>
+                    <button class="add-to-cart-btn ${isInCart ? 'added' : ''}" data-id="${p.id}" style="flex:2; padding: 10px; border: 1px solid #000; background: ${isInCart ? '#4CAF50' : '#fff'}; color: ${isInCart ? '#fff' : '#000'}; cursor: pointer;">
+                        ${isInCart ? 'Added' : 'Add to Collection'}
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    return card;
+}
+
+function attachProductListeners(container) {
     // Share button logic
-    grid.querySelectorAll('.share-btn').forEach(btn => {
+    container.querySelectorAll('.share-btn').forEach(btn => {
         btn.onclick = (e) => {
             const link = e.target.dataset.link;
             navigator.clipboard.writeText(link).then(() => {
@@ -115,7 +127,7 @@ function renderProducts(list) {
     });
 
     // Add to cart listener
-    grid.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+    container.querySelectorAll('.add-to-cart-btn').forEach(btn => {
         btn.onclick = async (e) => {
             const id = parseInt(e.target.dataset.id);
             if (!auth.isLoggedIn) {
@@ -123,8 +135,13 @@ function renderProducts(list) {
                 auth.showModal();
                 return;
             }
+            const btnEl = e.target;
             await cart.add(id);
-            renderProducts(list); // Re-render to update UI
+            // Visual feedback instead of full re-render if possible
+            btnEl.textContent = 'Added';
+            btnEl.style.background = '#4CAF50';
+            btnEl.style.color = '#fff';
+            btnEl.classList.add('added');
         };
     });
 }

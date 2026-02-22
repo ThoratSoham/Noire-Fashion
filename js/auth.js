@@ -83,11 +83,17 @@ const auth = {
         authLinks.style.gap = '20px';
         authLinks.innerHTML = '';
 
-        // WearLoop Link (Always visible)
+        // WearLoop Link
         const wearLoopLink = document.createElement('a');
         wearLoopLink.href = '#wearloop';
         wearLoopLink.innerHTML = '<span style="font-weight:700;">WearLoop</span>';
         authLinks.appendChild(wearLoopLink);
+
+        // Sets Link
+        const setsLink = document.createElement('a');
+        setsLink.href = '#sets';
+        setsLink.innerHTML = '<span style="font-weight:500;">Sets</span>';
+        authLinks.appendChild(setsLink);
 
         if (this.isLoggedIn && this.user) {
             // Profile / Avatar
@@ -125,7 +131,13 @@ const auth = {
             logoutBtn.onclick = async (e) => {
                 e.preventDefault();
                 await window.supabaseClient.auth.signOut();
-                window.location.hash = '#home';
+                // Redirect and force re-render if already on home
+                if (window.location.hash === '#home' || !window.location.hash) {
+                    if (typeof router !== 'undefined') router.renderRoute();
+                    else window.location.reload();
+                } else {
+                    window.location.hash = '#home';
+                }
             };
             authLinks.appendChild(logoutBtn);
         } else {
@@ -231,18 +243,33 @@ const auth = {
     // Activity Tracking (Helper for WearLoop)
     trackActivity: async function (postId, type, content = null) {
         if (!this.isLoggedIn) return;
+        const isNumeric = !isNaN(postId) && !isNaN(parseFloat(postId));
+        const data = {
+            user_id: this.user.id,
+            type,
+            content
+        };
+        if (isNumeric) data.post_id_int = parseInt(postId);
+        else data.post_id_str = String(postId);
+
         try {
-            await window.supabaseClient.from('wearloop_activities').upsert({
-                user_id: this.user.id, post_id: postId, type, content
-            }, { onConflict: 'user_id,post_id,type' });
+            await window.supabaseClient.from('wearloop_activities').upsert(data, {
+                onConflict: 'user_id,post_id_int,post_id_str,type'
+            });
         } catch (err) { console.error('[Auth] Activity error:', err); }
     },
 
     removeActivity: async function (postId, type) {
         if (!this.isLoggedIn) return;
+        const isNumeric = !isNaN(postId) && !isNaN(parseFloat(postId));
+        let query = window.supabaseClient.from('wearloop_activities').delete()
+            .eq('user_id', this.user.id).eq('type', type);
+
+        if (isNumeric) query = query.eq('post_id_int', parseInt(postId));
+        else query = query.eq('post_id_str', String(postId));
+
         try {
-            await window.supabaseClient.from('wearloop_activities').delete()
-                .eq('user_id', this.user.id).eq('post_id', postId).eq('type', type);
+            await query;
         } catch (err) { console.error('[Auth] Activity removal error:', err); }
     },
 
@@ -251,7 +278,84 @@ const auth = {
         try {
             const { data } = await window.supabaseClient.from('wearloop_activities')
                 .select('*').eq('user_id', this.user.id);
-            return data || [];
+            // Map back to a consistent post_id for simpler frontend logic
+            return (data || []).map(a => ({
+                ...a,
+                post_id: a.post_id_int ? String(a.post_id_int) : a.post_id_str
+            }));
         } catch (err) { return []; }
+    },
+
+    // WearLoop Post Management
+    getUserPosts: async function () {
+        if (!this.isLoggedIn) return [];
+        try {
+            const { data } = await window.supabaseClient
+                .from('wearloop_posts')
+                .select('*, post_analytics(event_type)')
+                .eq('user_id', this.user.id)
+                .order('created_at', { ascending: false });
+            return data || [];
+        } catch (err) {
+            console.error('[Auth] Error fetching user posts:', err);
+            return [];
+        }
+    },
+
+    createPost: async function (postData) {
+        if (!this.isLoggedIn) throw new Error('Must be logged in to post');
+        try {
+            const { data, error } = await window.supabaseClient
+                .from('wearloop_posts')
+                .insert({ ...postData, user_id: this.user.id })
+                .select();
+            if (error) throw error;
+            return data[0];
+        } catch (err) {
+            console.error('[Auth] Error creating post:', err);
+            throw err;
+        }
+    },
+
+    updatePost: async function (postId, postData) {
+        if (!this.isLoggedIn) throw new Error('Must be logged in to edit');
+        try {
+            const { error } = await window.supabaseClient
+                .from('wearloop_posts')
+                .update(postData)
+                .eq('id', postId)
+                .eq('user_id', this.user.id);
+            if (error) throw error;
+        } catch (err) {
+            console.error('[Auth] Error updating post:', err);
+            throw err;
+        }
+    },
+
+    deletePost: async function (postId) {
+        if (!this.isLoggedIn) throw new Error('Must be logged in to delete');
+        try {
+            const { error } = await window.supabaseClient
+                .from('wearloop_posts')
+                .delete()
+                .eq('id', postId)
+                .eq('user_id', this.user.id);
+            if (error) throw error;
+        } catch (err) {
+            console.error('[Auth] Error deleting post:', err);
+            throw err;
+        }
+    },
+
+    trackPostEvent: async function (postId, eventType) {
+        try {
+            await window.supabaseClient.from('post_analytics').insert({
+                post_id: postId,
+                event_type: eventType
+            });
+        } catch (err) {
+            // Silently fail for analytics
+            console.warn('[Analytics] Failed to track event:', eventType, postId);
+        }
     }
 };

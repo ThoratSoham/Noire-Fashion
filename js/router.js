@@ -27,6 +27,9 @@ const router = {
             case 'wearloop':
                 renderWearLoop();
                 break;
+            case 'sets':
+                renderSetsView();
+                break;
             case 'profile':
                 renderProfile();
                 break;
