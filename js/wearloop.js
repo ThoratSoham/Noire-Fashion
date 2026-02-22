@@ -18,9 +18,8 @@ const wearloop = {
             console.log('[WearLoop] Loaded user activities:', this.userActivities.length);
         }
 
-        // Combine products, dynamic sets, and dynamic user posts
+        // Combine products and curated sets from sets.js
         const userPostsData = await window.supabaseClient.from('wearloop_posts').select('*, profiles(name)');
-        const dynamicSetsData = await window.supabaseClient.from('wearloop_sets').select('*');
 
         const dynamicPosts = (userPostsData.data || []).map(p => ({
             ...p,
@@ -34,17 +33,15 @@ const wearloop = {
             popularity: Math.random() * 50
         }));
 
-        const dynamicSets = (dynamicSetsData.data || []).map(s => ({
+        const curatedSets = (typeof sets !== 'undefined' ? sets : []).map(s => ({
             ...s,
             type: 'set',
-            image: s.cover_image,
-            products: s.product_ids,
-            popularity: 90 + Math.random() * 10 // Newest sets get high popularity
+            products: s.productIds,
+            popularity: 85 + Math.random() * 15 // High visibility for curated sets
         }));
 
         const basePosts = [
-            ...outfitSets.map(s => ({ ...s, type: 'set', popularity: Math.random() * 100 })),
-            ...dynamicSets,
+            ...curatedSets,
             ...products.filter(p => p.creatorId).map(p => ({ ...p, type: 'single', popularity: Math.random() * 80 })),
             ...dynamicPosts
         ];
