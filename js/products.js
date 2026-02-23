@@ -687,6 +687,174 @@ const products = [
         occasion: "formal / casual",
         price: 18.99,
         gender: "men"
+    },
+    {
+        "id": 47,
+        "title": "CB-COLEBROOK Men's Long Sleeve Button Down Casual Cotton Linen Shirt",
+        "description": "Lightweight and breathable long-sleeve button down shirt made from breathable cotton-linen blend. Perfect for summer beach days, casual outings, or relaxed everyday wear — available in regular and plus sizes for a comfortable fit.",
+        "image": "https://m.media-amazon.com/images/I/71kfgknfIsL._SY879_.jpg",
+        "link": "https://amzn.to/4rtoK49",
+        "category": "clothing",
+        "subCategory": "shirts",
+        "tags": [
+            "men casual shirt",
+            "button down linen shirt",
+            "summer beach shirt",
+            "long sleeve men shirt",
+            "plus size men's top"
+        ],
+        "season": "summer",
+        "material": "cotton linen blend",
+        "occasion": "casual / beach",
+        "price": 7.99,
+        "gender": "men"
+    },
+    {
+        "id": 48,
+        "title": "Relaxed-fit corduroy sweatpants",
+        "description": "Sweatpants with a stretchable elastic waistband and adjustable drawstring. Designed for all-day comfort, casual wear, gym sessions, or winter lounging with a premium yet flexible feel.",
+        "image": "https://m.media-amazon.com/images/I/416KAVsRGwL.jpg",
+        "link": "https://amzn.to/4c68i5f",
+        "category": "clothing",
+        "subCategory": "pants",
+        "tags": [
+            "men sweatpants",
+            "corduroy joggers",
+            "stretch waist sweatpant",
+            "casual gym joggers",
+            "winter wear trousers"
+        ],
+        "season": "winter",
+        "material": "corduroy / cotton blend",
+        "occasion": "casual / gym",
+        "price": 4.99,
+        "gender": "men"
+    },
+    {
+        "id": 49,
+        "title": "Casual mid-top sneaker shoes",
+        "description": "Casual mid-top sneaker shoes featuring a synthetic upper and PVC outsole with lace-up closure. Lightweight and comfortable for daily casual wear, offering relaxed style and supportive fit suitable for men and boys.",
+        "image": "https://m.media-amazon.com/images/I/81R6YbNKOzL._SY695_.jpg",
+        "link": "https://amzn.to/3ZTDP2Z",
+        "category": "footwear",
+        "subCategory": "sneakers",
+        "tags": [
+            "men casual sneakers",
+            "mid top sneaker shoes",
+            "synthetic upper shoes",
+            "lightweight comfortable shoes",
+            "lace up sneaker"
+        ],
+        "season": "all",
+        "material": "synthetic / PVC",
+        "occasion": "casual",
+        "price": 7.99,
+        "gender": "men"
+    },
+    {
+        "id": 50,
+        "title": "TIMEWORKS Stainless Steel Designer Golden Round Shape Day & Date Analog Watch",
+        "description": "Elegant golden round shape analog watch featuring a stainless steel strap with day and date display. Designed with a premium metallic finish, suitable for both men and boys for formal and casual occasions.",
+        "image": "https://m.media-amazon.com/images/I/81TlAgJIxLL._SX679_.jpg",
+        "link": "https://amzn.to/3OymA4M",
+        "category": "accessories",
+        "subCategory": "watches",
+        "tags": [
+            "golden analog watch",
+            "stainless steel watch",
+            "day date dial watch",
+            "men designer watch",
+            "round shape watch"
+        ],
+        "season": "all",
+        "material": "stainless steel",
+        "occasion": "formal / casual",
+        "price": 3.99,
+        "gender": "men"
+    },
+    {
+        "id": 51,
+        "title": "Eyewearlabs OKNO Polarized Full Rim Alloy Square Stylish Sunglasses",
+        "description": "Polarized full-rim alloy sunglasses with square frame and 100% UV protection. Stylish and durable shades suitable for men and women, perfect for cricket, sports, cycling, driving, and everyday outdoor wear.",
+        "image": "https://m.media-amazon.com/images/I/51sbgMetKzL._SX679_.jpg",
+        "link": "https://amzn.to/4kSWOUT",
+        "category": "accessories",
+        "subCategory": "sunglasses",
+        "tags": [
+            "polarized sunglasses",
+            "full rim alloy shades",
+            "UV protection eyewear",
+            "unisex sunglasses",
+            "sports driving cycling glasses"
+        ],
+        "season": "all",
+        "material": "alloy",
+        "occasion": "sports / casual",
+        "price": 19.99,
+        "gender": "unisex"
+    },
+    {
+        "id": 52,
+        "title": "London Hills Women’s Solid Ribbed Long Sleeve Slim Fit T-Shirt",
+        "description": "Stretchable ribbed long sleeve slim fit t-shirt with a comfortable round neck, perfect for casual everyday wear. Designed for a flattering fit and soft feel.",
+        "image": "https://m.media-amazon.com/images/I/510ZaGeYBOL.jpg",
+        "link": "https://amzn.to/3OEExyA",
+        "category": "clothing",
+        "subCategory": "tops",
+        "tags": [
+            "women t shirt",
+            "ribbed long sleeve top",
+            "slim fit tee",
+            "stretchable round neck",
+            "casual women shirt"
+        ],
+        "season": "all",
+        "material": "ribbed knit",
+        "occasion": "casual",
+        "price": 2.99,
+        "gender": "women"
+    },
+    {
+        "id": 53,
+        "title": "London Hills Women's Relaxed Fit High Rise Baggy Jeans",
+        "description": "Relaxed fit high-rise women's jeans with a loose, oversized baggy style perfect for casual everyday wear. Comfortable denim with a contemporary relaxed silhouette.",
+        "image": "https://m.media-amazon.com/images/I/81MuoEzDncL._SY879_.jpg",
+        "link": "https://amzn.to/4b5K3mw",
+        "category": "clothing",
+        "subCategory": "jeans",
+        "tags": [
+            "women baggy jeans",
+            "high rise relaxed fit",
+            "loose oversized jeans",
+            "casual women denim",
+            "London Hills jeans"
+        ],
+        "season": "all",
+        "material": "denim",
+        "occasion": "casual",
+        "price": 6.99,
+        "gender": "women"
+    },
+    {
+        "id": 54,
+        "title": "Campus Women Raise Sneakers",
+        "description": "Casual women’s sneakers with a comfortable fit and stylish design, ideal for daily wear, walking, sports, and casual outings.",
+        "image": "https://m.media-amazon.com/images/I/61KNZZkCjYL._SY625_.jpg",
+        "link": "https://amzn.to/4kOor1z",
+        "category": "footwear",
+        "subCategory": "sneakers",
+        "tags": [
+            "women sneakers",
+            "Campus Raise shoes",
+            "casual footwear",
+            "comfortable sneakers",
+            "everyday shoes"
+        ],
+        "season": "all",
+        "material": "synthetic / fabric",
+        "occasion": "casual",
+        "price": 9.99,
+        "gender": "women"
     }
 
 ];
