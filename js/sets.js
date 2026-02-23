@@ -45,7 +45,7 @@ const sets = [
         id: 6,
         title: "Modern Smart Casual – Olive Shirt with White Wide Trousers",
         description: "Stylish smart-casual combo with an olive button-down shirt, relaxed white trousers, statement sneakers, and bold accessories. Ideal for brunch, evening outings, or polished everyday wear.",
-        image: "https://i.pinimg.com/736x/60/08/a2/6008a2494eafbbdc2fede26265634f9a.jpg",
+        image: "https://i.pinimg.com/474x/72/88/81/728881e4216faa3f5d5ca64960e160fe.jpg",
         productIds: [47, 48, 49, 50, 51],
         gender: "Male"
     },
@@ -53,7 +53,7 @@ const sets = [
         id: 7,
         title: "Minimal Everyday Chic – Ribbed Top with Relaxed Denim & Sneakers",
         description: "Clean and effortless outfit featuring a fitted ribbed long sleeve top paired with high-rise wide leg jeans and chunky sneakers",
-        image: "https://i.pinimg.com/736x/60/08/a2/6008a2494eafbbdc2fede26265634f9a.jpg",
+        image: "https://i.pinimg.com/736x/83/a0/2a/83a02ad45c82487c159f721c3b0ec48e.jpg",
         productIds: [52, 53, 54],
         gender: "Female"
     }
