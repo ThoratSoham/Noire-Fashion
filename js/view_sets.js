@@ -28,6 +28,27 @@ function renderSetsView() {
     if (typeof renderSets === 'function') {
         renderSets();
 
+        // Deep link handling for sets (scroll to set if id in hash)
+        const hash = window.location.hash;
+        if (hash.includes('set=')) {
+            const setId = hash.split('set=')[1];
+            setTimeout(() => {
+                const el = document.querySelector(`.set-expand-container[data-id="${setId}"]`);
+                if (el) {
+                    const card = el.closest('.set-card');
+                    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    card.style.outline = "2px solid #000";
+                    card.style.borderRadius = "8px";
+
+                    // Automatically expand the set so users see the items immediately
+                    const toggleBtn = card.querySelector('.toggle-set-btn');
+                    if (toggleBtn && toggleBtn.textContent.includes('View')) {
+                        toggleBtn.click();
+                    }
+                }
+            }, 500);
+        }
+
         // Attach filter listener
         const filter = document.getElementById('gender-filter');
         if (filter) {

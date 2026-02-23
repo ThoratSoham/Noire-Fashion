@@ -76,6 +76,9 @@ function renderSets(filter = 'All') {
         const card = createSetCard(set);
         container.appendChild(card);
     });
+
+    // Attach listeners for sharing and other set-specific actions
+    attachSetListeners(container);
 }
 
 function createSetCard(set) {
@@ -91,21 +94,26 @@ function createSetCard(set) {
     const card = document.createElement('div');
     card.className = 'set-card';
 
+    const siteLink = `${window.location.origin}${window.location.pathname}#sets?set=${set.id}`;
+
     card.innerHTML = `
-        <div class="set-image-wrapper">
+        <div class="set-image-wrapper copy-trigger" style="cursor: pointer;" title="Click to copy set link">
             <img src="${set.image}" alt="${set.title}">
             <div class="set-badge">OUTFIT SET</div>
         </div>
         <div class="set-content">
-            <h3>${set.title}</h3>
+            <h3 class="copy-trigger" style="cursor: pointer;" title="Click to copy set link">${set.title}</h3>
             <p style="color: #666; font-size: 0.9rem; margin-bottom: 15px;">${set.description}</p>
             <div class="set-price">$${totalAmount} <span style="font-weight: 400; font-size: 0.85rem; color: #888;">(${itemCount} items)</span></div>
-            <div class="set-actions">
-                <button class="cta-button toggle-set-btn" style="flex: 1; background: #fff; color: #000; border: 1px solid #000; font-size: 0.8rem; padding: 12px;">View Items</button>
-                <button class="cta-button add-set-cart-btn" style="flex: 1; background: #000; color: #fff; border: none; font-size: 0.8rem; padding: 12px;">Add Full Set to Cart</button>
+            <div class="set-actions" style="display: flex; flex-direction: column; gap: 10px;">
+                <div style="display: flex; gap: 10px;">
+                    <button class="cta-button toggle-set-btn" style="flex: 1; background: #fff; color: #000; border: 1px solid #000; font-size: 0.8rem; padding: 10px; font-weight: 600;">View Items</button>
+                    <button class="share-set-btn" data-link="${siteLink}" style="flex: 1; padding: 10px; border: 1px solid #ddd; background: #eee; cursor: pointer; font-size: 0.8rem; font-family: inherit;">Share</button>
+                </div>
+                <button class="cta-button add-set-cart-btn" style="background: #000; color: #fff; border: none; font-size: 0.8rem; padding: 12px; width: 100%;">Add Full Set to Collection</button>
             </div>
         </div>
-        <div class="set-expand-container">
+        <div class="set-expand-container" data-id="${set.id}">
             <div class="nested-grid">
                 <!-- Products injected here -->
             </div>
@@ -179,6 +187,41 @@ function createSetCard(set) {
     };
 
     return card;
+}
+
+function attachSetListeners(container) {
+    // Shared copy function
+    const copyLink = (link, element) => {
+        navigator.clipboard.writeText(link).then(() => {
+            const originalText = element.textContent;
+            const isButton = element.tagName === 'BUTTON';
+
+            if (isButton) {
+                element.textContent = "Copied!";
+                setTimeout(() => { element.textContent = originalText; }, 1500);
+            }
+            showNotification('Link copied to clipboard!');
+        });
+    };
+
+    // Share button logic for sets
+    container.querySelectorAll('.share-set-btn').forEach(btn => {
+        btn.onclick = (e) => {
+            copyLink(e.currentTarget.dataset.link, e.currentTarget);
+        };
+    });
+
+    // Card-level triggers for "automatic" copying
+    container.querySelectorAll('.copy-trigger').forEach(el => {
+        el.onclick = (e) => {
+            // Find the share link from the buttons in the same card
+            const card = e.currentTarget.closest('.set-card');
+            const shareBtn = card.querySelector('.share-set-btn');
+            if (shareBtn) {
+                copyLink(shareBtn.dataset.link, e.currentTarget);
+            }
+        };
+    });
 }
 
 // Utility for notification (if not exists)

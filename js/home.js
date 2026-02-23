@@ -117,11 +117,11 @@ function attachProductListeners(container) {
     // Share button logic
     container.querySelectorAll('.share-btn').forEach(btn => {
         btn.onclick = (e) => {
-            const link = e.target.dataset.link;
+            const link = e.currentTarget.dataset.link;
             navigator.clipboard.writeText(link).then(() => {
-                const originalText = e.target.textContent;
-                e.target.textContent = "Copied!";
-                setTimeout(() => { e.target.textContent = originalText; }, 1500);
+                const originalText = e.currentTarget.textContent;
+                e.currentTarget.textContent = "Copied!";
+                setTimeout(() => { e.currentTarget.textContent = originalText; }, 1500);
             });
         };
     });

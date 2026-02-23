@@ -108,6 +108,7 @@ const wearloop = {
                     <div class="main-actions">
                         <span class="action-btn heart-btn ${isLiked ? 'liked' : ''}" title="Like">❤️</span>
                         <span class="action-btn comment-btn" title="Comment">💬</span>
+                        <span class="action-btn share-feed-btn" title="Share" style="cursor:pointer;">🔗</span>
                         <span class="action-btn save-btn ${isSaved ? 'saved' : ''}" title="Save">🔖</span>
                     </div>
                     ${isSet ?
@@ -179,10 +180,35 @@ const wearloop = {
 
             const heartBtn = card.querySelector('.heart-btn');
             const saveBtn = card.querySelector('.save-btn');
+            const shareBtn = card.querySelector('.share-feed-btn');
             const shopBtn = card.querySelector('.shop-link');
 
             heartBtn.addEventListener('click', (e) => interact(e, 'like'));
             saveBtn.addEventListener('click', (e) => interact(e, 'save'));
+
+            if (shareBtn) {
+                shareBtn.addEventListener('click', () => {
+                    let shareLink;
+                    if (isSet) {
+                        shareLink = `${window.location.origin}${window.location.pathname}#sets?set=${post.id}`;
+                    } else {
+                        shareLink = `${window.location.origin}${window.location.pathname}#home?product=${post.id}`;
+                    }
+
+                    navigator.clipboard.writeText(shareLink).then(() => {
+                        if (typeof showNotification === 'function') {
+                            showNotification('Link copied to clipboard!');
+                        } else {
+                            alert('Link copied to clipboard!');
+                        }
+
+                        // Subtle visual feedback
+                        const originalEmoji = shareBtn.textContent;
+                        shareBtn.textContent = "✅";
+                        setTimeout(() => { shareBtn.textContent = originalEmoji; }, 1500);
+                    });
+                });
+            }
 
             // Analytics: Click Tracking
             if (shopBtn && post.type === 'user') {
