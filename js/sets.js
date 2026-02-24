@@ -61,7 +61,7 @@ const sets = [
         id: 8,
         title: "Urban Boston Casual Set",
         description: "Navy graphic tee styled with light-wash jeans, white sneakers, chain, and sunglasses — a clean, relaxed street-style everyday outfit",
-        image: "https://i.pinimg.com/736x/83/a0/2a/83a02ad45c82487c159f721c3b0ec48e.jpg",
+        image: "https://i.pinimg.com/736x/d8/7a/e1/d87ae140da11fecc760236bbbef1c8a9.jpg",
         productIds: [55, 56, 57, 58, 59],
         gender: "Male"
     },
@@ -69,7 +69,7 @@ const sets = [
         id: 9,
         title: "Rustic Grace Skirt Set",
         description: "Soft fitted top paired with a flowy lavender printed midi skirt and white sneakers — a calm, countryside-inspired look with effortless elegance.",
-        image: "https://i.pinimg.com/736x/83/a0/2a/83a02ad45c82487c159f721c3b0ec48e.jpg",
+        image: "https://i.pinimg.com/736x/4b/60/bf/4b60bf1d942b0285cd3368641eb030c6.jpg",
         productIds: [52, 60, 61],
         gender: "Female"
     }
