@@ -113,15 +113,41 @@ function createProductCard(p) {
     return card;
 }
 
+function copyToClipboard(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(text);
+    }
+    // Fallback for HTTP / file:// origins where Clipboard API is blocked
+    return new Promise((resolve, reject) => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0;';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        try {
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            resolve();
+        } catch (err) {
+            document.body.removeChild(ta);
+            reject(err);
+        }
+    });
+}
+
 function attachProductListeners(container) {
     // Share button logic
     container.querySelectorAll('.share-btn').forEach(btn => {
         btn.onclick = (e) => {
             const link = e.currentTarget.dataset.link;
-            navigator.clipboard.writeText(link).then(() => {
-                const originalText = e.currentTarget.textContent;
-                e.currentTarget.textContent = "Copied!";
-                setTimeout(() => { e.currentTarget.textContent = originalText; }, 1500);
+            const btnEl = e.currentTarget;
+            copyToClipboard(link).then(() => {
+                const originalText = btnEl.textContent;
+                btnEl.textContent = "Copied!";
+                setTimeout(() => { btnEl.textContent = originalText; }, 1500);
+            }).catch(() => {
+                alert('Could not copy link. Please copy it manually:\n' + link);
             });
         };
     });
