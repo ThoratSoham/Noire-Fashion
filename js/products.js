@@ -855,6 +855,155 @@ const products = [
         "occasion": "casual",
         "price": 9.99,
         "gender": "women"
+    },
+    {
+        "id": 55,
+        "title": "LEOTUDE Men's Half Sleeve Round Neck Cottonblend Graphic Print Oversized Tshirt",
+        "description": "Trendy oversized men’s t-shirt made from soft cotton blend fabric, featuring a stylish graphic print. Designed with a round neck and half sleeves, perfect for casual wear, street style, college outfits, and everyday comfort.",
+        "image": "https://m.media-amazon.com/images/I/61WYx598KKL._SY879_.jpg",
+        "link": "https://amzn.to/4aAKw05",
+        "category": "clothing",
+        "subCategory": "tshirts",
+        "tags": [
+            "men oversized tshirt",
+            "graphic print tshirt",
+            "cotton blend tshirt",
+            "casual men wear",
+            "street style tshirt",
+            "round neck tshirt"
+        ],
+        "season": "all",
+        "material": "cotton blend",
+        "occasion": "casual",
+        "price": 2.99,
+        "gender": "men"
+    },
+    {
+        "id": 56,
+        "title": "Ben Martin Men Baggy Fit High Rise Denim Jeans",
+        "description": "Stylish baggy fit men’s jeans made from stretchable denim cotton fabric. Designed with a high-rise waist and loose fit silhouette, perfect for casual wear, street style, dance, rap, and everyday comfort. Durable material with a relaxed vibe for modern urban fashion.",
+        "image": "https://m.media-amazon.com/images/I/71tq2wDUoRL._SY879_.jpg",
+        "link": "https://amzn.to/4qPRfrT",
+        "category": "clothing",
+        "subCategory": "jeans",
+        "tags": [
+            "men baggy jeans",
+            "loose fit denim",
+            "high rise jeans",
+            "stretchable jeans",
+            "street style jeans",
+            "rap style pants"
+        ],
+        "season": "all",
+        "material": "denim cotton",
+        "occasion": "casual",
+        "price": 8.99,
+        "gender": "men"
+    },
+    {
+        "id": 57,
+        "title": "ASIAN Men's White Casual Sneaker Shoes with Synthetic Upper Lightweight Comfortable Mid Top Sneaker Shoes for Men's & Boy's Boston-01",
+        "description": "Classic white casual sneakers for men and boys featuring a synthetic upper and lightweight mid-top design. Comfortable and versatile, ideal for daily wear, casual outings, and all-day comfort.",
+        "image": "https://m.media-amazon.com/images/I/71Oay2CuquL._SY695_.jpg",
+        "link": "https://amzn.to/4ayiVMZ",
+        "category": "footwear",
+        "subCategory": "sneakers",
+        "tags": [
+            "men white sneakers",
+            "ASIAN casual shoes",
+            "lightweight sneakers",
+            "comfortable footwear",
+            "mid top sneakers"
+        ],
+        "season": "all",
+        "material": "synthetic",
+        "occasion": "casual",
+        "price": 6.99,
+        "gender": "men"
+    },
+    {
+        "id": 58,
+        "title": "Nakabh Stainless Steel Statement Necklace Chain for Boys & Men",
+        "description": "Minimal stainless steel chain with a bold, elegant look. Durable, stylish, and perfect for daily or party wear.",
+        "image": "https://m.media-amazon.com/images/I/61LqJhGpcJL._SY695_.jpg",
+        "link": "https://amzn.to/4b89e84",
+        "category": "accessories",
+        "subCategory": "necklaces",
+        "tags": [
+            "men chain",
+            "stainless steel necklace",
+            "statement chain",
+            "boys jewelry",
+            "fashion accessories"
+        ],
+        "season": "all",
+        "material": "stainless steel",
+        "occasion": "casual",
+        "price": 1.99,
+        "gender": "men"
+    },
+    {
+        "id": 59,
+        "title": "Grey Jack Polarized Polygon Sunglasses for Men & Women",
+        "description": "Stylish polygon-shaped sunglasses with a metal frame and polarized lenses for clear vision and UV protection.",
+        "image": "https://m.media-amazon.com/images/I/41m6ZXLxIlL._SX679_.jpg",
+        "link": "https://amzn.to/4b89xQg",
+        "category": "accessories",
+        "subCategory": "sunglasses",
+        "tags": [
+            "polarized sunglasses",
+            "metal frame shades",
+            "unisex eyewear",
+            "UV protection",
+            "stylish sunglasses"
+        ],
+        "season": "all",
+        "material": "metal frame",
+        "occasion": "casual",
+        "price": 12.99,
+        "gender": "unisex"
+    },
+    {
+        "id": 60,
+        "title": "KZULLY Women’s Skirts",
+        "description": "Stylish women’s skirts perfect for casual, party, or everyday wear.",
+        "image": "https://m.media-amazon.com/images/I/611n63LBJJL._SY879_.jpg",
+        "link": "https://amzn.to/4azQPkp",
+        "category": "clothing",
+        "subCategory": "skirts",
+        "tags": [
+            "women skirts",
+            "fashion skirts",
+            "casual wear",
+            "everyday skirt",
+            "stylish women skirt"
+        ],
+        "season": "all",
+        "material": "fabric",
+        "occasion": "casual",
+        "price": 3.99,
+        "gender": "women"
+    },
+    {
+        "id": 61,
+        "title": "Puma Smash V1 Women’s Sneakers",
+        "description": "Classic women’s sneakers with a low-top silhouette and SoftFoam cushioning for everyday comfort and casual wear. Sleek lace-up design and reliable rubber outsole for daily use. :contentReference[oaicite:1]{index=1}",
+        "image": "https://m.media-amazon.com/images/I/41t8Xx1oJAL._SY695_.jpg",
+        "link": "https://amzn.to/3OYimDA",
+        "category": "footwear",
+        "subCategory": "sneakers",
+        "tags": [
+            "women sneakers",
+            "Puma Smash V1",
+            "SoftFoam comfort",
+            "casual shoes",
+            "everyday wear"
+        ],
+        "season": "all",
+        "material": "synthetic",
+        "occasion": "casual",
+        "price": 36.99,
+        "gender": "women"
     }
 
 ];
