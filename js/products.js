@@ -1004,6 +1004,27 @@ const products = [
         "occasion": "casual",
         "price": 36.99,
         "gender": "women"
+    },
+    {
+        "id": 62,
+        "title": "Trendy Queen Women's Long Sleeve Slim Fit Color Block Crop Top",
+        "description": "Stretchy slim-fit long sleeve top with a stylish color block design and slightly cropped length. Perfect for casual and streetwear looks.",
+        "image": "https://m.media-amazon.com/images/I/61COcNARkcL._AC_SY879_.jpg",
+        "link": "https://amzn.to/4rAVTel",
+        "category": "clothing",
+        "subCategory": "tops",
+        "tags": [
+            "women crop top",
+            "long sleeve top",
+            "slim fit shirt",
+            "color block top",
+            "stretchy casual wear"
+        ],
+        "season": "all",
+        "material": "polyester blend",
+        "occasion": "casual",
+        "price": 8.99,
+        "gender": "women"
     }
 
 ];
