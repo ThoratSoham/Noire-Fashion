@@ -1025,6 +1025,328 @@ const products = [
         "occasion": "casual",
         "price": 8.99,
         "gender": "women"
+    },
+    {
+        "id": 63,
+        "title": "DEELMO Men’s Cotton Blend Full Sleeve Casual Shirt",
+        "description": "Stylish button-down shirt with dual flap pockets, made from breathable cotton blend fabric. Ideal for casual office wear and everyday outings.",
+        "image": "https://m.media-amazon.com/images/I/51ZLGXFOJJL._SX679_.jpg",
+        "link": "https://m.media-amazon.com/images/I/51ZLGXFOJJL._SX679_.jpg",
+        "category": "clothing",
+        "subCategory": "shirts",
+        "tags": [
+            "men casual shirt",
+            "full sleeve shirt",
+            "button down shirt",
+            "cotton blend shirt",
+            "office casual wear"
+        ],
+        "season": "all",
+        "material": "cotton blend",
+        "occasion": "casual",
+        "price": 4.99,
+        "gender": "men"
+    },
+    {
+        "id": 64,
+        "title": "FTX Men’s Pants",
+        "description": "Classic men’s casual pants with a comfortable fit, perfect for everyday wear and relaxed outings.",
+        "image": "https://m.media-amazon.com/images/I/61uaLkBL-HL._SY879_.jpg",
+        "link": "https://amzn.to/4707bk1",
+        "category": "clothing",
+        "subCategory": "pants",
+        "tags": [
+            "men pants",
+            "casual trousers",
+            "everyday wear",
+            "comfortable fit",
+            "men fashion"
+        ],
+        "season": "all",
+        "material": "cotton blend",
+        "occasion": "casual",
+        "price": 4.99,
+        "gender": "men"
+    },
+    {
+        "id": 65,
+        "title": "U TURN Men's Casual Printed Striped Stylish Formal Shirt",
+        "description": "Men’s casual striped shirt with a modern printed design — stylish yet suitable for semi-formal and casual occasions.",
+        "image": "https://m.media-amazon.com/images/I/51w7mrJ++GL._SY879_.jpg",
+        "link": "https://amzn.to/4u1KV3o",
+        "category": "clothing",
+        "subCategory": "shirts",
+        "tags": [
+            "men striped shirt",
+            "casual formal shirt",
+            "printed shirt",
+            "stylish men wear",
+            "U TURN shirt"
+        ],
+        "season": "all",
+        "material": "cotton blend",
+        "occasion": "casual",
+        "price": 3.99,
+        "gender": "men"
+    },
+    {
+        "id": 66,
+        "title": "Men's Casual Black Lightweight Lace-Up Sneakers",
+        "description": "Stylish and breathable black sneakers with a lightweight design and anti-skid sole. Perfect for streetwear, walking, travel, and everyday comfort.",
+        "image": "https://m.media-amazon.com/images/I/41mF0WqImbL._SY695_.jpg",
+        "link": "https://amzn.to/4b7TT7w",
+        "category": "footwear",
+        "subCategory": "sneakers",
+        "tags": [
+            "men black sneakers",
+            "lightweight shoes",
+            "anti skid sneakers",
+            "streetwear shoes",
+            "walking shoes"
+        ],
+        "season": "all",
+        "material": "synthetic / mesh",
+        "occasion": "casual",
+        "price": 2.99,
+        "gender": "men"
+    },
+    {
+        "id": 67,
+        "title": "Tee Projekt Men's Solid Popcorn Half Sleeve Shirt",
+        "description": "Textured popcorn fabric solid shirt with a spread collar and half sleeves. Comfortable and stylish for casual everyday wear.",
+        "image": "https://m.media-amazon.com/images/I/61Ndr06DdmL._SY879_.jpg",
+        "link": "https://amzn.to/46uv1UZ",
+        "category": "clothing",
+        "subCategory": "shirts",
+        "tags": [
+            "men solid shirt",
+            "popcorn shirt",
+            "half sleeve shirt",
+            "spread collar shirt",
+            "casual men wear"
+        ],
+        "season": "all",
+        "material": "polyester blend",
+        "occasion": "casual",
+        "price": 1.99,
+        "gender": "men"
+    },
+    {
+        "id": 68,
+        "title": "Avix Men’s Track Pants",
+        "description": "Comfortable and casual men’s track pants with a relaxed fit — perfect for workouts, running errands, or everyday lounging.",
+        "image": "https://m.media-amazon.com/images/I/71LSFB359JL._SY879_.jpg",
+        "link": "https://amzn.to/4cPxux3",
+        "category": "clothing",
+        "subCategory": "pants",
+        "tags": [
+            "men track pants",
+            "casual joggers",
+            "sports wear",
+            "comfortable pants",
+            "everyday loungewear"
+        ],
+        "season": "all",
+        "material": "polyester blend",
+        "occasion": "casual",
+        "price": 4.99,
+        "gender": "men"
+    },
+    {
+        "id": 69,
+        "title": "London Hills Solid Men's Round Neck Cotton Blend Half Sleeve T-Shirts",
+        "description": "Classic solid round neck T-shirt with a comfortable cotton-blend fabric and half sleeves — perfect for daily casual wear.",
+        "image": "https://m.media-amazon.com/images/I/61v-HyIcV0L._SY879_.jpg",
+        "link": "https://amzn.to/4scmCOn",
+        "category": "clothing",
+        "subCategory": "tshirts",
+        "tags": [
+            "men solid tshirt",
+            "round neck tee",
+            "cotton blend shirt",
+            "half sleeve t shirt",
+            "casual men tee"
+        ],
+        "season": "all",
+        "material": "cotton blend",
+        "occasion": "casual",
+        "price": 3.99,
+        "gender": "men"
+    },
+    {
+        "id": 70,
+        "title": "Highlander Men’s Slim Fit Striped Full Sleeve Shirt",
+        "description": "Slim fit striped full sleeve shirt for stylish everyday wear — perfect for casual and semi-formal occasions.",
+        "image": "https://m.media-amazon.com/images/I/917CI3RXT3L._SY879_.jpg",
+        "link": "https://amzn.to/4bbnq00",
+        "category": "clothing",
+        "subCategory": "shirts",
+        "tags": [
+            "men striped shirt",
+            "slim fit shirt",
+            "full sleeve shirt",
+            "everyday stylish wear",
+            "casual shirts for men"
+        ],
+        "season": "all",
+        "material": "cotton blend",
+        "occasion": "casual",
+        "price": 6.99,
+        "gender": "men"
+    },
+    {
+        "id": 71,
+        "title": "Men’s Regular Fit Baggy Jeans – Beige",
+        "description": "Classic baggy-style beige jeans with a regular fit and plain design — perfect for casual and streetwear looks.",
+        "image": "https://m.media-amazon.com/images/I/41CH9QgAJFL.jpg",
+        "link": "https://amzn.to/4aQjPTL",
+        "category": "clothing",
+        "subCategory": "jeans",
+        "tags": [
+            "men baggy jeans",
+            "beige jeans",
+            "regular fit denim",
+            "plain style jeans",
+            "casual wear jeans"
+        ],
+        "season": "all",
+        "material": "denim cotton",
+        "occasion": "casual",
+        "price": 4.99,
+        "gender": "men"
+    },
+    {
+        "id": 72,
+        "title": "Women Relaxed Fit Vertical Striped Spread Collar Cotton Casual Shirt",
+        "description": "Comfortable women’s relaxed fit cotton shirt with vertical stripes and a spread collar — perfect for casual everyday wear.",
+        "image": "https://m.media-amazon.com/images/I/61lFkzNtrhL.jpg",
+        "link": "https://amzn.to/4aNMb0X",
+        "category": "clothing",
+        "subCategory": "shirts",
+        "tags": [
+            "women casual shirt",
+            "relaxed fit shirt",
+            "vertical striped shirt",
+            "spread collar top",
+            "cotton shirt women"
+        ],
+        "season": "all",
+        "material": "cotton",
+        "occasion": "casual",
+        "price": 4.99,
+        "gender": "women"
+    },
+    {
+        "id": 73,
+        "title": "GRECIILOOKS Women High Waist Flared Trousers (Combo Pack of 2)",
+        "description": "Elegant high-rise, high-waist flared trousers in a stylish Korean cut — perfect for office, college, events, and workwear.",
+        "image": "https://m.media-amazon.com/images/I/61Y+5m3-mGL._SY879_.jpg",
+        "link": "https://amzn.to/4rE3CZi",
+        "category": "clothing",
+        "subCategory": "pants",
+        "tags": [
+            "women high waist trousers",
+            "flared pants",
+            "Korean style pants",
+            "workwear trousers",
+            "formal women pants",
+            "combo pack"
+        ],
+        "season": "all",
+        "material": "polyester blend",
+        "occasion": "formal",
+        "price": 5.99,
+        "gender": "women"
+    },
+    {
+        "id": 74,
+        "title": "IndoPrimo Women's Classic Fit Striped Print Poly Cotton Shirt",
+        "description": "Comfortable classic fit shirt featuring a striped print, 3/4 sleeves, mandarin neck, standard length, and button-down closure — ideal for office, casual outings, and everyday wear.",
+        "image": "https://m.media-amazon.com/images/I/714QQv4ramL._SY879_.jpg",
+        "link": "https://amzn.to/46oWk34",
+        "category": "clothing",
+        "subCategory": "tops",
+        "tags": [
+            "women's shirt",
+            "striped print shirt",
+            "poly cotton shirt",
+            "mandarin neck",
+            "3/4 sleeve shirt",
+            "casual office wear"
+        ],
+        "season": "all",
+        "material": "polyester cotton blend",
+        "occasion": "casual, office",
+        "price": 4.99,
+        "gender": "women"
+    },
+    {
+        "id": 75,
+        "title": "GRECIILOOKS Women High Rise High Waist Trousers Flared Korean Style Formal Pants (Combo Pack of 2)",
+        "description": "Elegant high-rise, high-waist flared trousers in a stylish Korean cut — perfect for office, college, events, and workwear. Comes as a combo pack of 2 for versatile styling.",
+        "image": "https://m.media-amazon.com/images/I/61TrKnjiw4L._SY879_.jpg",
+        "link": "https://amzn.to/40xjVLi",
+        "category": "clothing",
+        "subCategory": "pants",
+        "tags": [
+            "women high waist trousers",
+            "flared pants",
+            "Korean style pants",
+            "workwear trousers",
+            "formal women pants",
+            "combo pack"
+        ],
+        "season": "all",
+        "material": "polyester blend",
+        "occasion": "formal",
+        "price": 5.99,
+        "gender": "women"
+    },
+    {
+        "id": 76,
+        "title": "Leriya Fashion Women's Crepe Regular Fit Top Korean Style Long Sleeve Oversized Button Down (Combo Pack of 2, Plus Size Available)",
+        "description": "Stylish crepe top with regular fit, Korean-style design, long sleeves, oversized button-down closure — perfect for office, casual outings, and everyday workwear. Available in plus sizes and combo pack of 2 for versatile wear.",
+        "image": "https://m.media-amazon.com/images/I/7154fFUTXHL._SY879_.jpg",
+        "link": "https://amzn.to/3ZYbDMj",
+        "category": "clothing",
+        "subCategory": "tops",
+        "tags": [
+            "women crepe top",
+            "regular fit shirt",
+            "Korean style top",
+            "long sleeve top",
+            "button down shirt",
+            "office wear",
+            "plus size",
+            "combo pack"
+        ],
+        "season": "all",
+        "material": "crepe",
+        "occasion": "office, casual",
+        "price": 4.99,
+        "gender": "women"
+    },
+    {
+        "id": 77,
+        "title": "RATAN Women’s Georgette Flared Sharara Palazzo Pant (One Size)",
+        "description": "Elegant georgette flared sharara palazzo pant in one-size-fits-most design — perfect for festive occasions, casual outings, and traditional events.",
+        "image": "https://m.media-amazon.com/images/I/51jc0Vt5VyL._SY879_.jpg",
+        "link": "https://amzn.to/40tlPN1",
+        "category": "clothing",
+        "subCategory": "pants",
+        "tags": [
+            "women palazzo pants",
+            "georgette pants",
+            "flared sharara",
+            "one size palazzo",
+            "festive wear pants",
+            "traditional pants"
+        ],
+        "season": "all",
+        "material": "georgette",
+        "occasion": "festive, casual, traditional",
+        "price": 6.99,
+        "gender": "women"
     }
 
 ];
