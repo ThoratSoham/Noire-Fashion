@@ -77,7 +77,7 @@ const sets = [
         id: 10,
         title: "Safari Chic",
         description: "A neutral, sophisticated look featuring a tan zebra-print button-down tucked into flowing white wide-leg trousers, cinched with a classic brown leather belt.",
-        image: "https://i.pinimg.com/736x/4b/60/bf/4b60bf1d942b0285cd3368641eb030c6.jpg",
+        image: "https://i.pinimg.com/736x/68/c4/a8/68c4a8bb487691ca1698e7c9f6eb33d0.jpg",
         productIds: [76, 77],
         gender: "Female"
     },
@@ -85,7 +85,7 @@ const sets = [
         id: 11,
         title: "Parisian Casual",
         description: "Effortless street style combining a breezy yellow striped shirt with cream pleated trousers and sporty sneakers for a polished day on the town.",
-        image: "https://i.pinimg.com/736x/4b/60/bf/4b60bf1d942b0285cd3368641eb030c6.jpg",
+        image: "https://i.pinimg.com/736x/08/64/ca/0864cad9d8e77df084779f4aca944714.jpg",
         productIds: [74, 75],
         gender: "Female"
     },
@@ -93,7 +93,7 @@ const sets = [
         id: 12,
         title: "Modern Professional",
         description: "A sharp, office-ready ensemble pairing a crisp blue-and-white striped shirt with high-waisted black trousers and a matching slim belt.",
-        image: "https://i.pinimg.com/736x/4b/60/bf/4b60bf1d942b0285cd3368641eb030c6.jpg",
+        image: "https://i.pinimg.com/736x/c4/8e/eb/c48eeb2ccaa526c51adf500f6fa82371.jpg",
         productIds: [72, 73],
         gender: "Female"
     },
@@ -101,7 +101,7 @@ const sets = [
         id: 13,
         title: "Relaxed Layering",
         description: "A versatile weekend look showcasing a blue striped button-up layered over a basic white tee, finished with khaki chinos and clean white sneakers.",
-        image: "https://i.pinimg.com/736x/4b/60/bf/4b60bf1d942b0285cd3368641eb030c6.jpg",
+        image: "https://i.pinimg.com/736x/dc/c5/e9/dcc5e969dd984a2c71394f33bc7e5acf.jpg",
         productIds: [69, 70, 71],
         gender: "Male"
     },
@@ -109,7 +109,7 @@ const sets = [
         id: 14,
         title: "Bold Minimalist",
         description: "A sleek aesthetic featuring a rich burgundy camp-collar shirt tucked into light grey pleated trousers for a polished yet approachable vibe.",
-        image: "https://i.pinimg.com/736x/4b/60/bf/4b60bf1d942b0285cd3368641eb030c6.jpg",
+        image: "https://i.pinimg.com/474x/ed/46/3f/ed463f8858048655a0d9dcb5d0fc95d1.jpg",
         productIds: [67, 68],
         gender: "Male"
     },
@@ -117,7 +117,7 @@ const sets = [
         id: 15,
         title: "Preppy Edge",
         description: "A playful take on classic style, featuring a pink striped long-sleeve shirt and black tailored trousers, grounded by casual black-and-white sneakers.",
-        image: "https://i.pinimg.com/736x/4b/60/bf/4b60bf1d942b0285cd3368641eb030c6.jpg",
+        image: "https://i.pinimg.com/736x/85/a8/bc/85a8bccf9ba8bd4e7ba53216478d78d1.jpg",
         productIds: [64, 65, 66],
         gender: "Male"
     }
