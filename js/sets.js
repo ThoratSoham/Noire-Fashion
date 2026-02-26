@@ -72,7 +72,57 @@ const sets = [
         image: "https://i.pinimg.com/736x/4b/60/bf/4b60bf1d942b0285cd3368641eb030c6.jpg",
         productIds: [52, 60, 61],
         gender: "Female"
+    },
+    {
+        id: 10,
+        title: "Safari Chic",
+        description: "A neutral, sophisticated look featuring a tan zebra-print button-down tucked into flowing white wide-leg trousers, cinched with a classic brown leather belt.",
+        image: "https://i.pinimg.com/736x/4b/60/bf/4b60bf1d942b0285cd3368641eb030c6.jpg",
+        productIds: [76, 77],
+        gender: "Female"
+    },
+    {
+        id: 11,
+        title: "Parisian Casual",
+        description: "Effortless street style combining a breezy yellow striped shirt with cream pleated trousers and sporty sneakers for a polished day on the town.",
+        image: "https://i.pinimg.com/736x/4b/60/bf/4b60bf1d942b0285cd3368641eb030c6.jpg",
+        productIds: [74, 75],
+        gender: "Female"
+    },
+    {
+        id: 12,
+        title: "Modern Professional",
+        description: "A sharp, office-ready ensemble pairing a crisp blue-and-white striped shirt with high-waisted black trousers and a matching slim belt.",
+        image: "https://i.pinimg.com/736x/4b/60/bf/4b60bf1d942b0285cd3368641eb030c6.jpg",
+        productIds: [72, 73],
+        gender: "Female"
+    },
+    {
+        id: 13,
+        title: "Relaxed Layering",
+        description: "A versatile weekend look showcasing a blue striped button-up layered over a basic white tee, finished with khaki chinos and clean white sneakers.",
+        image: "https://i.pinimg.com/736x/4b/60/bf/4b60bf1d942b0285cd3368641eb030c6.jpg",
+        productIds: [69, 70, 71],
+        gender: "Male"
+    },
+    {
+        id: 14,
+        title: "Bold Minimalist",
+        description: "A sleek aesthetic featuring a rich burgundy camp-collar shirt tucked into light grey pleated trousers for a polished yet approachable vibe.",
+        image: "https://i.pinimg.com/736x/4b/60/bf/4b60bf1d942b0285cd3368641eb030c6.jpg",
+        productIds: [67, 68],
+        gender: "Male"
+    },
+    {
+        id: 15,
+        title: "Preppy Edge",
+        description: "A playful take on classic style, featuring a pink striped long-sleeve shirt and black tailored trousers, grounded by casual black-and-white sneakers.",
+        image: "https://i.pinimg.com/736x/4b/60/bf/4b60bf1d942b0285cd3368641eb030c6.jpg",
+        productIds: [64, 65, 66],
+        gender: "Male"
     }
+
+
 
 
 ];
