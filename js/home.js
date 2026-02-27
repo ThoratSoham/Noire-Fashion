@@ -35,8 +35,9 @@ function renderHome() {
         </section>
     `;
 
-    // Initialize products display
-    renderProducts(products);
+    // Initialize products display — newest (highest id) first
+    const sortedProducts = products.slice().sort((a, b) => b.id - a.id);
+    renderProducts(sortedProducts);
 
     // Deep link handling (scroll to product if id in hash)
     const hash = window.location.hash;

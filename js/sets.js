@@ -132,7 +132,8 @@ function renderSets(filter = 'All') {
     if (!container) return;
 
     container.innerHTML = '';
-    const filteredSets = filter === 'All' ? sets : sets.filter(s => s.gender === filter);
+    const filteredSets = (filter === 'All' ? sets : sets.filter(s => s.gender === filter))
+        .slice().sort((a, b) => b.id - a.id);
 
     if (filteredSets.length === 0) {
         container.innerHTML = '<p style="text-align:center; grid-column: 1/-1; padding: 40px; color: #888;">No sets found for this category.</p>';
