@@ -1702,7 +1702,7 @@ const products = [
     },
     {
         "id": 94,
-        "title": "",
+        "title": "active wear polyester solid cap",
         "description": "Men’s active wear polyester solid cap with adjustable back closure and moisture-wicking StayDry technology — keeps you dry and fresh throughout the day, perfect for sports, walks, workouts, and casual wear.",
         "image": "https://m.media-amazon.com/images/I/51lpMr61Q3L._SY879_.jpg",
         "link": "https://amzn.to/4kXcdn4",
@@ -1724,7 +1724,7 @@ const products = [
     },
     {
         "id": 95,
-        "title": "",
+        "title": "Classic 42 mm champagne dial men’s analog watch",
         "description": "Classic 42 mm champagne dial men’s analog watch from Guess’s Connoisseur collection — stainless steel case with quartz movement for reliable timekeeping, perfect for both formal and casual wear.",
         "image": "https://m.media-amazon.com/images/I/51TidzsGkxL._SX679_.jpg",
         "link": "https://amzn.to/4sfCjnM",
