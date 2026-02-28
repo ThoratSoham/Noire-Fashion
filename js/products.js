@@ -1589,8 +1589,161 @@ const products = [
         "occasion": "formal, business, office",
         "price": 4.99,
         "gender": "men"
+    },
+    {
+        "id": 89,
+        "title": "Dream Beauty Fashion Women’s Sweetheart Neck Balloon/Puff Bishop Sleeve Casual Tee Top",
+        "description": "Elegant women’s casual tee top featuring a sweetheart neckline and stylish balloon/puff bishop sleeves — approx. 23″ length, perfect for casual outings and everyday fashion.",
+        "image": "https://m.media-amazon.com/images/I/61TcnMgHv4L._SY879_.jpg",
+        "link": "https://amzn.to/3OEcHTb",
+        "category": "clothing",
+        "subCategory": "tops",
+        "tags": [
+            "women tee top",
+            "sweetheart neck",
+            "balloon sleeve top",
+            "puff bishop sleeve",
+            "casual women shirt",
+            "everyday wear"
+        ],
+        "season": "all",
+        "material": "",
+        "occasion": "casual, daily",
+        "price": 1.99,
+        "gender": "women"
+    },
+    {
+        "id": 90,
+        "title": "Vendoz Women White Casual Sneakers",
+        "description": "Stylish and lightweight white casual sneakers for women featuring lace-up closure and cushioned insole — perfect for daily wear, college, travel, and casual outings.",
+        "image": "https://m.media-amazon.com/images/I/71SGV-4lI9L._SY695_.jpg",
+        "link": "https://amzn.to/4cSiO08",
+        "category": "clothing",
+        "subCategory": "shoes",
+        "tags": [
+            "women white sneakers",
+            "vendoz sneakers",
+            "casual shoes women",
+            "lace up sneakers",
+            "everyday footwear",
+            "college casual shoes"
+        ],
+        "season": "all",
+        "material": "synthetic",
+        "occasion": "casual, daily, travel",
+        "price": 5.99,
+        "gender": "women"
+    },
+    {
+        "id": 91,
+        "title": "GRECIILOOKS Men’s Polycotton Regular Fit Solid Plain Casual Full Sleeve T-Shirt",
+        "description": "Stylish men’s solid plain full sleeve casual T-shirt in a comfortable polycotton fabric — regular/oversized fit perfect for daily wear, casual outings, and relaxed style.",
+        "image": "https://m.media-amazon.com/images/I/61veqzxiKyL._SY879_.jpg",
+        "link": "https://amzn.to/4sB1DFh",
+        "category": "clothing",
+        "subCategory": "tops",
+        "tags": [
+            "men casual t shirt",
+            "polycotton tshirt",
+            "plain solid tee",
+            "full sleeve men top",
+            "oversized fit shirt",
+            "everyday wear tee"
+        ],
+        "season": "all",
+        "material": "polycotton",
+        "occasion": "casual, daily",
+        "price": 4.99,
+        "gender": "men"
+    },
+    {
+        "id": 92,
+        "title": "SAVAYO Men’s Wide Leg Flared Track Pants",
+        "description": "Men’s Korean-style wide leg flared track pants with a relaxed fit — multicolor lycra design ideal for casual wear, streetwear, loungewear, and everyday comfort.",
+        "image": "https://m.media-amazon.com/images/I/41nzeL2PYbL.jpg",
+        "link": "https://amzn.to/4r0bKBW",
+        "category": "clothing",
+        "subCategory": "pants",
+        "tags": [
+            "men wide leg pants",
+            "flared track pants",
+            "loose fit trousers",
+            "baggy joggers",
+            "streetwear loungewear",
+            "multicolor pants"
+        ],
+        "season": "all",
+        "material": "lycra",
+        "occasion": "casual, streetwear, loungewear",
+        "price": 3.99,
+        "gender": "men"
+    },
+    {
+        "id": 93,
+        "title": "Cruiser Men’s Casual Trainers – Atlas Classic Everyday Sneakers",
+        "description": "Comfortable and trendy men’s casual trainers designed for everyday wear. Classic sneaker style with effortless vibes and all-day comfort — perfect as a go-to daily shoe.",
+        "image": "https://m.media-amazon.com/images/I/61UnkVtaAzL._SY695_.jpg",
+        "link": "https://amzn.to/4sgObGj",
+        "category": "clothing",
+        "subCategory": "shoes",
+        "tags": [
+            "men casual sneakers",
+            "cruiser atlas shoes",
+            "everyday trainers",
+            "comfortable sneakers",
+            "classic men shoes",
+            "trendy footwear"
+        ],
+        "season": "all",
+        "material": "",
+        "occasion": "casual, daily, travel",
+        "price": 9.99,
+        "gender": "men"
+    },
+    {
+        "id": 94,
+        "title": "",
+        "description": "Men’s active wear polyester solid cap with adjustable back closure and moisture-wicking StayDry technology — keeps you dry and fresh throughout the day, perfect for sports, walks, workouts, and casual wear.",
+        "image": "https://m.media-amazon.com/images/I/51lpMr61Q3L._SY879_.jpg",
+        "link": "https://amzn.to/4kXcdn4",
+        "category": "clothing",
+        "subCategory": "accessories",
+        "tags": [
+            "men cap",
+            "Jockey CP21 cap",
+            "polyester active wear cap",
+            "adjustable back closure",
+            "stay dry technology",
+            "sports casual hat"
+        ],
+        "season": "all",
+        "material": "polyester",
+        "occasion": "sports, casual",
+        "price": 7.99,
+        "gender": "men"
+    },
+    {
+        "id": 95,
+        "title": "",
+        "description": "Classic 42 mm champagne dial men’s analog watch from Guess’s Connoisseur collection — stainless steel case with quartz movement for reliable timekeeping, perfect for both formal and casual wear.",
+        "image": "https://m.media-amazon.com/images/I/51TidzsGkxL._SX679_.jpg",
+        "link": "https://amzn.to/4sfCjnM",
+        "category": "accessories",
+        "subCategory": "watches",
+        "tags": [
+            "men analog watch",
+            "Guess Connoisseur watch",
+            "42mm watch",
+            "champagne dial",
+            "stainless steel watch",
+            "quartz movement"
+        ],
+        "season": "all",
+        "material": "stainless steel",
+        "occasion": "formal, casual",
+        "price": 79.99,
+        "gender": "men"
     }
-
 
 
 ];
