@@ -125,7 +125,7 @@ const sets = [
         id: 16,
         title: "Urban Cream Drift",
         description: "Neutral cream knit with relaxed dark trousers and clean sneakers for a minimal street look.",
-        image: "outfit_male_cream_street.jpg",
+        image: "https://i.pinimg.com/736x/59/4e/e1/594ee198f393ff1eaee131b4549bb261.jpg",
         productIds: [91, 92, 93, 94, 95, 21],
         gender: "Male"
     },
@@ -133,7 +133,7 @@ const sets = [
         id: 17,
         title: "Midnight Muse",
         description: "Structured black jumpsuit with puff sleeves, styled sleek and modern.",
-        image: "outfit_female_black_jumpsuit.jpg",
+        image: "https://i.pinimg.com/736x/98/34/0e/98340e741ba63f37230fb7accb26e144.jpg",
         productIds: [89, 90, 73],
         gender: "Female"
     }
