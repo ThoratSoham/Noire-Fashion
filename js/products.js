@@ -1743,6 +1743,50 @@ const products = [
         "occasion": "formal, casual",
         "price": 79.99,
         "gender": "men"
+    },
+    {
+        "id": 96,
+        "title": "GRECIILOOKS Women’s Western Knee-Length Casual Shorts",
+        "description": "GRECIILOOKS women’s western knee-length shorts designed with a relaxed fit for everyday comfort. Lightweight and breathable fabric makes them perfect for summer wear — ideal for casual outings, travel, and daily styling.",
+        "image": "https://m.media-amazon.com/images/I/51qHHr9BJEL._SY879_.jpg",
+        "link": "https://amzn.to/4l0UMlH",
+        "category": "clothing",
+        "subCategory": "shorts",
+        "tags": [
+            "women western shorts",
+            "knee length shorts",
+            "summer casual shorts",
+            "relaxed fit shorts",
+            "girls trendy bottoms",
+            "daily wear shorts"
+        ],
+        "season": "summer",
+        "material": "cotton blend",
+        "occasion": "casual, travel, daily wear",
+        "price": 5.99,
+        "gender": "women"
+    },
+    {
+        "id": 97,
+        "title": "GRECIILOOKS Women’s Western Knee-Length Casual Shorts",
+        "description": "GRECIILOOKS women’s western knee-length shorts designed with a relaxed fit for everyday comfort. Lightweight and breathable fabric makes them perfect for summer wear — ideal for casual outings, travel, and daily styling.",
+        "image": "https://m.media-amazon.com/images/I/71JdpoyxJUL._SY879_.jpg",
+        "link": "https://amzn.to/4b6rIVA",
+        "category": "clothing",
+        "subCategory": "shorts",
+        "tags": [
+            "women western shorts",
+            "knee length shorts",
+            "summer casual shorts",
+            "relaxed fit shorts",
+            "girls trendy bottoms",
+            "daily wear shorts"
+        ],
+        "season": "summer",
+        "material": "cotton blend",
+        "occasion": "casual, travel, daily wear",
+        "price": 5.99,
+        "gender": "women"
     }
 
 
