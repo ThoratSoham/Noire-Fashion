@@ -1787,6 +1787,72 @@ const products = [
         "occasion": "casual, travel, daily wear",
         "price": 5.99,
         "gender": "women"
+    },
+    {
+        "id": 98,
+        "title": "Vintamour Vintage Elegant Women’s Ruffle Collar Long Sleeve Blouse",
+        "description": "Vintamour vintage-inspired women’s blouse featuring an elegant ruffle collar, bowknot cuffs, and soft gathered detailing. Designed with long sleeves and a flattering silhouette, this versatile top is perfect for office wear, fall outings, and polished casual styling.",
+        "image": "https://m.media-amazon.com/images/I/61SsVvBPeVL._SY879_.jpg",
+        "link": "https://amzn.to/46tFSP2",
+        "category": "clothing",
+        "subCategory": "tops",
+        "tags": [
+            "women vintage blouse",
+            "ruffle collar top",
+            "bowknot cuff blouse",
+            "long sleeve work shirt",
+            "elegant women top",
+            "fall fashion blouse"
+        ],
+        "season": "fall",
+        "material": "polyester blend",
+        "occasion": "office, casual, workwear",
+        "price": 4.99,
+        "gender": "women"
+    },
+    {
+        "id": 99,
+        "title": "FRAULEIN Women’s High Waist Flared Pleated Maxi Skirt",
+        "description": "FRAULEIN women’s flared pleated maxi skirt designed with a high-waist A-line silhouette for a flattering and elegant look. Features functional side pockets and a stylish belt accessory for added detail. Perfect for casual outings, office wear, and dressy occasions.",
+        "image": "https://m.media-amazon.com/images/I/61-e58B8BiL._SX679_.jpg",
+        "link": "https://amzn.to/3OHJUxe",
+        "category": "clothing",
+        "subCategory": "skirts",
+        "tags": [
+            "women maxi skirt",
+            "pleated skirt",
+            "high waist skirt",
+            "A-line skirt",
+            "skirt with pockets",
+            "flared long skirt"
+        ],
+        "season": "all",
+        "material": "polyester blend",
+        "occasion": "casual, office, party",
+        "price": 5.99,
+        "gender": "women"
+    },
+    {
+        "id": 100,
+        "title": "Shoetopia Women’s Heel-1700 Heeled Sandals",
+        "description": "Shoetopia women’s Heel-1700 heeled sandals crafted for style and comfort. Designed with a sleek silhouette and sturdy heel, these sandals are perfect for parties, formal occasions, and elevated everyday wear.",
+        "image": "https://m.media-amazon.com/images/I/71SrUojOHYL._SY695_.jpg",
+        "link": "https://amzn.to/3NdwE2N",
+        "category": "footwear",
+        "subCategory": "heels",
+        "tags": [
+            "women heeled sandals",
+            "Shoetopia heels",
+            "party wear sandals",
+            "stylish women heels",
+            "open toe sandals",
+            "women fashion footwear"
+        ],
+        "season": "all",
+        "material": "synthetic",
+        "occasion": "party, formal, evening wear",
+        "price": 4.99,
+        "gender": "women"
     }
 
 
