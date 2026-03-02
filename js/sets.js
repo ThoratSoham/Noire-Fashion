@@ -141,7 +141,7 @@ const sets = [
         id: 18,
         title: "Vintage Vignette",
         description: "A timeless, high-contrast ensemble featuring a cream pussy-bow blouse tucked into a belted black midi skirt. It’s a graceful blend of 1950s charm and modern academic elegance.",
-        image: "https://i.pinimg.com/736x/98/34/0e/98340e741ba63f37230fb7accb26e144.jpg",
+        image: "https://i.pinimg.com/736x/74/af/12/74af12c8f91a68053cf719bd8e636829.jpg",
         productIds: [98, 99, 100],
         gender: "Female"
     }
