@@ -1853,7 +1853,74 @@ const products = [
         "occasion": "party, formal, evening wear",
         "price": 4.99,
         "gender": "women"
-    }
+    },
+    {
+        "id": 101,
+        "title": "Combo of Men’s Casual Cotton Blend Long Sleeve Button-Down Shirts",
+        "description": "Combo pack of men’s casual cotton blend shirts designed with long sleeves, spread collar, and full button-down closure. Crafted from lightweight, breathable fabric for all-day comfort. Perfect for beach outings, office wear, and everyday styling with a clean solid finish.",
+        "image": "https://m.media-amazon.com/images/I/51YLiiaao9L.jpg",
+        "link": "https://amzn.to/4l4vG5B",
+        "category": "clothing",
+        "subCategory": "shirts",
+        "tags": [
+            "men casual shirt combo",
+            "cotton blend shirt",
+            "long sleeve button down",
+            "spread collar shirt",
+            "solid men shirt",
+            "breathable summer shirt"
+        ],
+        "season": "all",
+        "material": "cotton blend",
+        "occasion": "casual, office, beach, daily wear",
+        "price": 4.99,
+        "gender": "men"
+    },
+    {
+        "id": 102,
+        "title": "TAGAS Men’s Relaxed Fit Baggy Denim Jeans",
+        "description": "TAGAS men’s relaxed fit denim jeans designed with a loose, baggy silhouette for all-day comfort and street-style appeal. Crafted from durable denim fabric, these jeans are perfect for casual wear, outings, and everyday styling.",
+        "image": "https://m.media-amazon.com/images/I/61SOaCrWoOL._SY879_.jpg",
+        "link": "https://amzn.to/40GKy0o",
+        "category": "clothing",
+        "subCategory": "jeans",
+        "tags": [
+            "men relaxed fit jeans",
+            "baggy denim jeans",
+            "loose fit jeans men",
+            "casual denim pants",
+            "street style jeans",
+            "mens everyday jeans"
+        ],
+        "season": "all",
+        "material": "denim",
+        "occasion": "casual, daily wear, streetwear",
+        "price": 7.99,
+        "gender": "men"
+    },
+    {
+        "id": 103,
+        "title": "The Modern Soul Men’s Sleeveless Tank Top Vest",
+        "description": "The Modern Soul sleeveless T-shirt for men designed for comfort and mobility. Crafted from soft, breathable fabric, this tank top vest is perfect for gym sessions, workouts, casual wear, and summer styling.",
+        "image": "https://m.media-amazon.com/images/I/61xaIbaFC4L._SY879_.jpg",
+        "link": "https://amzn.to/46y9vie",
+        "category": "clothing",
+        "subCategory": "tshirts",
+        "tags": [
+            "men sleeveless tshirt",
+            "men tank top",
+            "gym vest for men",
+            "summer sleeveless shirt",
+            "casual men vest",
+            "workout tank top"
+        ],
+        "season": "summer",
+        "material": "cotton blend",
+        "occasion": "gym, casual, daily wear",
+        "price": 2.99,
+        "gender": "men"
+    },
+
 
 
 ];
