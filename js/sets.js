@@ -144,6 +144,14 @@ const sets = [
         image: "https://i.pinimg.com/736x/74/af/12/74af12c8f91a68053cf719bd8e636829.jpg",
         productIds: [98, 99, 100],
         gender: "Female"
+    },
+    {
+        id: 19,
+        title: "The Royal Nomad",
+        description: "This name captures the contrast between the rich, 'royal' purple of the shirt and the 'nomadic,' effortless street-style aesthetic of the baggy denim and ribbed tank.",
+        image: "https://i.pinimg.com/736x/74/af/12/74af12c8f91a68053cf719bd8e636829.jpg",
+        productIds: [101, 102, 103],
+        gender: "Male"
     }
 
 
