@@ -1920,6 +1920,72 @@ const products = [
         "price": 2.99,
         "gender": "men"
     },
+    {
+        "id": 104,
+        "title": "Sugathari Women’s Beige Eyelet Embroidery Square Neck Crop T-Shirt",
+        "description": "Sugathari girl’s and women’s beige slim-fit T-shirt featuring delicate eyelet embroidery with a knitted finish. Designed with a flattering square neckline, short sleeves, and schiffli crop style for a chic spring and summer look. Perfect for casual outings and everyday styling.",
+        "image": "https://m.media-amazon.com/images/I/81M4f8U9NjL._SY879_.jpg",
+        "link": "https://amzn.to/4ssRJ8C",
+        "category": "clothing",
+        "subCategory": "tops",
+        "tags": [
+            "women square neck top",
+            "eyelet embroidery tshirt",
+            "beige crop top",
+            "schiffli top women",
+            "summer slim fit tee",
+            "casual women tshirt"
+        ],
+        "season": "spring, summer",
+        "material": "cotton blend",
+        "occasion": "casual, daily wear, summer outings",
+        "price": 2.99,
+        "gender": "women"
+    },
+    {
+        "id": 105,
+        "title": "Leriya Fashion Women’s Boho Rayon Sharara Palazzo Trousers",
+        "description": "Leriya Fashion women’s loose fit boho harem pants crafted from soft, breathable rayon fabric. Designed with a relaxed sharara-style silhouette and elastic waistband for maximum comfort. Perfect for casual outings, yoga sessions, lounging, and everyday wear.",
+        "image": "https://m.media-amazon.com/images/I/81nKYmqEPNL._SY879_.jpg",
+        "link": "https://amzn.to/4u7NZux",
+        "category": "clothing",
+        "subCategory": "trousers",
+        "tags": [
+            "women sharara pants",
+            "boho harem trousers",
+            "rayon palazzo pants",
+            "elastic waist trousers",
+            "loose fit women pants",
+            "casual yoga lounge wear"
+        ],
+        "season": "all",
+        "material": "rayon",
+        "occasion": "casual, yoga, lounge wear",
+        "price": 4.99,
+        "gender": "women"
+    },
+    {
+        "id": 106,
+        "title": "Marc Loire Women’s Embellished Fashion Flat Sandals",
+        "description": "Marc Loire women’s fashion flat sandals featuring elegant embellishments and a stylish open design. Crafted for comfort and everyday versatility, these flats are perfect for casual outings, festive occasions, and daily wear.",
+        "image": "https://m.media-amazon.com/images/I/61r6IeE0VmL._SY695_.jpg",
+        "link": "https://amzn.to/4biFoxP",
+        "category": "footwear",
+        "subCategory": "sandals",
+        "tags": [
+            "women flat sandals",
+            "embellished sandals",
+            "fashion flat footwear",
+            "casual women sandals",
+            "open toe flats",
+            "women stylish sandals"
+        ],
+        "season": "all",
+        "material": "synthetic",
+        "occasion": "casual, festive, daily wear",
+        "price": 7.99,
+        "gender": "women"
+    }
 
 
 

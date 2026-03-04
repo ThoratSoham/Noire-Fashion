@@ -152,6 +152,14 @@ const sets = [
         image: "https://i.pinimg.com/736x/31/a1/7b/31a17b96a70b9bcfd825ebc00ad64030.jpg",
         productIds: [101, 102, 103],
         gender: "Male"
+    },
+    {
+        "id": 20,
+        "title": "Meadow Muse",
+        "description": "The Meadow Muse set is the epitome of effortless, feminine grace, designed for the woman who finds beauty in the quietest moments.",
+        "image": "https://i.pinimg.com/736x/4b/60/bf/4b60bf1d942b0285cd3368641eb030c6.jpg",
+        "productIds": [104, 105, 106],
+        "gender": "Female"
     }
 
 
