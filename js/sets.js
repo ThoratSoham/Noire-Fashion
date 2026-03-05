@@ -165,7 +165,7 @@ const sets = [
         "id": 21,
         "title": "Azure Alabaster",
         "description": "This outfit is a masterclass in tonal contrast and textural balance. It pairs a structured, boxy-fit Camp Collar Shirt in a sun-bleached Mediterranean Blue with relaxed, straight-leg Ecru Denim.",
-        "image": "https://i.pinimg.com/736x/4b/60/bf/4b60bf1d942b0285cd3368641eb030c6.jpg",
+        "image": "https://i.pinimg.com/736x/46/42/9d/46429dab3ab060e94fafc442928358f2.jpg",
         "productIds": [107, 93, 71],
         "gender": "Male"
     }
