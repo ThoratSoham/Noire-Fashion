@@ -1985,6 +1985,28 @@ const products = [
         "occasion": "casual, festive, daily wear",
         "price": 7.99,
         "gender": "women"
+    },
+    {
+        "id": 107,
+        "title": "Aatman Men’s Casual Box Fit Cuban Collar Shirt",
+        "description": "Aatman men’s casual half sleeve shirt designed with a relaxed box fit and stylish Cuban collar. Made for comfort and effortless style, this shirt is perfect for summer outings, casual gatherings, and everyday wear.",
+        "image": "https://m.media-amazon.com/images/I/81V1fiew6hL._SY879_.jpg",
+        "link": "https://amzn.to/4sxesjT",
+        "category": "clothing",
+        "subCategory": "shirts",
+        "tags": [
+            "men cuban collar shirt",
+            "box fit shirt men",
+            "half sleeve casual shirt",
+            "summer men shirt",
+            "men relaxed fit shirt",
+            "casual men fashion"
+        ],
+        "season": "summer",
+        "material": "cotton blend",
+        "occasion": "casual, vacation, daily wear",
+        "price": 7.99,
+        "gender": "men"
     }
 
 
