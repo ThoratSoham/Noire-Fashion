@@ -168,6 +168,14 @@ const sets = [
         "image": "https://i.pinimg.com/736x/46/42/9d/46429dab3ab060e94fafc442928358f2.jpg",
         "productIds": [107, 93, 71],
         "gender": "Male"
+    },
+    {
+        "id": 22,
+        "title": "Petal & Path",
+        "description": "It’s all in the texture. Loving the contrast between the soft ruffles of the dress and the breezy, open button-down. Finished with pink-and-white kicks for ultimate comfort.",
+        "image": "https://i.pinimg.com/736x/59/4e/e1/594ee198f393ff1eaee131b4549bb261.jpg",
+        "productIds": [108, 109, 110],
+        "gender": "Female"
     }
 
 

@@ -2007,6 +2007,72 @@ const products = [
         "occasion": "casual, vacation, daily wear",
         "price": 7.99,
         "gender": "men"
+    },
+    {
+        "id": 108,
+        "title": "HIMACARE Women’s Casual Midi Dress",
+        "description": "HIMACARE women’s midi dress designed for effortless style and everyday comfort. Featuring a flattering mid-length silhouette, this versatile dress is perfect for casual outings, summer days, and relaxed daily wear.",
+        "image": "https://m.media-amazon.com/images/I/61zjd+NuwHL._SY879_.jpg",
+        "link": "https://amzn.to/4l8B1bS",
+        "category": "clothing",
+        "subCategory": "dresses",
+        "tags": [
+            "women midi dress",
+            "casual midi dress",
+            "summer women dress",
+            "everyday women outfit",
+            "stylish midi dress",
+            "women casual wear"
+        ],
+        "season": "summer",
+        "material": "polyester blend",
+        "occasion": "casual, daily wear, outings",
+        "price": 3.99,
+        "gender": "women"
+    },
+    {
+        "id": 109,
+        "title": "ROYALICA Women’s Oversized Solid Delta Long Shirt",
+        "description": "ROYALICA women’s regular fit oversized shirt featuring a solid design and longline silhouette. Crafted for comfort and modern style, this Delta long shirt is perfect for casual outings, office layering, and everyday wear.",
+        "image": "https://m.media-amazon.com/images/I/61838KuBhPL._SX679_.jpg",
+        "link": "https://amzn.to/46IMtVV",
+        "category": "clothing",
+        "subCategory": "shirts",
+        "tags": [
+            "women oversized shirt",
+            "longline shirt women",
+            "solid women shirt",
+            "delta long shirt",
+            "casual women shirt",
+            "regular fit women top"
+        ],
+        "season": "all",
+        "material": "cotton blend",
+        "occasion": "casual, office, daily wear",
+        "price": 3.99,
+        "gender": "women"
+    },
+    {
+        "id": 110,
+        "title": "ASIAN Women PARADISE-12 Casual Mid Top Sneakers",
+        "description": "ASIAN PARADISE-12 women’s casual mid-top sneakers designed with lace-up closure for a secure fit and modern style. Lightweight and comfortable, these trendy sneakers are perfect for everyday wear, travel, and casual outings.",
+        "image": "https://m.media-amazon.com/images/I/71WH-s7EwfL._SY695_.jpg",
+        "link": "https://amzn.to/3NhTZ3o",
+        "category": "footwear",
+        "subCategory": "sneakers",
+        "tags": [
+            "women mid top sneakers",
+            "asian paradise 12 shoes",
+            "lace up women sneakers",
+            "casual women shoes",
+            "trendy girls sneakers",
+            "everyday women footwear"
+        ],
+        "season": "all",
+        "material": "synthetic",
+        "occasion": "casual, travel, daily wear",
+        "price": 5.99,
+        "gender": "women"
     }
 
 
