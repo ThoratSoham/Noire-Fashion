@@ -2073,6 +2073,72 @@ const products = [
         "occasion": "casual, travel, daily wear",
         "price": 5.99,
         "gender": "women"
+    },
+    {
+        "id": 111,
+        "title": "JQR Men STYLE-001 Casual Sneakers",
+        "description": "JQR STYLE-001 men’s casual sneakers designed for everyday comfort and modern street style. Featuring a lightweight build and lace-up design, these sneakers are perfect for casual outings, travel, and daily wear.",
+        "image": "https://m.media-amazon.com/images/I/51+-NGcwKfL._SY695_.jpg",
+        "link": "https://amzn.to/4aVQd8V",
+        "category": "footwear",
+        "subCategory": "sneakers",
+        "tags": [
+            "men casual sneakers",
+            "jqr style 001 shoes",
+            "lace up men sneakers",
+            "street style sneakers",
+            "everyday men footwear",
+            "trendy men shoes"
+        ],
+        "season": "all",
+        "material": "synthetic",
+        "occasion": "casual, travel, daily wear",
+        "price": 7.99,
+        "gender": "men"
+    },
+    {
+        "id": 112,
+        "title": "SMOWKLY Men’s Regular Fit Linen Cotton Casual Trousers",
+        "description": "SMOWKLY men’s regular fit straight trousers crafted from a soft linen-cotton fabric blend for breathable comfort. Designed as stylish chinos suitable for everyday wear, travel, and office use, offering a clean and versatile look.",
+        "image": "https://m.media-amazon.com/images/I/51PCXa8Jf9L._SY879_.jpg",
+        "link": "https://amzn.to/4aSCv6M",
+        "category": "clothing",
+        "subCategory": "trousers",
+        "tags": [
+            "men casual trousers",
+            "regular fit chinos",
+            "linen cotton pants",
+            "men office trousers",
+            "everyday men bottom wear",
+            "comfortable men pants"
+        ],
+        "season": "summer",
+        "material": "linen cotton",
+        "occasion": "casual, office, travel, daily wear",
+        "price": 6.99,
+        "gender": "men"
+    },
+    {
+        "id": 113,
+        "title": "Veirdo Men’s Casual Ribbed Polo Collar Knit T-Shirt",
+        "description": "Veirdo men’s regular fit ribbed polo collar knit T-shirt designed with a flat knit textured fabric for a clean and stylish look. Featuring half sleeves and a comfortable fit, this versatile polo is perfect for office wear, casual outings, travel, and parties.",
+        "image": "https://m.media-amazon.com/images/I/61aA0si+YJL._SY879_.jpg",
+        "link": "https://amzn.to/4busv3G",
+        "category": "clothing",
+        "subCategory": "tshirts",
+        "tags": [
+            "men polo tshirt",
+            "ribbed knit tshirt",
+            "men half sleeve polo",
+            "textured polo tshirt",
+            "casual men polo shirt",
+            "regular fit polo"
+        ],
+        "season": "all",
+        "material": "cotton blend",
+        "occasion": "casual, office, party, travel",
+        "price": 9.98,
+        "gender": "men"
     }
 
 
