@@ -180,7 +180,7 @@ const sets = [
         "id": 23,
         "title": "The Alabaster Drift",
         "description": "The Alabaster Drift ensemble features a cream, vertically ribbed polo t-shirt paired with textured, beige tailored pants. The look is completed with clean white sneakers, creating a cohesive, high-end aesthetic rooted in affordable elegance.",
-        "image": "https://i.pinimg.com/736x/40/15/a8/4015a84e68d0e1a01e39e71485183c94.jpg",
+        "image": "https://i.pinimg.com/736x/61/18/be/6118be36ebb7496c96dedd0b0ea99d8d.jpg",
         "productIds": [113, 112, 111],
         "gender": "Male"
     }
