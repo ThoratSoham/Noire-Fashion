@@ -176,13 +176,22 @@ const sets = [
         "image": "https://i.pinimg.com/736x/40/15/a8/4015a84e68d0e1a01e39e71485183c94.jpg",
         "productIds": [108, 109, 110],
         "gender": "Female"
-    }, {
+    },
+    {
         "id": 23,
         "title": "The Alabaster Drift",
         "description": "The Alabaster Drift ensemble features a cream, vertically ribbed polo t-shirt paired with textured, beige tailored pants. The look is completed with clean white sneakers, creating a cohesive, high-end aesthetic rooted in affordable elegance.",
         "image": "https://i.pinimg.com/736x/61/18/be/6118be36ebb7496c96dedd0b0ea99d8d.jpg",
         "productIds": [113, 112, 111],
         "gender": "Male"
+    },
+    {
+        "id": 24,
+        "title": "The Amethyst Contour",
+        "description": "A sleek, purple corset crop top paired with flattering flared leggings featuring a unique ruched side-tie detail.",
+        "image": "https://i.pinimg.com/736x/61/18/be/6118be36ebb7496c96dedd0b0ea99d8d.jpg",
+        "productIds": [114, 115, 116],
+        "gender": "Female"
     }
 
 
