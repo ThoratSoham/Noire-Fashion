@@ -189,7 +189,7 @@ const sets = [
         "id": 24,
         "title": "The Amethyst Contour",
         "description": "A sleek, purple corset crop top paired with flattering flared leggings featuring a unique ruched side-tie detail.",
-        "image": "https://i.pinimg.com/736x/61/18/be/6118be36ebb7496c96dedd0b0ea99d8d.jpg",
+        "image": "https://i.pinimg.com/736x/30/65/24/306524755cfc160074bae68bc633d4a4.jpg",
         "productIds": [114, 115, 116],
         "gender": "Female"
     }
