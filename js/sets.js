@@ -192,6 +192,14 @@ const sets = [
         "image": "https://i.pinimg.com/736x/30/65/24/306524755cfc160074bae68bc633d4a4.jpg",
         "productIds": [114, 115, 116],
         "gender": "Female"
+    },
+    {
+        "id": 25,
+        "title": "The Sun-Drenched Nomad.",
+        "description": "The Sun-Drenched Nomad aesthetic focuses on high-contrast neutrals and breathable textures that capture the essence of a summer spent exploring the edge of the sea.",
+        "image": "https://i.pinimg.com/736x/30/65/24/306524755cfc160074bae68bc633d4a4.jpg",
+        "productIds": [117, 118, 119],
+        "gender": "Male"
     }
 
 

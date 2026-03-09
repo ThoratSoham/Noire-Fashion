@@ -2205,6 +2205,72 @@ const products = [
         "occasion": "gym, walking, office, daily wear",
         "price": 6.99,
         "gender": "women"
+    },
+    {
+        "id": 117,
+        "title": "TOPLOT Men’s Regular Fit Casual Shirt",
+        "description": "TOPLOT men’s regular fit shirt designed for everyday comfort and clean style. Crafted with a classic button-down design, this versatile shirt is suitable for casual outings, office wear, and daily use.",
+        "image": "https://m.media-amazon.com/images/I/71mUllWToyL._SY879_.jpg",
+        "link": "https://amzn.to/4b8WVbX",
+        "category": "clothing",
+        "subCategory": "shirts",
+        "tags": [
+            "men regular fit shirt",
+            "casual men shirt",
+            "men button down shirt",
+            "everyday men clothing",
+            "office casual shirt",
+            "men stylish shirt"
+        ],
+        "season": "all",
+        "material": "cotton blend",
+        "occasion": "casual, office, daily wear",
+        "price": 4.99,
+        "gender": "men"
+    },
+    {
+        "id": 118,
+        "title": "Men’s Slim Fit Knitted Summer Shorts",
+        "description": "Men’s slim fit knitted shorts made from stretchable, breathable, and lightweight fabric for maximum comfort during warm weather. Designed with an elastic waistband and adjustable drawstring, these casual lounge shorts are perfect for summer outings, relaxing at home, or everyday wear.",
+        "image": "https://m.media-amazon.com/images/I/812ozxZHjZL._SX679_.jpg",
+        "link": "https://amzn.to/46Rhk2y",
+        "category": "clothing",
+        "subCategory": "shorts",
+        "tags": [
+            "men summer shorts",
+            "knitted lounge shorts",
+            "slim fit men shorts",
+            "elastic waist shorts",
+            "drawstring casual shorts",
+            "lightweight breathable shorts"
+        ],
+        "season": "summer",
+        "material": "knitted cotton blend",
+        "occasion": "casual, lounge, daily wear",
+        "price": 2.99,
+        "gender": "men"
+    },
+    {
+        "id": 119,
+        "title": "Kraasa Cloudfoam Pillow Slippers for Men",
+        "description": "Kraasa Cloudfoam pillow slippers for men designed with an ultra-cushioned thick sole for superior comfort. Featuring a non-slip and quick-drying design, these shower slides are perfect for bathroom use, home wear, and casual everyday comfort.",
+        "image": "https://m.media-amazon.com/images/I/61rQS0fhWbL._SX695_.jpg",
+        "link": "https://amzn.to/40R1hOH",
+        "category": "footwear",
+        "subCategory": "slippers",
+        "tags": [
+            "men pillow slippers",
+            "cloudfoam slides",
+            "bathroom shower slippers",
+            "ultra cushion sandals",
+            "quick dry slides",
+            "non slip home slippers"
+        ],
+        "season": "all",
+        "material": "eva foam",
+        "occasion": "home, bathroom, casual",
+        "price": 6.99,
+        "gender": "men"
     }
 
 
