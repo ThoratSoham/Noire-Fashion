@@ -2271,6 +2271,28 @@ const products = [
         "occasion": "home, bathroom, casual",
         "price": 6.99,
         "gender": "men"
+    },
+    {
+        "id": 120,
+        "title": "Leriya Fashion Women’s Paisley Printed Summer Co-Ord Set",
+        "description": "Leriya Fashion stylish co-ord set for women featuring a short sleeve shirt paired with wide-leg pants in a trendy paisley print. Designed with lightweight fabric for breathable comfort, this coordinated outfit is perfect for summer travel, casual outings, and relaxed everyday styling.",
+        "image": "https://m.media-amazon.com/images/I/71VTxNNFuOL._SY879_.jpg",
+        "link": "https://amzn.to/3Pca0IG",
+        "category": "clothing",
+        "subCategory": "co-ord sets",
+        "tags": [
+            "women co ord set",
+            "paisley print outfit",
+            "summer travel set",
+            "wide leg pant set",
+            "casual women coord",
+            "stylish summer outfit"
+        ],
+        "season": "summer",
+        "material": "rayon blend",
+        "occasion": "casual, travel, vacation",
+        "price": 5.99,
+        "gender": "women"
     }
 
 

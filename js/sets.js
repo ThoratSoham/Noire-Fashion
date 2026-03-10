@@ -200,6 +200,14 @@ const sets = [
         "image": "https://i.pinimg.com/736x/bd/ba/4f/bdba4f7b1733af9abdd6cc40ee4cdb20.jpg",
         "productIds": [117, 118, 119],
         "gender": "Male"
+    },
+    {
+        "id": 26,
+        "title": "Azure Oasis Kimono Set",
+        "description": "Found my vacation uniform. Effortless, airy, and iconic.",
+        "image": "https://i.pinimg.com/736x/bd/ba/4f/bdba4f7b1733af9abdd6cc40ee4cdb20.jpg",
+        "productIds": [120],
+        "gender": "Female"
     }
 
 
