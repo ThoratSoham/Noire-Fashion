@@ -2293,6 +2293,72 @@ const products = [
         "occasion": "casual, travel, vacation",
         "price": 5.99,
         "gender": "women"
+    },
+    {
+        "id": 121,
+        "title": "Imsa Moda Men’s Printed Polycotton Relax Fit T-Shirt",
+        "description": "Imsa Moda men’s printed T-shirt crafted from comfortable polycotton fabric with a relaxed fit. Designed with a round neck and half sleeves, this versatile T-shirt is ideal for casual outings, gym sessions, and everyday wear.",
+        "image": "https://m.media-amazon.com/images/I/51fQcUJ93dL.jpg",
+        "link": "https://amzn.to/47CnqnA",
+        "category": "clothing",
+        "subCategory": "tshirts",
+        "tags": [
+            "men printed tshirt",
+            "polycotton tshirt",
+            "relax fit tshirt",
+            "men casual tshirt",
+            "gym wear tshirt",
+            "round neck men tshirt"
+        ],
+        "season": "all",
+        "material": "polycotton",
+        "occasion": "casual, gym, daily wear",
+        "price": 2.99,
+        "gender": "men"
+    },
+    {
+        "id": 122,
+        "title": "Lymio Men’s Loose Fit Stylish Track Pants",
+        "description": "Lymio men’s track pants designed with a loose fit for comfort and easy movement. Featuring a modern stylish design, these track pants are ideal for workouts, casual outings, lounging, and everyday wear.",
+        "image": "https://m.media-amazon.com/images/I/61N3Oajo1hL._SY879_.jpg",
+        "link": "https://amzn.to/40V0AUz",
+        "category": "clothing",
+        "subCategory": "track pants",
+        "tags": [
+            "men track pants",
+            "loose fit track pant",
+            "men gym track pants",
+            "casual men trackwear",
+            "stylish men track pants",
+            "men lounge wear"
+        ],
+        "season": "all",
+        "material": "polyester blend",
+        "occasion": "gym, casual, lounge, daily wear",
+        "price": 4.99,
+        "gender": "men"
+    },
+    {
+        "id": 123,
+        "title": "ASIAN Men NEXUS-11 Casual Mid Top Sneakers",
+        "description": "ASIAN NEXUS-11 men’s stylish mid-top sneakers designed with a trendy color combination and lace-up closure. Built for durability and comfort, these sneakers are ideal for casual outings, travel, and all-day everyday wear.",
+        "image": "https://m.media-amazon.com/images/I/71Ih4uBwD9L._SY695_.jpg",
+        "link": "https://amzn.to/47oqAvc",
+        "category": "footwear",
+        "subCategory": "sneakers",
+        "tags": [
+            "men mid top sneakers",
+            "asian nexus 11 shoes",
+            "casual men sneakers",
+            "lace up sneakers men",
+            "trendy men footwear",
+            "durable casual shoes"
+        ],
+        "season": "all",
+        "material": "synthetic",
+        "occasion": "casual, outings, travel, daily wear",
+        "price": 7.99,
+        "gender": "men"
     }
 
 
