@@ -2359,6 +2359,72 @@ const products = [
         "occasion": "casual, outings, travel, daily wear",
         "price": 7.99,
         "gender": "men"
+    },
+    {
+        "id": 124,
+        "title": "Women’s Ikat Printed Sleeveless Rayon Summer Top",
+        "description": "Women’s ikat printed sleeveless top designed with delicate straps and a relaxed tunic silhouette. Made from lightweight rayon fabric for breathable comfort, this stylish top is perfect for summer outings, casual wear, and everyday styling.",
+        "image": "https://m.media-amazon.com/images/I/514mlRzKM7L._SY879_.jpg",
+        "link": "https://amzn.to/4rC4dde",
+        "category": "clothing",
+        "subCategory": "tops",
+        "tags": [
+            "women ikat top",
+            "sleeveless summer top",
+            "rayon casual tunic",
+            "strappy women top",
+            "lightweight summer wear",
+            "women casual top"
+        ],
+        "season": "summer",
+        "material": "rayon",
+        "occasion": "casual, outing, daily wear",
+        "price": 4.99,
+        "gender": "women"
+    },
+    {
+        "id": 125,
+        "title": "Women’s Wide Leg Cotton Korean Style Trousers",
+        "description": "Women’s wide leg cotton trousers designed with a straight fit Korean-style silhouette for a clean and modern look. Made from breathable cotton fabric, these parallel pants are perfect for casual outings, office wear, and formal everyday styling.",
+        "image": "https://m.media-amazon.com/images/I/31B3w6oKEHL.jpg",
+        "link": "https://amzn.to/4blsduT",
+        "category": "clothing",
+        "subCategory": "trousers",
+        "tags": [
+            "women wide leg trousers",
+            "korean style pants",
+            "cotton straight fit trousers",
+            "parallel pants women",
+            "office wear trousers",
+            "casual formal women pants"
+        ],
+        "season": "all",
+        "material": "cotton",
+        "occasion": "casual, office, formal",
+        "price": 4.99,
+        "gender": "women"
+    },
+    {
+        "id": 126,
+        "title": "Shoetopia Women & Girls Stylish Block Heels",
+        "description": "Shoetopia women’s block heels designed for style and comfort. Featuring a sturdy heel and modern design, these sandals are perfect for parties, office wear, and casual outings while providing stable all-day support.",
+        "image": "https://m.media-amazon.com/images/I/41WSAb7FaNL._SY695_.jpg",
+        "link": "https://amzn.to/46XUAhj",
+        "category": "footwear",
+        "subCategory": "heels",
+        "tags": [
+            "women block heels",
+            "girls block heel sandals",
+            "stylish women heels",
+            "party wear heels",
+            "comfortable block heels",
+            "fashion women footwear"
+        ],
+        "season": "all",
+        "material": "synthetic",
+        "occasion": "party, office, casual",
+        "price": 4.99,
+        "gender": "women"
     }
 
 

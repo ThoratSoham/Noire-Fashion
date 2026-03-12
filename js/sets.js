@@ -216,6 +216,14 @@ const sets = [
         "image": "https://i.pinimg.com/736x/31/33/ff/3133ff3e6d59204a07b42b781df102ac.jpg",
         "productIds": [121, 122, 123],
         "gender": "Male"
+    },
+    {
+        "id": 28,
+        "title": "Pure Prism",
+        "description": "White and wonderful, and perfect for any occasion.",
+        "image": "https://i.pinimg.com/736x/31/33/ff/3133ff3e6d59204a07b42b781df102ac.jpg",
+        "productIds": [124, 125, 126],
+        "gender": "Female"
     }
 
 
