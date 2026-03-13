@@ -2425,7 +2425,74 @@ const products = [
         "occasion": "party, office, casual",
         "price": 4.99,
         "gender": "women"
+    },
+    {
+        "id": 127,
+        "title": "DEELMO Men’s Mandarin Collar Cotton Blend Casual Short Kurta",
+        "description": "DEELMO men’s casual short kurta crafted from a comfortable cotton blend fabric. Designed with a stylish mandarin collar, self-textured pattern, and full sleeves for a modern ethnic look. Perfect for casual outings, festive occasions, and everyday traditional wear.",
+        "image": "https://m.media-amazon.com/images/I/61P0jlvu1OL._SX679_.jpg",
+        "link": "https://amzn.to/46ZDwHQ",
+        "category": "clothing",
+        "subCategory": "kurtas",
+        "tags": [
+            "men short kurta",
+            "mandarin collar kurta",
+            "cotton blend kurta",
+            "casual men kurta",
+            "ethnic men wear",
+            "self design kurta"
+        ],
+        "season": "all",
+        "material": "cotton blend",
+        "occasion": "casual, festive, traditional",
+        "price": 4.99,
+        "gender": "men"
+    },
+    {
+        "id": 128,
+        "title": "Men’s Baggy Corduroy Relaxed Fit Casual Trousers",
+        "description": "Men’s comfortable baggy corduroy trousers designed with a relaxed fit and stretch waistband for all-day comfort. Crafted from soft corduroy fabric, these casual pants are ideal for everyday wear, outings, and relaxed street-style looks.",
+        "image": "https://m.media-amazon.com/images/I/51tUxTtqczL._SY879_.jpg",
+        "link": "https://amzn.to/4ru7Vp4",
+        "category": "clothing",
+        "subCategory": "trousers",
+        "tags": [
+            "men corduroy pants",
+            "baggy trousers men",
+            "relaxed fit pants",
+            "stretch waist trousers",
+            "casual men pants",
+            "everyday men clothing"
+        ],
+        "season": "all",
+        "material": "corduroy",
+        "occasion": "casual, daily wear, outings",
+        "price": 5.99,
+        "gender": "men"
+    },
+    {
+        "id": 129,
+        "title": "Puma Men’s Dazzler Casual Sneakers",
+        "description": "Puma Dazzler men’s sneakers designed with a sporty yet casual style for everyday comfort. Featuring a durable build and cushioned sole, these sneakers are ideal for casual outings, travel, and daily wear.",
+        "image": "https://m.media-amazon.com/images/I/51GOpp8rAJL._SY695_.jpg",
+        "link": "https://amzn.to/3PygBxe",
+        "category": "footwear",
+        "subCategory": "sneakers",
+        "tags": [
+            "puma men sneakers",
+            "dazzler sneaker",
+            "casual men shoes",
+            "sporty sneakers men",
+            "comfortable everyday footwear",
+            "puma casual shoes"
+        ],
+        "season": "all",
+        "material": "synthetic mesh",
+        "occasion": "casual, travel, daily wear",
+        "price": 15.99,
+        "gender": "men"
     }
+
 
 
 
