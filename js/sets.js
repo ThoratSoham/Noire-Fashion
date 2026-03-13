@@ -229,7 +229,7 @@ const sets = [
         "id": 29,
         "title": "The Urban Nomad",
         "description": "A fusion of traditional linen textures and modern corduroy, creating a sophisticated, adventurous aesthetic for the modern urban nomad.",
-        "image": "https://i.pinimg.com/736x/31/33/ff/3133ff3e6d59204a07b42b781df102ac.jpg",
+        "image": "https://i.pinimg.com/736x/7a/9d/25/7a9d253d3d9541c9889967e639fd6b3d.jpg",
         "productIds": [127, 128, 129],
         "gender": "Male"
     },
