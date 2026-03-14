@@ -233,6 +233,14 @@ const sets = [
         "productIds": [127, 128, 129],
         "gender": "Male"
     },
+    {
+        "id": 30,
+        "title": "The Midnight Flare",
+        "description": "The combination of the structured, feminine neckline and the retro flare of the jeans creates a flattering, elongated silhouette that is both trendy and timeless.",
+        "image": "https://i.pinimg.com/736x/7a/9d/25/7a9d253d3d9541c9889967e639fd6b3d.jpg",
+        "productIds": [130, 131, 132],
+        "gender": "Female"
+    }
 
 
 

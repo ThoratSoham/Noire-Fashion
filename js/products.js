@@ -2491,6 +2491,72 @@ const products = [
         "occasion": "casual, travel, daily wear",
         "price": 15.99,
         "gender": "men"
+    },
+    {
+        "id": 130,
+        "title": "Aahwan Women’s Ribbed V-Neck Collared Slim Fit Crop Top",
+        "description": "Aahwan women’s solid basic crop top designed with a ribbed texture, V-neck collar, and slim fit silhouette. Stylish and versatile, this crop top is perfect for casual outings, layering, and everyday fashion wear.",
+        "image": "https://m.media-amazon.com/images/I/618AzxjVqPL._SX679_.jpg",
+        "link": "https://amzn.to/47xEfjD",
+        "category": "clothing",
+        "subCategory": "tops",
+        "tags": [
+            "women ribbed crop top",
+            "v neck collared top",
+            "slim fit crop top",
+            "casual women top",
+            "basic crop tshirt",
+            "trendy women clothing"
+        ],
+        "season": "all",
+        "material": "cotton blend",
+        "occasion": "casual, outing, daily wear",
+        "price": 3.99,
+        "gender": "women"
+    },
+    {
+        "id": 131,
+        "title": "Ben Martin Women’s High Waist Baggy Wide Leg Denim Jeans",
+        "description": "Ben Martin women’s loose fit denim jeans designed with a high waist and wide leg silhouette for a relaxed, oversized look. Crafted from durable denim fabric, these baggy jeans offer comfort and effortless street-style appeal for casual outings and everyday wear.",
+        "image": "https://m.media-amazon.com/images/I/61ixYIWikbL._SY879_.jpg",
+        "link": "https://amzn.to/3P6w5bM",
+        "category": "clothing",
+        "subCategory": "jeans",
+        "tags": [
+            "women baggy jeans",
+            "wide leg denim jeans",
+            "high waist women jeans",
+            "oversized denim pants",
+            "loose fit jeans women",
+            "casual street style jeans"
+        ],
+        "season": "all",
+        "material": "denim",
+        "occasion": "casual, outings, daily wear",
+        "price": 8.99,
+        "gender": "women"
+    },
+    {
+        "id": 132,
+        "title": "ASIAN Women NANCY-02 Lightweight Casual Sneakers",
+        "description": "ASIAN NANCY-02 women’s sneakers designed with a stylish lace-up build for comfort and versatility. Lightweight and durable, these shoes are suitable for casual outings, parties, gym sessions, and everyday wear.",
+        "image": "https://m.media-amazon.com/images/I/71pg5pOHQPL._SY695_.jpg",
+        "link": "https://amzn.to/4cNqalO",
+        "category": "footwear",
+        "subCategory": "sneakers",
+        "tags": [
+            "women casual sneakers",
+            "asian nancy 02 shoes",
+            "lightweight women shoes",
+            "gym sports sneakers",
+            "stylish lace up sneakers",
+            "daily wear women footwear"
+        ],
+        "season": "all",
+        "material": "synthetic mesh",
+        "occasion": "casual, gym, sports, parties, daily wear",
+        "price": 7.99,
+        "gender": "women"
     }
 
 
