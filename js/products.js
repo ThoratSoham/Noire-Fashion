@@ -2623,6 +2623,50 @@ const products = [
         "occasion": "casual, travel, daily wear",
         "price": 9.99,
         "gender": "men"
+    },
+    {
+        "id": 136,
+        "title": "Jack & Jones Cotton Baseball Cap with Adjustable Back Closure",
+        "description": "Jack & Jones classic cotton baseball cap designed with an adjustable back closure for a comfortable fit. Lightweight and versatile, this unisex cap is perfect for casual wear, outdoor activities, and everyday styling.",
+        "image": "https://m.media-amazon.com/images/I/51vkWuPp4mL._SY879_.jpg",
+        "link": "https://amzn.to/4rtfqwj",
+        "category": "accessories",
+        "subCategory": "caps",
+        "tags": [
+            "baseball cap",
+            "jack and jones cap",
+            "unisex cotton cap",
+            "adjustable back cap",
+            "casual fashion cap",
+            "everyday headwear"
+        ],
+        "season": "all",
+        "material": "cotton",
+        "occasion": "casual, outdoor, daily wear",
+        "price": 5.99,
+        "gender": "unisex"
+    },
+    {
+        "id": 137,
+        "title": "Fashion Frill Stainless Steel Tribal Sword Pendant Chain",
+        "description": "Fashion Frill vintage-style pendant chain featuring a tribal sword design crafted from anti-tarnish stainless steel. Durable and stylish, this necklace is perfect for casual outfits, street fashion, and everyday wear for men, boys, and anyone who enjoys bold accessories.",
+        "image": "https://m.media-amazon.com/images/I/61F0put3NhL._SY695_.jpg",
+        "link": "https://amzn.to/4sf2s6P",
+        "category": "accessories",
+        "subCategory": "necklaces",
+        "tags": [
+            "men pendant chain",
+            "tribal sword necklace",
+            "stainless steel chain",
+            "vintage pendant necklace",
+            "street style jewellery",
+            "anti tarnish chain"
+        ],
+        "season": "all",
+        "material": "stainless steel",
+        "occasion": "casual, party, streetwear",
+        "price": 2.99,
+        "gender": "unisex"
     }
 
 
