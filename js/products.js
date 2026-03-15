@@ -2557,6 +2557,72 @@ const products = [
         "occasion": "casual, gym, sports, parties, daily wear",
         "price": 7.99,
         "gender": "women"
+    },
+    {
+        "id": 133,
+        "title": "Imsa Moda Men’s Printed Waffle Sleeveless Tank Top Vest",
+        "description": "Imsa Moda men’s sleeveless waffle tank top designed with breathable lightweight fabric for maximum comfort. Featuring a printed design and relaxed fit, this vest is perfect for gym workouts, summer wear, and casual everyday styling.",
+        "image": "https://m.media-amazon.com/images/I/61I-YfbF-ML._SY879_.jpg",
+        "link": "https://amzn.to/3NEktfF",
+        "category": "clothing",
+        "subCategory": "tshirts",
+        "tags": [
+            "men sleeveless tank top",
+            "waffle vest men",
+            "gym vest men",
+            "printed sleeveless tshirt",
+            "summer undershirt men",
+            "breathable casual vest"
+        ],
+        "season": "summer",
+        "material": "cotton blend",
+        "occasion": "gym, casual, summer wear",
+        "price": 2.99,
+        "gender": "men"
+    },
+    {
+        "id": 134,
+        "title": "TAGDO Men’s Classic Cotton Cargo Pants",
+        "description": "TAGDO men’s classic cargo pants crafted from durable cotton fabric for comfort and functionality. Designed with a relaxed fit and multiple utility pockets, these cargo trousers are ideal for casual outings, travel, and everyday wear.",
+        "image": "https://m.media-amazon.com/images/I/41XWeZKCftL._SY879_.jpg",
+        "link": "https://amzn.to/4djx2r5",
+        "category": "clothing",
+        "subCategory": "cargo pants",
+        "tags": [
+            "men cargo pants",
+            "cotton cargo trousers",
+            "utility pocket pants",
+            "casual men cargo",
+            "classic cargo pants",
+            "everyday men clothing"
+        ],
+        "season": "all",
+        "material": "cotton",
+        "occasion": "casual, travel, daily wear",
+        "price": 7.99,
+        "gender": "men"
+    },
+    {
+        "id": 135,
+        "title": "Cruiser Men’s Classic Canvas Lace-Up Sneakers",
+        "description": "Cruiser men’s classic canvas sneakers designed for everyday comfort and casual style. Featuring a lightweight build, soft cushioned insole, and trendy lace-up design, these shoes are perfect for daily wear, travel, and casual outfits.",
+        "image": "https://m.media-amazon.com/images/I/61cX2y010sL._SY695_.jpg",
+        "link": "https://amzn.to/3P6lihO",
+        "category": "footwear",
+        "subCategory": "sneakers",
+        "tags": [
+            "men canvas sneakers",
+            "lace up casual shoes",
+            "lightweight men sneakers",
+            "cushioned sole shoes",
+            "everyday men footwear",
+            "trendy casual sneakers"
+        ],
+        "season": "all",
+        "material": "canvas",
+        "occasion": "casual, travel, daily wear",
+        "price": 9.99,
+        "gender": "men"
     }
 
 
