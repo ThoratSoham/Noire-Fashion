@@ -2667,6 +2667,50 @@ const products = [
         "occasion": "casual, party, streetwear",
         "price": 2.99,
         "gender": "unisex"
+    },
+    {
+        "id": 138,
+        "title": "LITZO Women’s Western One Piece Maxi Dress",
+        "description": "LITZO women’s western-style maxi dress designed as a stylish one-piece outfit for effortless elegance. Featuring a flattering long silhouette and comfortable fabric, this dress is perfect for casual outings, summer events, and everyday wear.",
+        "image": "https://m.media-amazon.com/images/I/61BgTgg2g8L._SY879_.jpg",
+        "link": "https://amzn.to/4sMhXmj",
+        "category": "clothing",
+        "subCategory": "dresses",
+        "tags": [
+            "women maxi dress",
+            "western dress women",
+            "one piece maxi dress",
+            "casual long dress",
+            "summer women dress",
+            "stylish women outfit"
+        ],
+        "season": "summer",
+        "material": "polyester blend",
+        "occasion": "casual, outing, daily wear",
+        "price": 8.99,
+        "gender": "women"
+    },
+    {
+        "id": 139,
+        "title": "Froh Feet Women’s Casual Heel Sandals",
+        "description": "Froh Feet casual heel sandals designed for women and girls with a solid, comfortable sole for all-day wear. Stylish and versatile, these sandals are suitable for casual outings, office wear, and everyday fashion.",
+        "image": "https://m.media-amazon.com/images/I/61K-5cRlwZL._SY675_.jpg",
+        "link": "https://amzn.to/3N8gZlv",
+        "category": "footwear",
+        "subCategory": "heels",
+        "tags": [
+            "women heel sandals",
+            "casual heel sandals",
+            "comfortable women heels",
+            "solid heel footwear",
+            "girls stylish sandals",
+            "daily wear heels"
+        ],
+        "season": "all",
+        "material": "synthetic",
+        "occasion": "casual, office, daily wear",
+        "price": 7.99,
+        "gender": "women"
     }
 
 
