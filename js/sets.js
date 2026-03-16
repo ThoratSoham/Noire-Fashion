@@ -253,7 +253,7 @@ const sets = [
         "id": 32,
         "title": "Azure Ethereal Column",
         "description": "A body-sculpting ruched silhouette featuring delicate blue floral motifs on a crisp white base. This look blends classical elegance with a modern, romantic edge for effortless daytime grace.",
-        "image": "https://i.pinimg.com/736x/a1/66/80/a16680824fde16fd3ac1d6bb4fae58fb.jpg",
+        "image": "https://i.pinimg.com/736x/6d/d0/b5/6dd0b5f5e1fec76f0ee794c857f203a5.jpg",
         "productIds": [138, 139],
         "gender": "Female"
     }
