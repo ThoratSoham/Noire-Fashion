@@ -261,7 +261,7 @@ const sets = [
         "id": 33,
         "title": "The Alabaster Moss",
         "description": "A fusion of urban grit and organic calm. Features a piqué-textured grey shirt and tailored black tech-shorts for a sharp, versatile silhouette.",
-        "image": "https://i.pinimg.com/M736x/6d/d0/b5/6dd0b5f5e1fec76f0ee794c857f203a5.jpg",
+        "image": "https://i.pinimg.com/736x/ea/2c/10/ea2c108a413cc85000ab8c7e50b6d014.jpg",
         "productIds": [140, 141, 142],
         "gender": "Male"
     },
