@@ -2711,6 +2711,72 @@ const products = [
         "occasion": "casual, office, daily wear",
         "price": 7.99,
         "gender": "women"
+    },
+    {
+        "id": 140,
+        "title": "Men’s Solid Linen Cotton Regular Fit Casual Shirt",
+        "description": "Men’s solid linen-cotton shirt designed with a regular fit and full sleeves for breathable summer comfort. Featuring a clean plain design, this stylish shirt is suitable for casual outings, office wear, and everyday formal styling.",
+        "image": "https://m.media-amazon.com/images/I/81I4F9xgijL._SX679_.jpg",
+        "link": "https://amzn.to/4slYUzM",
+        "category": "clothing",
+        "subCategory": "shirts",
+        "tags": [
+            "men linen cotton shirt",
+            "regular fit men shirt",
+            "plain casual shirt",
+            "summer men shirt",
+            "formal casual shirt men",
+            "full sleeve men shirt"
+        ],
+        "season": "summer",
+        "material": "linen cotton",
+        "occasion": "casual, office, formal, daily wear",
+        "price": 5.99,
+        "gender": "men"
+    },
+    {
+        "id": 141,
+        "title": "PROSHARX Men’s Quick Dry Athletic Sports Shorts",
+        "description": "PROSHARX men’s athletic shorts designed with quick-dry and anti-wicking technology for maximum comfort during workouts. Lightweight and breathable, these shorts are ideal for sports, running, gym training, and active everyday wear.",
+        "image": "https://m.media-amazon.com/images/I/51WF+1nbkqL._SX679_.jpg",
+        "link": "https://amzn.to/418vVTP",
+        "category": "clothing",
+        "subCategory": "shorts",
+        "tags": [
+            "men sports shorts",
+            "quick dry gym shorts",
+            "athletic running shorts",
+            "lightweight workout shorts",
+            "anti wicking sportswear",
+            "men fitness shorts"
+        ],
+        "season": "summer",
+        "material": "polyester blend",
+        "occasion": "sports, gym, running, workout",
+        "price": 3.99,
+        "gender": "men"
+    },
+    {
+        "id": 142,
+        "title": "ASICS Men Classic CT S Casual Sneakers",
+        "description": "ASICS Classic CT S men’s casual sneakers designed with a clean, timeless silhouette and durable construction. Lightweight and comfortable, these shoes are perfect for everyday wear, travel, and casual outings.",
+        "image": "https://m.media-amazon.com/images/I/514KRL73VDL._SX695_.jpg",
+        "link": "https://amzn.to/47IErfV",
+        "category": "footwear",
+        "subCategory": "sneakers",
+        "tags": [
+            "asics men sneakers",
+            "classic ct s shoes",
+            "men casual sneakers",
+            "everyday men footwear",
+            "lightweight casual shoes",
+            "stylish men sneakers"
+        ],
+        "season": "all",
+        "material": "synthetic leather",
+        "occasion": "casual, travel, daily wear",
+        "price": 28.99,
+        "gender": "men"
     }
 
 
