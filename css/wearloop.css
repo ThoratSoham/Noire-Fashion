@@ -1,49 +1,55 @@
-:root {
-    --primary-bg: #f5f5f0;
-    /* Original Noire background */
-    --secondary-bg: #ffffff;
-    --accent: #000000;
-    --accent-blue: #555555;
-    --text-main: #333333;
-    --text-muted: #666666;
-    --glass: rgba(0, 0, 0, 0.05);
-    --glass-border: rgba(0, 0, 0, 0.1);
-}
+/* wearloop.css — Golden Ratio Design System applied
+   Uses CSS variables from style.css (:root)
+   φ = 1.618 | 1/φ = 0.618 | φ² = 2.618 | φ³ = 4.236
+   ============================================= */
 
-/* WearLoop Branding */
+/* =============================================
+   WEARLOOP BRANDING
+   ============================================= */
 .wearloop-logo {
     font-weight: 700;
     font-family: 'Playfair Display', serif;
-    color: var(--text-main);
+    color: #333;
     letter-spacing: 2px;
 }
 
-/* Hero Section Adjustment */
+/* =============================================
+   WEARLOOP HERO — φ-proportioned
+   ============================================= */
 .wearloop-hero {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: var(--primary-bg);
-    color: var(--text-main);
+    background: #f5f5f0;
+    color: #333;
     text-align: center;
-    padding: 20px;
+    /* padding = φ² horizontal, φ vertical */
+    padding: var(--sp-7) var(--sp-6);
 }
 
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(calc(var(--sp-5) * -1)); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* h1 = φ³ type scale — same as main hero h1 */
 .wearloop-hero h1 {
-    font-size: 5rem;
-    margin-bottom: 15px;
-    color: var(--text-main);
+    font-size: var(--fs-2xl);   /* 4.236rem */
+    margin-bottom: var(--sp-4);
+    color: #333;
     animation: fadeInDown 0.8s ease-out;
+    letter-spacing: 3px;
 }
 
+/* Tagline carousel — φ line-height */
 .tagline-carousel {
-    font-size: 2rem;
+    font-size: var(--fs-lg);    /* φ = 1.618rem */
     font-weight: 300;
-    height: 2.5rem;
+    height: calc(var(--fs-lg) * 1.618); /* height = fontSize × φ */
     overflow: hidden;
-    margin-bottom: 20px;
+    margin-bottom: var(--sp-4);
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -54,31 +60,45 @@
 }
 
 .tagline-option {
-    height: 2.5rem;
-    color: var(--accent);
+    height: calc(var(--fs-lg) * 1.618);
+    color: #000;
+    line-height: 1.618;
 }
 
+/* subtext — base font size, φ max-width */
 .wearloop-hero p.subtext {
-    max-width: 600px;
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    margin-bottom: 40px;
-    line-height: 1.6;
+    max-width: 38.2rem;   /* 1/φ² of 100rem ≈ golden-ratio derived width */
+    font-size: var(--fs-base);
+    color: #666;
+    margin-bottom: var(--sp-6);  /* φ² spacing */
+    line-height: 1.618;
+    padding: 0 var(--sp-3);
 }
 
 .hero-ctas {
     display: flex;
-    gap: 20px;
+    gap: var(--sp-5);   /* φ gap */
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
+/* =============================================
+   BUTTONS
+   ============================================= */
 .btn-premium {
-    padding: 15px 30px;
-    font-size: 1rem;
+    /* vertical: 1/φ, horizontal: φ */
+    padding: var(--sp-3) var(--sp-6);
+    font-size: var(--fs-sm);
     font-weight: 500;
     text-decoration: none;
     border-radius: 0;
     transition: all 0.3s ease;
     border: 1px solid #000;
+    font-family: inherit;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
 }
 
 .btn-start {
@@ -92,58 +112,92 @@
 }
 
 .btn-premium:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 var(--sp-3) var(--sp-4) rgba(0,0,0,0.12);
     transform: translateY(-2px);
 }
 
-/* How It Works Section */
+/* =============================================
+   HOW IT WORKS — φ-proportioned section
+   ============================================= */
 .how-it-works {
     background: #fff;
-    color: var(--text-main);
-    padding: 100px 20px;
+    color: #333;
+    /* padding = φ³ top/bottom, φ horizontal */
+    padding: var(--sp-7) var(--sp-5);
     text-align: center;
 }
 
-.steps-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 40px;
-    max-width: 1100px;
-    margin: 60px auto 0;
+/* h2 = φ² type scale */
+.how-it-works h2 {
+    font-size: var(--fs-xl);   /* 2.618rem */
+    margin-bottom: var(--sp-3);
+    letter-spacing: 1px;
 }
 
+.how-it-works > p {
+    color: #666;
+    font-size: var(--fs-base);
+    max-width: 38.2rem;
+    margin: 0 auto;
+}
+
+/* Steps grid — minmax anchored to φ */
+.steps-grid {
+    display: grid;
+    /* min column width = φ² × 100 = 261.8px ≈ 262px */
+    grid-template-columns: repeat(auto-fit, minmax(262px, 1fr));
+    gap: var(--sp-6);    /* φ² gap */
+    max-width: 1100px;
+    margin: var(--sp-6) auto 0;
+}
+
+/* Step card padding = φ × 1.5 */
 .step-card {
-    padding: 40px;
+    padding: var(--sp-6) var(--sp-5);
     background: #fafafa;
     border: 1px solid #ddd;
-    border-radius: 0;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
 }
 
 .step-card:hover {
     background: #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 var(--sp-3) var(--sp-5) rgba(0,0,0,0.06);
 }
 
+/* Step icon = φ² font size */
 .step-icon {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
+    font-size: var(--fs-xl);   /* 2.618rem */
+    margin-bottom: var(--sp-4);
     display: block;
 }
 
-/* Feed Section */
+.step-card h3 {
+    font-size: var(--fs-lg);
+    margin-bottom: var(--sp-3);
+}
+
+.step-card p {
+    font-size: var(--fs-sm);
+    color: #666;
+    line-height: 1.618;
+}
+
+/* =============================================
+   WEARLOOP FEED
+   ============================================= */
 .feed-container {
-    background: var(--primary-bg);
+    background: #f5f5f0;
     min-height: 100vh;
-    padding: 40px 0;
+    padding: var(--sp-6) 0;
 }
 
 .feed-grid {
     max-width: 600px;
     margin: 0 auto;
+    padding: 0 var(--sp-5);
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: var(--sp-5);
 }
 
 .post-card {
@@ -154,27 +208,29 @@
 }
 
 .post-header {
-    padding: 12px 16px;
+    padding: var(--sp-3) var(--sp-4);
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: var(--sp-3);
 }
 
 .creator-avatar {
-    width: 32px;
-    height: 32px;
+    width: calc(var(--sp-4) * 2);
+    height: calc(var(--sp-4) * 2);
     border-radius: 50%;
     background: #eee;
+    flex-shrink: 0;
 }
 
 .creator-name {
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: var(--fs-sm);
 }
 
+/* post media: 1:1 aspect ratio for feed */
 .post-media {
     width: 100%;
-    aspect-ratio: 1/1;
+    aspect-ratio: 1 / 1;
     background: #f9f9f9;
 }
 
@@ -182,10 +238,11 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
 }
 
 .post-actions {
-    padding: 12px 16px;
+    padding: var(--sp-3) var(--sp-4);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -193,56 +250,146 @@
 
 .main-actions {
     display: flex;
-    gap: 15px;
-    font-size: 1.2rem;
+    gap: var(--sp-4);
+    font-size: var(--fs-lg);
 }
 
 .action-btn {
     cursor: pointer;
     filter: grayscale(1);
     transition: filter 0.2s ease;
+    background: none;
+    border: none;
+    padding: 0;
 }
 
-.action-btn:hover {
-    filter: grayscale(0);
-}
-
-.action-btn.liked {
-    filter: grayscale(0);
-}
+.action-btn:hover   { filter: grayscale(0); }
+.action-btn.liked   { filter: grayscale(0); }
 
 .shop-btn-pill {
     background: #000;
     color: #fff;
-    padding: 8px 16px;
+    padding: var(--sp-2) var(--sp-4);
     font-weight: 600;
     text-decoration: none;
-    font-size: 0.8rem;
+    font-size: var(--fs-xs);
+    white-space: nowrap;
+    letter-spacing: 0.5px;
 }
 
 .post-info {
-    padding: 0 16px 16px;
+    padding: 0 var(--sp-4) var(--sp-4);
 }
 
 .tag {
     color: #888;
-    font-size: 0.8rem;
-    margin-right: 5px;
+    font-size: var(--fs-xs);
+    margin-right: var(--sp-2);
 }
 
-/* Responsiveness */
+/* =============================================
+   TABLET — ≤768px
+   ============================================= */
 @media (max-width: 768px) {
+    .wearloop-hero {
+        padding: var(--sp-7) var(--sp-5);
+        min-height: 90vh;
+    }
+
     .wearloop-hero h1 {
-        font-size: 3rem;
+        font-size: var(--fs-xl);   /* φ² on tablet */
+        letter-spacing: 2px;
     }
 
     .tagline-carousel {
-        font-size: 1.4rem;
+        font-size: var(--fs-base);
+        height: calc(var(--fs-base) * 1.618);
+        margin-bottom: var(--sp-4);
+    }
+
+    .tagline-option {
+        height: calc(var(--fs-base) * 1.618);
+    }
+
+    .wearloop-hero p.subtext {
+        font-size: var(--fs-sm);
+        margin-bottom: var(--sp-5);
+    }
+
+    .how-it-works {
+        padding: var(--sp-7) var(--sp-4);
+    }
+
+    .steps-grid {
+        gap: var(--sp-4);
+        margin-top: var(--sp-5);
+    }
+
+    .step-card {
+        padding: var(--sp-5) var(--sp-4);
+    }
+
+    .feed-grid {
+        padding: 0 var(--sp-4);
+        gap: var(--sp-5);
+    }
+}
+
+/* =============================================
+   MOBILE — ≤480px
+   ============================================= */
+@media (max-width: 480px) {
+    .wearloop-hero {
+        padding: var(--sp-6) var(--sp-4);
+    }
+
+    .wearloop-hero h1 {
+        font-size: var(--fs-lg);   /* φ on mobile */
+        letter-spacing: 1px;
+    }
+
+    .tagline-carousel {
+        font-size: var(--fs-sm);
+        height: calc(var(--fs-sm) * 1.618);
+        margin-bottom: var(--sp-3);
+    }
+
+    .tagline-option {
+        height: calc(var(--fs-sm) * 1.618);
+    }
+
+    .wearloop-hero p.subtext {
+        font-size: var(--fs-xs);
+        margin-bottom: var(--sp-5);
     }
 
     .hero-ctas {
         flex-direction: column;
         width: 100%;
-        max-width: 300px;
+        max-width: 280px;
+    }
+
+    .btn-premium {
+        width: 100%;
+        padding: var(--sp-3) var(--sp-5);
+        font-size: var(--fs-sm);
+    }
+
+    .how-it-works {
+        padding: var(--sp-6) var(--sp-4);
+    }
+
+    .steps-grid {
+        grid-template-columns: 1fr;
+        gap: var(--sp-4);
+    }
+
+    .step-card {
+        padding: var(--sp-5) var(--sp-4);
+    }
+
+    .feed-grid {
+        padding: 0 var(--sp-3);
+        gap: var(--sp-4);
     }
 }

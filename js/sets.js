@@ -313,15 +313,15 @@ function createSetCard(set) {
 
     card.innerHTML = `
         <div class="set-image-wrapper copy-trigger" style="cursor: pointer;" title="Click to copy set link">
-            <img src="${set.image}" alt="${set.title}">
+            <img src="${set.image}" alt="${set.title}" loading="lazy">
             <div class="set-badge">OUTFIT SET</div>
         </div>
         <div class="set-content">
             <h3 class="copy-trigger" style="cursor: pointer;" title="Click to copy set link">${set.title}</h3>
-            <p style="color: #666; font-size: 0.9rem; margin-bottom: 15px;">${set.description}</p>
+            <div class="set-desc-fade">${set.description}</div>
             <div class="set-price">$${totalAmount} <span style="font-weight: 400; font-size: 0.85rem; color: #888;">(${itemCount} items)</span></div>
-            <div class="set-actions" style="display: flex; flex-direction: column; gap: 10px;">
-                <div style="display: flex; gap: 10px;">
+            <div class="set-actions">
+                <div>
                     <button class="cta-button toggle-set-btn" style="flex: 1; background: #fff; color: #000; border: 1px solid #000; font-size: 0.8rem; padding: 10px; font-weight: 600;">View Items</button>
                     <button class="share-set-btn" data-link="${siteLink}" style="flex: 1; padding: 10px; border: 1px solid #ddd; background: #eee; cursor: pointer; font-size: 0.8rem; font-family: inherit;">Share</button>
                 </div>
@@ -339,6 +339,14 @@ function createSetCard(set) {
     const grid = card.querySelector('.nested-grid');
     const toggleBtn = card.querySelector('.toggle-set-btn');
     const addBtn = card.querySelector('.add-set-cart-btn');
+    const descEl = card.querySelector('.set-desc-fade');
+
+    // Tap-to-expand description on mobile
+    if (descEl) {
+        descEl.addEventListener('click', () => {
+            descEl.classList.toggle('expanded');
+        });
+    }
 
     toggleBtn.onclick = () => {
         const isActive = expandContainer.classList.contains('active');

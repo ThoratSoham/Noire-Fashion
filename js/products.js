@@ -2777,6 +2777,50 @@ const products = [
         "occasion": "casual, travel, daily wear",
         "price": 28.99,
         "gender": "men"
+    },
+    {
+        "id": 143,
+        "title": "Women’s Bardot Bow Detail Bodycon Dress with Thigh Split",
+        "description": "Women’s elegant bodycon dress featuring a Bardot off-shoulder neckline with bow detailing and a stylish thigh-high split. Designed for a flattering fit, this dress is perfect for parties, evening events, and special occasions.",
+        "image": "https://m.media-amazon.com/images/I/41AuQK-yPgL._SY879_.jpg",
+        "link": "https://amzn.to/47aEOjo",
+        "category": "clothing",
+        "subCategory": "dresses",
+        "tags": [
+            "bodycon dress women",
+            "bardot off shoulder dress",
+            "bow detail dress",
+            "thigh split dress",
+            "party wear dress",
+            "evening women dress"
+        ],
+        "season": "all",
+        "material": "polyester blend",
+        "occasion": "party, evening, special occasions",
+        "price": 5.99,
+        "gender": "women"
+    },
+    {
+        "id": 144,
+        "title": "XE Looks Women’s Elegant Block Heel Sandals",
+        "description": "XE Looks women’s block heel sandals designed with stretchable straps for a secure and flexible fit. Lightweight and durable with a cushioned sole, these heels provide all-day comfort and are perfect for casual outings, office wear, and parties.",
+        "image": "https://m.media-amazon.com/images/I/5196Ls8vbLL._SY695_.jpg",
+        "link": "https://amzn.to/3NmyjDp",
+        "category": "footwear",
+        "subCategory": "heels",
+        "tags": [
+            "women block heel sandals",
+            "stretchable strap heels",
+            "comfortable cushioned heels",
+            "lightweight women footwear",
+            "elegant women sandals",
+            "girls stylish heels"
+        ],
+        "season": "all",
+        "material": "synthetic",
+        "occasion": "casual, office, party",
+        "price": 7.99,
+        "gender": "women"
     }
 
 
