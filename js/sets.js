@@ -265,7 +265,30 @@ const sets = [
         "productIds": [140, 141, 142],
         "gender": "Male"
     },
-
+    {
+        "id": 34,
+        "title": "The Pistachio Dream Set",
+        "description": "A masterclass in 'clean girl' lounging. This ultra-soft duo pairs a creamy oversized tee with breathable sage-green trousers, perfect for slow Sunday mornings and achieving an effortless, high-comfort indoor aesthetic.",
+        "image": "https://i.pinimg.com/736x/6d/d0/b5/6dd0b5f5e1fec76f0ee794c857f203a5.jpg",
+        "productIds": [146],
+        "gender": "Female"
+    },
+    {
+        "id": 35,
+        "title": "The Tropical Eclipse Maxi",
+        "description": "High-contrast elegance designed for your next getaway. The bold palm-print skirt features a daring side slit, balanced by a sleek black bodice and sun-drenched straw accents for peak vacation sophistication.",
+        "image": "https://i.pinimg.com/736x/6d/d0/b5/6dd0b5f5e1fec76f0ee794c857f203a5.jpg",
+        "productIds": [145],
+        "gender": "Female"
+    },
+    {
+        "id": 36,
+        "title": "The Midnight Ember Fit",
+        "description": "Streetwear that pops long after the sun goes down. This look anchors a striking orange graphic tee against crisp white textured pants, creating a sharp, modern silhouette that commands attention.",
+        "image": "https://i.pinimg.com/736x/6d/d0/b5/6dd0b5f5e1fec76f0ee794c857f203a5.jpg",
+        "productIds": [147, 148, 149, 150],
+        "gender": "Male"
+    },
 
 
 

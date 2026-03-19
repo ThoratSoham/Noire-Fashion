@@ -2821,6 +2821,138 @@ const products = [
         "occasion": "casual, office, party",
         "price": 7.99,
         "gender": "women"
+    },
+    {
+        "id": 145,
+        "title": "Women’s Western Beach Wear Two Piece Maxi Co-Ord Set",
+        "description": "Women’s trendy two-piece co-ord set designed for beach and vacation wear. Featuring a stylish maxi dress-inspired look with a coordinated top and bottom, this outfit offers a breezy, fashionable style perfect for summer getaways and casual outings.",
+        "image": "https://m.media-amazon.com/images/I/71l-XjlOS2L._SY879_.jpg",
+        "link": "https://amzn.to/4sfCEHv",
+        "category": "clothing",
+        "subCategory": "co-ord sets",
+        "tags": [
+            "women beach co ord set",
+            "two piece vacation outfit",
+            "maxi co ord dress",
+            "summer beach wear women",
+            "trendy women outfit",
+            "vacation women clothing"
+        ],
+        "season": "summer",
+        "material": "polyester blend",
+        "occasion": "beach, vacation, casual",
+        "price": 4.99,
+        "gender": "women"
+    },
+    {
+        "id": 146,
+        "title": "Women’s Korean Style Full Sleeve Nightwear Pyjama Set",
+        "description": "Women’s Korean-style nightwear set featuring a round neck full sleeve top paired with comfortable pyjama bottoms. Designed for relaxed loungewear and everyday comfort, this nightsuit is perfect for sleeping, lounging at home, and cozy daily wear.",
+        "image": "https://m.media-amazon.com/images/I/71nP95DfOLL._SX679_.jpg",
+        "link": "https://amzn.to/4rIYuCe",
+        "category": "clothing",
+        "subCategory": "nightwear",
+        "tags": [
+            "women night suit",
+            "korean nightwear set",
+            "full sleeve pyjama set",
+            "women loungewear",
+            "comfortable nightdress",
+            "everyday sleepwear"
+        ],
+        "season": "all",
+        "material": "cotton blend",
+        "occasion": "sleepwear, lounge, home wear",
+        "price": 6.99,
+        "gender": "women"
+    },
+    {
+        "id": 147,
+        "title": "LEOTUDE Men’s Oversized Printed Cotton Blend T-Shirt",
+        "description": "LEOTUDE men’s half sleeve oversized T-shirt crafted from a soft cotton blend fabric. Designed with a round neck and stylish printed pattern, this relaxed-fit tee is perfect for casual wear, street style, and everyday comfort.",
+        "image": "https://m.media-amazon.com/images/I/51ArLLKmljL._SY879_.jpg",
+        "link": "https://amzn.to/4rHsjTN",
+        "category": "clothing",
+        "subCategory": "tshirts",
+        "tags": [
+            "men oversized tshirt",
+            "printed cotton blend tee",
+            "round neck men tshirt",
+            "street style t shirt",
+            "casual men wear",
+            "relaxed fit tshirt"
+        ],
+        "season": "all",
+        "material": "cotton blend",
+        "occasion": "casual, streetwear, daily wear",
+        "price": 2.99,
+        "gender": "men"
+    },
+    {
+        "id": 148,
+        "title": "Men’s Relaxed Fit Corduroy Stretch Waist Trousers",
+        "description": "Men’s comfortable corduroy trousers designed with a relaxed fit and stretch waistband for all-day ease. Made from soft corduroy fabric, these pants are ideal for everyday wear, casual outings, and relaxed styling.",
+        "image": "https://m.media-amazon.com/images/I/41IRHU2zfkL._SY879_.jpg",
+        "link": "https://amzn.to/4sr9Ax6",
+        "category": "clothing",
+        "subCategory": "trousers",
+        "tags": [
+            "men corduroy trousers",
+            "relaxed fit pants",
+            "stretch waist trousers",
+            "casual men pants",
+            "everyday wear trousers",
+            "comfortable men clothing"
+        ],
+        "season": "all",
+        "material": "corduroy",
+        "occasion": "casual, daily wear",
+        "price": 4.99,
+        "gender": "men"
+    },
+    {
+        "id": 149,
+        "title": "Boldfit Men’s Lightweight Casual Lace-Up Sneakers",
+        "description": "Boldfit men’s stylish sneakers designed with a lightweight build and lace-up closure for a secure and comfortable fit. Perfect for casual outings, daily wear, and versatile styling, these sneakers offer all-day comfort and modern appeal.",
+        "image": "https://m.media-amazon.com/images/I/51JceuUOhAL._SY695_.jpg",
+        "link": "https://amzn.to/4lW09mV",
+        "category": "footwear",
+        "subCategory": "sneakers",
+        "tags": [
+            "men casual sneakers",
+            "boldfit shoes men",
+            "lightweight sneakers",
+            "lace up casual shoes",
+            "comfortable men footwear",
+            "daily wear sneakers"
+        ],
+        "season": "all",
+        "material": "synthetic mesh",
+        "occasion": "casual, daily wear, travel",
+        "price": 10.99,
+        "gender": "men"
+    },
+    {
+        "id": 150,
+        "title": "Nakabh Cuban 8-Inch Stainless Steel Bracelet for Men",
+        "description": "Nakabh Cuban-style bracelet crafted from durable stainless steel with an 8-inch length for a comfortable fit. Designed with a sleek and bold look, this accessory is perfect for everyday wear, casual styling, and adding a statement touch to outfits.",
+        "image": "https://m.media-amazon.com/images/I/512hvqlxOuL._SY695_.jpg",
+        "link": "https://amzn.to/3Pfe5vT",
+        "category": "accessories",
+        "subCategory": "bracelets",
+        "tags": [
+            "men cuban bracelet",
+            "stainless steel bracelet",
+            "8 inch bracelet",
+            "men jewelry accessory",
+            "casual fashion bracelet",
+            "boys bracelet"
+        ],
+        "season": "all",
+        "material": "stainless steel",
+        "occasion": "casual, party, daily wear",
+        "price": 2.99,
+        "gender": "men"
     }
 
 
