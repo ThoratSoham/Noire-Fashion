@@ -289,6 +289,14 @@ const sets = [
         "productIds": [147, 148, 149, 150],
         "gender": "Male"
     },
+    {
+        "id": 37,
+        "title": "Pink Picnic Panache",
+        "description": "This charming ensemble fuses a retro-inspired pink and white gingham halter peplum top with modern, light-wash wide-leg denim. Finished with sporty white sneakers and a chic structured mini bag, it's the ultimate blend of playful sweetness and street-ready cool for sunny days.",
+        "image": "https://i.pinimg.com/736x/51/yh/8s/51yh8sbk89l._sx679_.jpg",
+        "productIds": [151, 152, 153],
+        "gender": "Female"
+    }
 
 
 

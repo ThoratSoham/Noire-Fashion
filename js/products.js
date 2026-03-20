@@ -2953,6 +2953,72 @@ const products = [
         "occasion": "casual, party, daily wear",
         "price": 2.99,
         "gender": "men"
+    },
+    {
+        "id": 151,
+        "title": "Muhib Women’s Halter Neck Gingham Twist Front Crop Top",
+        "description": "Muhib women’s sleeveless cotton crop top designed with a halter neck and stylish twist front detail. Featuring a classic black and white gingham check pattern, this lightweight summer blouse is perfect for casual outings and trendy everyday wear.",
+        "image": "https://m.media-amazon.com/images/I/51yH8sbk89L._SX679_.jpg",
+        "link": "https://amzn.to/4sNZ7LC",
+        "category": "clothing",
+        "subCategory": "tops",
+        "tags": [
+            "women halter neck top",
+            "gingham check crop top",
+            "twist front blouse",
+            "summer sleeveless top",
+            "casual women crop top",
+            "black white check top"
+        ],
+        "season": "summer",
+        "material": "cotton",
+        "occasion": "casual, outing, daily wear",
+        "price": 2.99,
+        "gender": "women"
+    },
+    {
+        "id": 152,
+        "title": "Nifty Women’s High Waist Stretchable Baggy Denim Jeans",
+        "description": "Nifty women’s denim jeans designed with a high waist and baggy fit for a relaxed, trendy look. Made from stretchable denim fabric for added comfort and flexibility, these jeans are perfect for casual outings and everyday wear.",
+        "image": "https://m.media-amazon.com/images/I/71O2LW50WcL._SY879_.jpg",
+        "link": "https://amzn.to/476pUe0",
+        "category": "clothing",
+        "subCategory": "jeans",
+        "tags": [
+            "women baggy jeans",
+            "high waist denim jeans",
+            "stretchable jeans women",
+            "loose fit jeans",
+            "casual women denim",
+            "street style jeans"
+        ],
+        "season": "all",
+        "material": "stretch denim",
+        "occasion": "casual, daily wear, outings",
+        "price": 7.99,
+        "gender": "women"
+    },
+    {
+        "id": 153,
+        "title": "YOHO UrbanDash Women’s Cushioned Everyday Sneakers",
+        "description": "YOHO UrbanDash women’s sneakers designed with a strong grip sole, thick laces, and cushioned insoles for maximum comfort. Stylish and durable, these shoes are perfect for everyday wear, casual outings, and active lifestyles.",
+        "image": "https://m.media-amazon.com/images/I/61VhZIyhrUL._SY695_.jpg",
+        "link": "https://amzn.to/4bQvPXb",
+        "category": "footwear",
+        "subCategory": "sneakers",
+        "tags": [
+            "women sneakers",
+            "yoho urbandash shoes",
+            "cushioned sneakers",
+            "strong grip shoes",
+            "casual women footwear",
+            "daily wear sneakers"
+        ],
+        "season": "all",
+        "material": "synthetic mesh",
+        "occasion": "casual, daily wear, outings",
+        "price": 17.99,
+        "gender": "women"
     }
 
 
