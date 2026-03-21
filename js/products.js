@@ -3019,6 +3019,72 @@ const products = [
         "occasion": "casual, daily wear, outings",
         "price": 17.99,
         "gender": "women"
+    },
+    {
+        "id": 154,
+        "title": "Men’s TerraSoft Ultra Soft Performance Cuddle Tee",
+        "description": "Men’s TerraSoft™ performance T-shirt designed with ultra-soft fabric that feels like cotton while offering sweat-wicking and odour-proof technology. Lightweight and breathable, this cuddle tee is perfect for gym workouts, running, walking, and everyday comfort.",
+        "image": "https://m.media-amazon.com/images/I/51UICslfeWL._SX679_.jpg",
+        "link": "https://amzn.to/47JyRdk",
+        "category": "clothing",
+        "subCategory": "tshirts",
+        "tags": [
+            "men performance tshirt",
+            "sweat wicking tee",
+            "odour proof tshirt",
+            "gym workout shirt",
+            "soft cotton feel tshirt",
+            "everyday activewear"
+        ],
+        "season": "all",
+        "material": "performance fabric",
+        "occasion": "gym, running, walking, casual",
+        "price": 14.99,
+        "gender": "men"
+    },
+    {
+        "id": 155,
+        "title": "Trillion Men’s Relaxed Fit Casual Track Pants",
+        "description": "Trillion men’s relaxed fit track pants designed for comfort and ease of movement. Made from soft and breathable fabric, these pants are perfect for workouts, lounging, and everyday casual wear.",
+        "image": "https://m.media-amazon.com/images/I/31uIshO4ONL.jpg",
+        "link": "https://amzn.to/41j3in2",
+        "category": "clothing",
+        "subCategory": "track pants",
+        "tags": [
+            "men track pants",
+            "relaxed fit track pant",
+            "casual men trackwear",
+            "gym track pants",
+            "men lounge wear",
+            "comfortable men clothing"
+        ],
+        "season": "all",
+        "material": "polyester blend",
+        "occasion": "gym, casual, lounge, daily wear",
+        "price": 4.99,
+        "gender": "men"
+    },
+    {
+        "id": 156,
+        "title": "Boldfit Men’s DripBloc Lightweight Air Mesh Sneakers",
+        "description": "Boldfit men’s DripBloc sneakers designed with breathable air mesh and a soft cushioned insole for all-day comfort. Lightweight and stylish with a lace-up closure, these shoes are perfect for casual wear, travel, and everyday use.",
+        "image": "https://m.media-amazon.com/images/I/51asLeJi5uL._SY695_.jpg",
+        "link": "https://amzn.to/3Pp4vXg",
+        "category": "footwear",
+        "subCategory": "sneakers",
+        "tags": [
+            "men lightweight sneakers",
+            "boldfit dripbloc shoes",
+            "air mesh casual shoes",
+            "cushioned insole sneakers",
+            "lace up men footwear",
+            "daily wear sneakers"
+        ],
+        "season": "all",
+        "material": "air mesh synthetic",
+        "occasion": "casual, travel, daily wear",
+        "price": 15.99,
+        "gender": "men"
     }
 
 

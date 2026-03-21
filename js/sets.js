@@ -296,6 +296,14 @@ const sets = [
         "image": "https://i.pinimg.com/736x/fa/8a/78/fa8a78227c4e8fa9fdadbc7efe1a0d86.jpg",
         "productIds": [151, 152, 153],
         "gender": "Female"
+    },
+    {
+        "id": 38,
+        "title": "Sage Spirit Set",
+        "description": "This contemporary ensemble pairs a pastel quarter-zip sweater with high-waisted, striped cargo joggers, merging clean, modern lines with relaxed, street-inspired athletic comfort.",
+        "image": "https://i.pinimg.com/736x/2a/89/4a/2a894a436b4770563b08161894032241.jpg",
+        "productIds": [154, 155, 156],
+        "gender": "Male"
     }
 
 
